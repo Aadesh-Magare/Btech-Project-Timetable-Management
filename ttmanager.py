@@ -1,3 +1,6 @@
+
+#!/usr/bin/python
+
 # Timetable Management Software - Semi Automated Approach to Timetable Design.
 # Copyright (C) 2016  Aadesh Magare - aadeshmagare01@gmail.com, Abhijit A M - abhijit13@gmail.com, Sourabh Limbore - limboresourabh@gmail.com
 
@@ -14,7 +17,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#!/usr/bin/python
 import os, sys
 import wx
 import wx.grid as gridlib
@@ -26,7 +28,6 @@ from Dialouge import *
 from GridTable import *
 from MyGrid import *
 import globaldata
-# from threading import Thread
 
 class SaveClass(object):
     pass
@@ -1144,6 +1145,7 @@ class MyForm(wx.Frame):
         lines = filter(None, lines)
         try:
             for l in lines:
+                print l
                 p = l.split('\t')
                 p = filter(None, p)
                 globaldata.subject_fullnames.append(p[0])

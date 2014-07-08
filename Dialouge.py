@@ -236,6 +236,7 @@ class ListView(wx.Dialog):
         self.hh = wx.BoxSizer(wx.HORIZONTAL)
         self.okbutton = wx.Button(self, label="OK", id=wx.ID_OK)        
         self.Bind(wx.EVT_BUTTON, self.onOK, id=wx.ID_OK)
+        self.okbutton.SetFocus()
 
         self.addbutton = wx.Button(self, label="Add", id=wx.ID_ADD)        
         self.Bind(wx.EVT_BUTTON, self.onAdd, id=wx.ID_ADD)
