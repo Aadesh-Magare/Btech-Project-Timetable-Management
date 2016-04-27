@@ -683,8 +683,8 @@ class MyForm(wx.Frame):
         globaldata.class_capacity = saveObject.class_capacity
 
         globaldata.subject_fullnames = saveObject.subject_fullnames
-        globaldata.subject_shortnames =saveObject.subject_shortnames
-        globaldata.subject_credits =saveObject.subject_credits
+        globaldata.subject_shortnames = saveObject.subject_shortnames
+        globaldata.subject_credits = saveObject.subject_credits
 
         globaldata.clipboard = saveObject.clipboard
         globaldata.teacher_class_map = saveObject.teacher_class_map
@@ -1053,8 +1053,8 @@ class MyForm(wx.Frame):
             p = l.split('\t')
             globaldata.teacher_fullnames.append(p[0])
             globaldata.teacher_shortnames.append(p[1])
-            globaldata.teacher_weeklymax.append(p[2])
-            globaldata.teacher_dailymax.append(p[3])
+            globaldata.teacher_weeklymax.append(int(p[2]))
+            globaldata.teacher_dailymax.append(int(p[3]))
 
         self.SuccessBox('Imported Successfully')
         if len(globaldata.all_teachers) == 0:    #default attr are 32
@@ -1074,7 +1074,7 @@ class MyForm(wx.Frame):
             p = l.split('\t')
             globaldata.venue_fullnames.append(p[0])
             globaldata.venue_shortnames.append(p[1])
-            globaldata.venue_capacity.append(p[2])
+            globaldata.venue_capacity.append(int(p[2]))
         self.SuccessBox('Imported Successfully')    
         if len(globaldata.all_venues) == 0:    #default attr are 32
             self.ShowFirstGrid('Venue')
@@ -1093,7 +1093,7 @@ class MyForm(wx.Frame):
             p = l.split('\t')
             globaldata.class_fullnames.append(p[0])
             globaldata.class_shortnames.append(p[1])
-            globaldata.class_capacity.append(p[2])
+            globaldata.class_capacity.append(int(p[2]))
         self.SuccessBox('Imported Successfully')    
         if len(globaldata.all_classes) == 0:    #default attr are 32
             self.ShowFirstGrid('Class')
@@ -1112,8 +1112,10 @@ class MyForm(wx.Frame):
             p = l.split('\t')
             globaldata.subject_fullnames.append(p[0])
             globaldata.subject_shortnames.append(p[1])
-            globaldata.subject_credits.append(p[2])
+            globaldata.subject_credits.append(int(p[2]))
+            globaldata.subjects[p[1]] = int(p[2])
         self.SuccessBox('Imported Successfully')    
+
 
     # def ImportFromFile(self, evt):
     #     f = open("data.txt", "r")

@@ -723,8 +723,7 @@ class MyGrid(gridlib.Grid):
         self.PopupMenu(menu)
         menu.Destroy()
 
-    def OnCellDoubleClick(self, evt):
-        
+    def OnCellDoubleClick(self, evt):        
         dlg = Dialoge(self)
         dlg.ShowModal()
         if hasattr(dlg, 'result1') and hasattr(dlg, 'result2') and hasattr(dlg, 'result3') and hasattr(dlg, 'result4'):

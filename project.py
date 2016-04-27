@@ -248,6 +248,7 @@ class Classes(BaseStructure):
 	def remove_entry(self, day, lecture, values=''):
 		#reduce the no of lectures of that subject
 		#for subject of a batch
+		batch = None
 		if len(values) > 1:
 			batch = values[-1]
 			a = [x for x in self.mat[day][lecture] if x[-1] == batch]
@@ -255,9 +256,19 @@ class Classes(BaseStructure):
 		else:
 			a = self.mat[day][lecture]
 		try:
-			self.subjects[a[0][2]] -= 1
+			if batch != None:
+				name = self.name + '-' + batch
+			else:
+				name = self.name
+			print 'Removing entry', name
+			print a[0][2]
+			print self.subjects[a[0][2]]
+			print self.subjects[a[0][2]][name]
+			self.subjects[a[0][2]][name] -= 1
 		except:
 			pass #if its a lunch entry
+
+		print 'from remove', self.subjects
 
 		if super(Classes, self).remove_entry(day, lecture, values) == True :
 			#reduce workload of the class
@@ -344,20 +355,31 @@ class Classes(BaseStructure):
 		# if self.current_work_load >= self.max_work_load:
 		# 	raise ExtraWorkLoad([(self.name, self.max_work_load)])
 		# print globaldata.subjects
-		if sub in globaldata.subject_shortnames:
-			if sub in self.subjects:
-				if self.subjects[sub] >= globaldata.subject_credits[globaldata.subject_shortnames.index(sub) - 1]:
-					raise LimitForSubject([sub + str(globaldata.subjects[sub])])
-				else:
-					self.subjects[sub] += 1;
-			else:
-				self.subjects[sub] = 1;
-		print sub, self.subjects[sub]
 		batch = None
 		if len(List) > 1:
 			batch = List[1]
 			if batch not in self.batches:
 				self.batches.append(batch)
+
+		if batch != None:
+			name = self.name + '-' + batch
+		else:
+			name = self.name
+
+		# print 'Below this', sub, name, self.subjects[sub][name]
+		# print self.subjects
+
+		if sub in globaldata.subject_shortnames:
+			if sub in self.subjects:
+				if name in self.subjects[sub]:
+					if self.subjects[sub][name] >= globaldata.subject_credits[globaldata.subject_shortnames.index(sub) - 1]:
+						raise LimitForSubject([sub + str(globaldata.subjects[sub])])
+					else:
+						self.subjects[sub][name] += 1
+				else:
+					self.subjects[sub][name] = 1
+			else:
+				self.subjects[sub] = {name:1}
 
 		if self.can_add(day, lecture):
 			self.mat[day][lecture] = [(teacher, venue, sub, batch)]

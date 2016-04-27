@@ -479,7 +479,7 @@ class PromptingComboBox(wx.ComboBox) :
                 if hasattr(dlg, 'result1') and hasattr(dlg, 'result2') and hasattr(dlg, 'result3'):
                     globaldata.subject_fullnames.append(dlg.result1)
                     globaldata.subject_shortnames.append(dlg.result2)
-                    globaldata.subject_credits.append(dlg.result3)
+                    globaldata.subject_credits.append(int(dlg.result3))
                     globaldata.subjects[dlg.result2] = int(dlg.result3)
                     self.Append(dlg.result2)
                     self.parent.field4.SetValue(dlg.result2)
