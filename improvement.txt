@@ -1,17 +1,17 @@
 //import data from file / can devide it / diff files for t, v ,c s
-
+//file select box for these files
+//copyright notice delte repo create new
+//import nnter disl phije
+//ods location is hard coded so causes problem when its not installed
 
 conflict with lunch does not show whoes lunch it is conflicting with
-class constraints 
-file select box for data load.
+class constraints should be soft
 multiple remove selected
-khatavkar sir  send
-copyright notice delte repo create new
+khatavkar sir send after fixing the ods thing
 enter in pop up box
-sub credits rename to lab / minimum credits are satisfied or not
+sub credits rename/ to lab / minimum credits are satisfied or not
 row labels not sufficient
 all timetables show blank
-import nnter disl phije
 try exe
 initial grid not showing / shows a box of very small size. - default size for row / col
 add new nnter select zala phije

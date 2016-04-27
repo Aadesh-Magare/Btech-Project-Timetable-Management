@@ -325,7 +325,21 @@ class MyForm(wx.Frame):
     def ExportODS(self, evt):
         import ezodf
         # ods = ezodf.newdoc('ods')
-        ods = ezodf.newdoc('ods', template='/usr/share/ttmanager/styling_reference.ods')
+        if os.path.isfile('/usr/share/ttmanager/styling_reference.ods'):
+            ods = ezodf.newdoc('ods', template='/usr/share/ttmanager/styling_reference.ods')
+        else :
+            try:
+                ods = ezodf.newdoc('ods', template='styling_reference.ods')
+            except:
+                dlg = wx.MessageDialog(None, "Styling Reference Not Found", "Error", wx.OK|wx.ICON_ERROR)
+                dlg.ShowModal()
+                dlg.Destroy()
+                return
+        saveFileDialog = wx.FileDialog(self, "Save Project File As", "", ".ods",
+                                               "ods files (*.ods)|*.ods", wx.FD_SAVE | wx.FD_OVERWRITE_PROMPT)
+        if saveFileDialog.ShowModal() == wx.ID_CANCEL:
+            return
+        savefilepath = saveFileDialog.GetPath()
 
         # ods.inject_style(""" <style:style style:name="heading" style:family="table-cell" style:parent-style-name="Default"><style:text-properties style:vertical-align="top" style:use-window-font-color="true" style:repeat-content="false" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:font-name="Liberation Serif" fo:font-size="22pt" fo:language="en" fo:country="IN" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="bold" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-size-asian="22pt" style:language-asian="zh" style:country-asian="CN" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-size-complex="22pt" style:language-complex="hi" style:country-complex="IN" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/></style:style>""")
         # ods.inject_style(""" <style:style style:name="cell" style:family="table-cell" style:parent-style-name="Default"><style:table-cell-properties fo:border-bottom="0.06pt solid #000000" style:text-align-source="fix" style:repeat-content="false" fo:border-left="2.49pt solid #000000" fo:border-right="0.06pt solid #000000" fo:border-top="0.06pt solid #000000" style:vertical-align="top"/><style:paragraph-properties fo:text-align="center"/><style:text-properties style:use-window-font-color="true" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:font-name="Liberation Serif" fo:font-size="22pt" fo:language="en" fo:country="IN" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="bold" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-size-asian="10pt" style:language-asian="zh" style:country-asian="CN" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-size-complex="10pt" style:language-complex="hi" style:country-complex="IN" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/></style:style> """)
@@ -472,7 +486,8 @@ class MyForm(wx.Frame):
             sheetC[i+12+globaldata.days_per_week, 3+globaldata.lectures_per_day].style_name = "ce23"
             i += 25
 
-        ods.saveas('Timetable.ods')
+        ods.saveas(savefilepath)
+        self.SuccessBox('Exported Successfully')
 
     def ExportHTML(self, evt):
 
@@ -861,6 +876,21 @@ class MyForm(wx.Frame):
         dlg.ShowModal()
         dlg.Destroy()
 
+    def ShowFirstGrid(self, type):
+        if type == 'Teacher':
+            if len(globaldata.teacher_shortnames) > 1:
+                project.push_object(globaldata.teacher_shortnames[1], 'Teacher')
+                pub.sendMessage('UPDATE_VIEW', data = None)
+                # self.AppendFirstEntry(globaldata.teacher_shortnames[1], self.panel1, self.sizer1, 'Teacher')
+        if type == 'Venue':
+            if len(globaldata.venue_shortnames) > 1:
+                project.push_object(globaldata.venue_shortnames[1], 'Venue')
+                pub.sendMessage('UPDATE_VIEW', data = None)
+        if type == 'Class':
+            if len(globaldata.class_shortnames) > 1:
+                project.push_object(globaldata.class_shortnames[1], 'Class')
+                pub.sendMessage('UPDATE_VIEW', data = None)
+
     def TeacherData(self, evt):
         # global teacher_fullnames, teacher_shortnames
         dlg = ListView(self, title='Add Teacher Data', key='Teacher')
@@ -873,10 +903,7 @@ class MyForm(wx.Frame):
             globaldata.teacher_weeklymax = dlg.result3
             globaldata.teacher_dailymax = dlg.result4
             if len(self.__dict__) == 32:    #default attr are 32
-                if len(globaldata.teacher_shortnames) > 1:
-                    project.push_object(globaldata.teacher_shortnames[1], 'Teacher')
-                    pub.sendMessage('UPDATE_VIEW', data = None)
-                    # self.AppendFirstEntry(globaldata.teacher_shortnames[1], self.panel1, self.sizer1, 'Teacher')
+                self.ShowFirstGrid('Teacher')
 
     def VenueData(self, evt):
         # global venue_fullnames, venue_shortnames
@@ -889,9 +916,7 @@ class MyForm(wx.Frame):
             globaldata.venue_shortnames =  temp      
             globaldata.venue_capacity = dlg.result3
             if len(self.__dict__) == 32:    #default attr are 32
-                if len(globaldata.venue_shortnames) > 1:
-                    project.push_object(globaldata.venue_shortnames[1], 'Venue')
-                    pub.sendMessage('UPDATE_VIEW', data = None)
+                self.ShowFirstGrid('Venue')
 
     def ClassData(self, evt):
         # global class_fullnames, class_shortnames
@@ -904,9 +929,7 @@ class MyForm(wx.Frame):
             globaldata.class_shortnames = temp
             globaldata.class_capacity = dlg.result3
             if len(self.__dict__) == 32:    #default attr are 32
-                if len(globaldata.class_shortnames) > 1:
-                    project.push_object(globaldata.class_shortnames[1], 'Class')
-                    pub.sendMessage('UPDATE_VIEW', data = None)
+                self.ShowFirstGrid('Venue')
 
     def SubjectData(self, evt):
         dlg = ListView(self, title='Add Subject Data', key='Subject')
@@ -1008,6 +1031,9 @@ class MyForm(wx.Frame):
             globaldata.teacher_dailymax.append(p[3])
 
         self.SuccessBox('Imported Successfully')
+        if len(self.__dict__) == 32:    #default attr are 32
+            self.ShowFirstGrid('Teacher')
+
     def ImportVenueData(self, evt):
         openFileDialog = wx.FileDialog(self, "Open Venue Data File", "", "",
                                        "txt files (*.txt)|*.txt", wx.FD_OPEN | wx.FD_FILE_MUST_EXIST)
@@ -1024,6 +1050,9 @@ class MyForm(wx.Frame):
             globaldata.venue_shortnames.append(p[1])
             globaldata.venue_capacity.append(p[2])
         self.SuccessBox('Imported Successfully')    
+        if len(self.__dict__) == 32:    #default attr are 32
+            self.ShowFirstGrid('Venue')
+
     def ImportClassData(self, evt):
         openFileDialog = wx.FileDialog(self, "Open Class Data File", "", "",
                                        "txt files (*.txt)|*.txt", wx.FD_OPEN | wx.FD_FILE_MUST_EXIST)
@@ -1040,6 +1069,8 @@ class MyForm(wx.Frame):
             globaldata.class_shortnames.append(p[1])
             globaldata.class_capacity.append(p[2])
         self.SuccessBox('Imported Successfully')    
+        if len(self.__dict__) == 32:    #default attr are 32
+            self.ShowFirstGrid('Class')
 
     def ImportSubjectData(self, evt):
         openFileDialog = wx.FileDialog(self, "Open Subject Data File", "", "",
