@@ -32,7 +32,7 @@ class MyGrid(gridlib.Grid):
         self.data = data
         self.name = name
         self.type = typeOf
-        tableBase = GenericTable(data, globaldata.rowLabels, globaldata.colLabels)
+        tableBase = GenericTable(data, globaldata.rowLabels, globaldata.colLabels, name, typeOf)
         self.SetTable(tableBase)                    
         # self.SetGridLineColour(wx.RED)
         self.SetRowLabelSize(-1) 
@@ -51,7 +51,9 @@ class MyGrid(gridlib.Grid):
         self.InvalidateBestSize();
 #        ///////////////////////////////////
         # SetClientSize(self.GetBestSize());
-        self.Bind(gridlib.EVT_GRID_EDITOR_SHOWN, self.OnCellDoubleClick)
+        # self.Bind(gridlib.EVT_GRID_EDITOR_HIDDEN, self.OnCellChange)
+        # self.Bind(gridlib.EVT_GRID_EDITOR_SHOWN, self.OnCellChange)
+        # self.Bind(gridlib.EVT_GRID_CELL_CHANGED, self.OnCellChange)
         self.Bind(gridlib.EVT_GRID_SELECT_CELL, self.OnSelectCell)
         self.Bind(gridlib.EVT_GRID_RANGE_SELECT, self.onDragSelection)
         self.Bind(gridlib.EVT_GRID_CELL_LEFT_DCLICK, self.OnCellDoubleClick)

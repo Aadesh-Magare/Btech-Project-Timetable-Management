@@ -160,7 +160,7 @@ class ListView(wx.Dialog):
             for i in range(len(globaldata.class_fullnames)):
                 self.list.Append([globaldata.class_fullnames[i],globaldata.class_shortnames[i+1],globaldata.class_capacity[i]])
         if key == "Subject" :
-            self.list.InsertColumn(2,"Credits", width=wx.LIST_AUTOSIZE_USEHEADER)
+            self.list.InsertColumn(2,"NoOfHours", width=wx.LIST_AUTOSIZE_USEHEADER)
             for i in range(len(globaldata.subject_fullnames)):
                 self.list.Append([globaldata.subject_fullnames[i],globaldata.subject_shortnames[i+1],globaldata.subject_credits[i]])
 
@@ -304,7 +304,7 @@ class ThreeItemList(wx.Dialog):
         self.mainSizer.AddSpacer(10)
 
         if key == "Subject":
-            self.label3 = wx.StaticText(self, label="Credits:")
+            self.label3 = wx.StaticText(self, label="NoOfHours:")
             self.field3 = wx.TextCtrl(self, value="")                
             self.mainSizer.Add(self.label3, 1, flag=wx.ALIGN_CENTER_VERTICAL)
             self.mainSizer.Add(self.field3, 1, flag=wx.ALIGN_CENTER_VERTICAL)
@@ -439,10 +439,12 @@ class PromptingComboBox(wx.ComboBox) :
                     globaldata.teacher_weeklymax.append(int(dlg.result3))
                     globaldata.teacher_dailymax.append(int(dlg.result4))
                     self.Append(dlg.result2)
+                    self.parent.field1.SetValue(dlg.result2)
+                    self.parent.field1.res = dlg.result2
                 else:
                     self.SetValue('Choose')
+                    del self.res
                 dlg.Destroy()
-
             elif self.name == "Venue":
                 dlg = ThreeItemList(self, title="Enter Venue Data", key="Venue")
                 dlg.ShowModal()
@@ -451,8 +453,11 @@ class PromptingComboBox(wx.ComboBox) :
                     globaldata.venue_shortnames.append(dlg.result2)
                     globaldata.venue_capacity.append(int(dlg.result3))
                     self.Append(dlg.result2)
+                    self.parent.field2.SetValue(dlg.result2)
+                    self.parent.field2.res = dlg.result2
                 else:
                     self.SetValue('Choose')
+                    del self.res
                 dlg.Destroy()        
             elif self.name == "Class":
                 dlg = ThreeItemList(self, title="Enter Class Data", key="Class")
@@ -462,8 +467,11 @@ class PromptingComboBox(wx.ComboBox) :
                     globaldata.class_shortnames.append(dlg.result2)
                     globaldata.class_capacity.append(int(dlg.result3))
                     self.Append(dlg.result2)
+                    self.parent.field3.SetValue(dlg.result2)
+                    self.parent.field3.res = dlg.result2
                 else:
                     self.SetValue('Choose')
+                    del self.res
                 dlg.Destroy()
             elif self.name == "Subject":
                 dlg = ThreeItemList(self, title="Enter Subject Data", key="Subject")
@@ -474,10 +482,12 @@ class PromptingComboBox(wx.ComboBox) :
                     globaldata.subject_credits.append(dlg.result3)
                     globaldata.subjects[dlg.result2] = int(dlg.result3)
                     self.Append(dlg.result2)
+                    self.parent.field4.SetValue(dlg.result2)
+                    self.parent.field4.res = dlg.result2
                 else:
                     self.SetValue('Choose')
+                    del self.res
                 dlg.Destroy()
-            del self.res
         event.Skip()
 
 class Dialoge(wx.Dialog):

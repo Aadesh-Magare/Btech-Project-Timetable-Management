@@ -3,33 +3,34 @@
 //copyright notice delte repo create new
 //import nnter disl phije
 //ods location is hard coded so causes problem when its not installed
+//khatavkar sir send after fixing the ods thing
+//conflict with lunch does not show whoes lunch it is conflicting with
+//class constraints should be soft
+//initial grid not showing / shows a box of very small size. - default size for row / col
+//col labels not sufficient
+//should be able to  type in cell directly / check for wrong data
+//some things happen wrt len of rowlables which is static (messes up when lecturs are more than 10)
+//all timetables show at beginning
+//cmd argument while opening.
+//export - chose directory
+//add new nnter select zala phije
+//show error when credits violation.
 
-conflict with lunch does not show whoes lunch it is conflicting with
-class constraints should be soft
 multiple remove selected
-khatavkar sir send after fixing the ods thing
 enter in pop up box
-sub credits rename/ to lab / minimum credits are satisfied or not
-row labels not sufficient
-all timetables show blank
-try exe
-initial grid not showing / shows a box of very small size. - default size for row / col
-add new nnter select zala phije
+minimum credits are satisfied or not by sub
+
 mapping after 
 progress bar
-export - chose directory
-cmd argument while opening.
-show error when credits violation.
-remove space from the top
+remove space from the top of page
 space above and below the text.
 double click to change some fileds
-merge option in right click menu
 keyboard shortcuts in menu and help section
-batches logic rethink
 lab credits - one batch may consume all of it.
-code is mixed ui and data manipulation. / clean
-should be able to  type in cell directly / check for wrong data
 save ods file format to disk json / xml and read that for styling
-dependencies check / dont directly install while installing deb
 pdf madhe page-break , and other details
-some things happen wrt len of rowlables which is static (messes up when lecturs are more than 10)
+
+
+#code is mixed ui and data manipulation. / clean
+#try exe
+#dependencies check / dont directly install while installing deb

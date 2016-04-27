@@ -156,6 +156,7 @@ class Teacher(BaseStructure):
 			self.mat[day][lecture] = [('LUNCH', batch)]
 		else:
 			entries = self.mat[day][lecture]
+			errors.append(self.name)
 			raise ExistingEntry(entries)		
 
 	def check_workload(self):
@@ -192,6 +193,7 @@ class Teacher(BaseStructure):
 				if entry[-1] == None or entry[-1] == batch or batch == None:
 					errors.append(entry)
 			if len(errors) > 0:
+				errors.append(self.name)
 				raise ExistingEntry(errors)				
 			self.mat[day][lecture].append((venue, Class, sub, batch))
 
@@ -228,6 +230,7 @@ class Venue(BaseStructure):
 				if entry[-1] == None or entry[-1] == batch or batch == None:
 					errors.append(entry)
 			if len(errors) > 0:
+				errors.append(self.name)
 				raise ExistingEntry(errors)
 			self.mat[day][lecture].append((teacher, Class, sub, batch))
 
@@ -269,22 +272,6 @@ class Classes(BaseStructure):
 			return True
 		else:
 			return False
-
-	def print_table(self):
-		for i in range(0, globaldata.days_per_week):
-			print i, 
-			for j in range(0, globaldata.lectures_per_day):
-				try:
-					for data in self.mat[i][j]:
-						if 'LUNCH' in data :
-							print data[0], '-', data[1],
-						else:
-							print data[2], '-', data[1],
-					print " ",
-				except:
-					print "None\t",
-			print
-		print	
 
 	#Constraints (compulsary lunch break) 
 	def valid_lunch_break(self):
@@ -341,21 +328,31 @@ class Classes(BaseStructure):
 				if entry[-1] == None or entry[-1] == batch or batch == None:
 					errors.append(entry)
 			if len(errors) > 0:
+				errors.append(self.name)
 				raise ExistingEntry(errors)		
 			self.mat[day][lecture].append(('LUNCH', batch))
 
+	def check_workload(self):
+		#work load should be greater than min and less than max
+		if self.current_work_load > self.max_work_load or self.current_work_load < self.min_work_load:
+			return False
+		else:
+			return True
+
 	def add_entry(self, teacher, venue, day, lecture, sub, List=''):
 		#check if we dont exceed max work load
-		if self.current_work_load >= self.max_work_load:
-			raise ExtraWorkLoad([(self.name, self.max_work_load)])
-		if sub in globaldata.subjects:
+		# if self.current_work_load >= self.max_work_load:
+		# 	raise ExtraWorkLoad([(self.name, self.max_work_load)])
+		# print globaldata.subjects
+		if sub in globaldata.subject_shortnames:
 			if sub in self.subjects:
-				if self.subjects[sub] >= globaldata.subjects[sub]:
-					raise LimitForSubject(globaldata.subjects[sub])
+				if self.subjects[sub] >= globaldata.subject_credits[globaldata.subject_shortnames.index(sub) - 1]:
+					raise LimitForSubject([sub + str(globaldata.subjects[sub])])
 				else:
 					self.subjects[sub] += 1;
 			else:
 				self.subjects[sub] = 1;
+		print sub, self.subjects[sub]
 		batch = None
 		if len(List) > 1:
 			batch = List[1]
@@ -371,6 +368,7 @@ class Classes(BaseStructure):
 				if entry[-1] == None or entry[-1] == batch or batch == None:
 					errors.append(entry)
 			if len(errors) > 0:
+				errors.append(self.name)
 				raise ExistingEntry(errors)
 			self.mat[day][lecture].append((teacher, venue, sub, batch))
 		
@@ -422,7 +420,7 @@ def push_object(listname, typeOf):
 		globaldata.all_venues.append(entry)
 	if typeOf == 'Class':
 		i = globaldata.class_shortnames.index(listname)
-		entry = Classes(listname, class_capacity[i-1])		
+		entry = Classes(listname, globaldata.class_capacity[i-1])		
 		globaldata.all_classes.append(entry)
 
 def insert_entry(teacher, venue, Class, sub, day, lecture):

@@ -24,12 +24,14 @@ import project
 import globaldata
 
 class GenericTable(wx.grid.PyGridTableBase):
-    def __init__(self, data, rowLabels=None, colLabels=None):
+    def __init__(self, data, rowLabels=None, colLabels=None, name=None, typeOf=None):
         wx.grid.PyGridTableBase.__init__(self)
         self.data = data
         self.rowLabels = globaldata.rowLabels
         self.colLabels = globaldata.colLabels
-        
+        self.name = name
+        self.type = typeOf
+
     def GetNumberRows(self):
         return len(self.data)
         # return globaldata.days_per_week
@@ -67,18 +69,69 @@ class GenericTable(wx.grid.PyGridTableBase):
             # return self.data[row][col]
 
     def SetValue(self, row, col, value):
-        print 'set value', row, col, value
-        #deletion not perfect - when cell has batch entries it wont work
-        # if value == '':
-        #     data = self.data[row][col]
-        #     if len(data) == 4:
-        #         project.remove_all(data[0], data[1], data[2], row, col)
-        #     else:
-        #         project.remove_lunch(data[1], row, col)
-        # else:
-        value = value.split(' ')
-        try:
-            project.insert_entry(value[0], value[1], value[2], value[3], row, col)
-        except:
-            print 'Cant update cell', row, col
-        pub.sendMessage('UPDATE_VIEW', data = None)
+        print 'Update to', value, row, col
+        if value != '':
+            value = value.split()
+            value = filter(None, value)
+            if value[0] == 'LUNCH':
+                if len(value) > 1:
+                    name = self.name + '-' + value[1]
+                else:
+                    name = self.name
+                try:
+                    project.insert_lunch(name, row, col, self.type)
+                    pub.sendMessage('UPDATE_VIEW', data = None)
+                except Exception as e:
+                    s = 'Conflict with: '
+                    for t in e.value:
+                        for e in t:
+                            if e != None:
+                                s += str(e) + ' '
+                        s += '\n'
+                    dlg = wx.MessageDialog(None, s , "ERROR", wx.OK|wx.ICON_INFORMATION)
+                    dlg.ShowModal()
+                    dlg.Destroy()
+                    return
+            else:
+                if len(value) >= 3:
+                    if self.type == 'Teacher':
+                        t = self.name
+                        v = value[0]
+                        c = value[1]
+                        s = value[2]
+                        i = row
+                        j = col
+                        if len(value) == 4:
+                            t += '-' + value[3]
+                    if self.type == 'Venue':
+                        t = value[0]
+                        v = self.name
+                        c = value[1]
+                        s = value[2]
+                        i = row
+                        j = col
+                        if len(value) == 4:
+                            v += '-' + value[3]
+                    if self.type == 'Class':
+                        t = value[0] 
+                        v = value[1]
+                        c = self.name
+                        s = value[2]
+                        i = row
+                        j = col
+                        if len(value) == 4:
+                            c += '-' + value[3]
+                    try:
+                        project.insert_entry(t, v, c, s, i, j)
+                        pub.sendMessage('UPDATE_VIEW', data = None)
+                    except Exception as e:
+                        print e
+                        s = 'Conflict with: '
+                        for t in e.value:
+                            for e in t:
+                                if e != None:
+                                    s += str(e) + ' '
+                            s += '\n'
+                        dlg = wx.MessageDialog(None, s , "ERROR", wx.OK|wx.ICON_INFORMATION)
+                        dlg.ShowModal()
+                        dlg.Destroy()

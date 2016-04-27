@@ -291,10 +291,9 @@ class MyForm(wx.Frame):
         self.psizer3.Add(self.panel3, 6, wx.EXPAND)
         self.page3.SetSizer(self.psizer3)
 
-
-        self.book.AddPage(self.page1, "Teacher")
-        self.book.AddPage(self.page2, "Venue") 
         self.book.AddPage(self.page3, "Class")
+        self.book.AddPage(self.page2, "Venue") 
+        self.book.AddPage(self.page1, "Teacher")
 
         self.mainSizer.Add(self.book, 1, wx.EXPAND)
         self.mainPanel.SetSizer(self.mainSizer)
@@ -312,11 +311,15 @@ class MyForm(wx.Frame):
         dlg.ShowModal()
         dlg.Destroy()
 
-    def __init__(self):
-        wx.Frame.__init__(self, parent=None, title="Timetable Management", size=(1024,1000))
+    def __init__(self, flag):
+        wx.Frame.__init__(self,parent=None, title="Timetable Management", size=(1024,1000))
         self._init_menubar()
         self._init_toolbar()
-        self.RenewUI()
+        if flag :
+            self.RenewUI()
+            self.PostOpenPath(sys.argv[1])
+        else:
+            self.RenewUI()
 
     def OnQuit(self, evt):
         self.Close()
@@ -377,11 +380,11 @@ class MyForm(wx.Frame):
             #fix last one in first row
             sheetV[i+12, 3+len(globaldata.colLabels)].style_name = "ce21"
             #first col
-            for l in range(1, len(globaldata.rowLabels)+1):
+            for l in range(1, len(globaldata.days_per_week)+1):
                 sheetV[i+12+l, 3].set_value(globaldata.rowLabels[l-1])
                 sheetV[i+12+l, 3].style_name = "ce6"
             #fix last one in first col
-            sheetV[i+12 + len(globaldata.rowLabels), 3].style_name = "ce7"
+            sheetV[i+12 + len(globaldata.days_per_week), 3].style_name = "ce7"
 
             for l in range(1, globaldata.days_per_week+1):
                 for m in range(1, globaldata.lectures_per_day+1):
@@ -491,23 +494,29 @@ class MyForm(wx.Frame):
 
     def ExportHTML(self, evt):
 
+        saveFileDialog = wx.DirDialog (None, "Choose Directory", "",
+                    wx.DD_DEFAULT_STYLE | wx.DD_DIR_MUST_EXIST)
+        if saveFileDialog.ShowModal() == wx.ID_CANCEL:
+            return
+        savefilepath = saveFileDialog.GetPath()
+
         import pdfkit
         src = "<HTML><BODY>"
-        html = open('teacher.html', "w")
+        html = open(savefilepath + '/teacher.html', "w")
         for t in globaldata.all_teachers:
             src += getattr(self, t.name).getHTML()
         html.write(src)
         html.close()
         # pdfkit.from_string(src, 'teacher.pdf')
         src = "<HTML><BODY>"    
-        html = open('venue.html', "w")
+        html = open(savefilepath + '/venue.html', "w")
         for t in globaldata.all_venues:
             src += getattr(self, t.name).getHTML()
         html.write(src)
         html.close()
         # pdfkit.from_string(src, 'venue.pdf')
         src = "<HTML><BODY>"    
-        html = open('class.html', "w")
+        html = open(savefilepath + '/class.html', "w")
         for t in globaldata.all_classes:
             src += getattr(self, t.name).getHTML()
         html.write(src)
@@ -520,27 +529,33 @@ class MyForm(wx.Frame):
 
     def ExportPDF(self, evt):
         import pdfkit
+        saveFileDialog = wx.DirDialog (None, "Choose Directory", "",
+                    wx.DD_DEFAULT_STYLE | wx.DD_DIR_MUST_EXIST)
+        if saveFileDialog.ShowModal() == wx.ID_CANCEL:
+            return
+        savefilepath = saveFileDialog.GetPath()
+
         src = "<HTML><BODY>"
         # html = open('teacher.html', "w")
         for t in globaldata.all_teachers:
             src += getattr(self, t.name).getHTML()
         # html.write(src)
         # html.close()
-        pdfkit.from_string(src, 'teacher.pdf')
+        pdfkit.from_string(src, savefilepath + '/teacher.pdf')
         src = "<HTML><BODY>"    
         # html = open('venue.html', "w")
         for t in globaldata.all_venues:
             src += getattr(self, t.name).getHTML()
         # html.write(src)
         # html.close()
-        pdfkit.from_string(src, 'venue.pdf')
+        pdfkit.from_string(src, savefilepath + '/venue.pdf')
         src = "<HTML><BODY>"    
         # html = open('class.html', "w")
         for t in globaldata.all_classes:
             src += getattr(self, t.name).getHTML()
         # html.write(src)
         # html.close()
-        pdfkit.from_string(src,'class.pdf')
+        pdfkit.from_string(src, savefilepath+ '/class.pdf')
 
         dlg = wx.MessageDialog(None, "Exported Successfully", "Notice", wx.OK|wx.ICON_INFORMATION)
         dlg.ShowModal()
@@ -550,14 +565,16 @@ class MyForm(wx.Frame):
         s = []
         for c in globaldata.all_classes:
             res = c.valid_lunch_break()
-            if res == True:
-                continue
-            for m in res:
-                for key in m:
-                    if c.name == key:
-                        s.append("No Lunch Breaks for %s on %s\n" % (key, m[key]))
-                    else:
-                        s.append("No Lunch Breaks for %s-%s on %s\n" % (c.name, key, m[key]))
+            if res == False:
+                for m in res:
+                    for key in m:
+                        if c.name == key:
+                            s.append("No Lunch Breaks for %s on %s\n" % (key, m[key]))
+                        else:
+                            s.append("No Lunch Breaks for %s-%s on %s\n" % (c.name, key, m[key]))
+            res = c.check_workload()
+            if res == False:
+                s.append("Extra Workload for Class %s\n" % c.name)
 
         for t in globaldata.all_teachers:
             res = t.check_workload()
@@ -571,6 +588,7 @@ class MyForm(wx.Frame):
                         temp += globaldata.rowLabels[i] + ', '
                     temp += '\n'
                     s.append(temp)
+
         return s
 
     def ReplaceFile(self, data):                    
@@ -598,7 +616,7 @@ class MyForm(wx.Frame):
         # dlg = ListView(self, title='Add Teacher Data', key='Teacher')
         # dlg.ShowModal()
 
-            # dlg = warningx.MessageDialog(None, s, "Error", wx.OK|wx.ICON_ERROR)
+            # dlg = warningx.MessageDialog(None, s, "filepath", wx.OK|wx.ICON_ERROR)
             # dlg.ShowModal()
             # dlg.Destroy()
         # pass
@@ -614,8 +632,10 @@ class MyForm(wx.Frame):
             return 
         
         self.savefilepath = openFileDialog.GetPath()
+        self.PostOpenPath(self.savefilepath)
 
-        with open(self.savefilepath, 'rb') as handle:
+    def PostOpenPath(self, filepath):
+        with open(filepath, 'rb') as handle:
             try:
                 saveObject = pickle.load(handle)
             except:
@@ -851,11 +871,16 @@ class MyForm(wx.Frame):
             # globaldata.daily_min = int(dlg.daily_min)
             globaldata.class_max = int(dlg.class_max)
             globaldata.class_min = int(dlg.class_min)
+            diff = globaldata.lectures_per_day - len(globaldata.colLabels)
+            temp = []
+            if diff > 0 :
+                temp = ['.'] * diff
+            globaldata.colLabels.extend(temp)
             # globaldata.weekly_max = int(dlg.weekly_max)
             # globaldata.weekly_min = int(dlg.weekly_min)
-        print len(self.__dict__)
-        for i in  self.__dict__ :
-            print i
+        # print len(self.__dict__)
+        # for i in  self.__dict__ :
+        #     print i
         # self.AppendGlobalInput(None)
     
     def OnNew(self, evt):
@@ -892,6 +917,7 @@ class MyForm(wx.Frame):
                 pub.sendMessage('UPDATE_VIEW', data = None)
 
     def TeacherData(self, evt):
+        print len(self.__dict__)
         # global teacher_fullnames, teacher_shortnames
         dlg = ListView(self, title='Add Teacher Data', key='Teacher')
         dlg.ShowModal()
@@ -1020,7 +1046,7 @@ class MyForm(wx.Frame):
             return         
         filepath = openFileDialog.GetPath()
         f = open(filepath, "r")
-        lines = f.read().split('\n')
+        lines = f.read().split('\n')    
         del lines[0]
         lines = filter(None, lines)
         for l in lines:
@@ -1031,7 +1057,7 @@ class MyForm(wx.Frame):
             globaldata.teacher_dailymax.append(p[3])
 
         self.SuccessBox('Imported Successfully')
-        if len(self.__dict__) == 32:    #default attr are 32
+        if len(globaldata.all_teachers) == 0:    #default attr are 32
             self.ShowFirstGrid('Teacher')
 
     def ImportVenueData(self, evt):
@@ -1050,7 +1076,7 @@ class MyForm(wx.Frame):
             globaldata.venue_shortnames.append(p[1])
             globaldata.venue_capacity.append(p[2])
         self.SuccessBox('Imported Successfully')    
-        if len(self.__dict__) == 32:    #default attr are 32
+        if len(globaldata.all_venues) == 0:    #default attr are 32
             self.ShowFirstGrid('Venue')
 
     def ImportClassData(self, evt):
@@ -1069,7 +1095,7 @@ class MyForm(wx.Frame):
             globaldata.class_shortnames.append(p[1])
             globaldata.class_capacity.append(p[2])
         self.SuccessBox('Imported Successfully')    
-        if len(self.__dict__) == 32:    #default attr are 32
+        if len(globaldata.all_classes) == 0:    #default attr are 32
             self.ShowFirstGrid('Class')
 
     def ImportSubjectData(self, evt):
@@ -1292,15 +1318,18 @@ class MyForm(wx.Frame):
         self.toolbar.Show()
         self.Show(True)
 
-def main():
+def main(flag):
     app = wx.App(False)
-    frame = MyForm().Show()
+    frame = MyForm(flag).Show()
     # import wx.lib.inspection
     # wx.lib.inspection.InspectionTool().Show()
     app.MainLoop()
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
-        filename = sys.argv[1]
-    # if os.path.exists(filename) :
-    main()
+        if os.path.isfile(sys.argv[1]):
+            main(True)
+        else:
+            print 'Not a valid tt file'
+    else:
+        main(False)
