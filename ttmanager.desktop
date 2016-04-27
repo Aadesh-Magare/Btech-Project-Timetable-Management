@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=ttmanager
+Comment=Manage Educational Timetable
+Keywords=Timetable;Management;Software;Educational;Institures;
+Exec=/usr/share/ttmanager/ttmanager.py
+Icon=/usr/share/ttmanager/icon.png
+Terminal=false
+Type=Application

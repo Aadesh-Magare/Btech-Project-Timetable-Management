@@ -1,0 +1,75 @@
+/////////////////////////////////////////////////////////////////////////////////////////
+
+cell- display formatting / add colosr
+export as ods - nice form, pdf
+header box instead of line
+enter should work
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+								***bugs***
+
+	//new wizard -> headers, basic constraints, popup for data
+	//data --> teachers, venue, classes, subjects
+	//suggestions dropdown box for teacher/venue/class names
+	//subject credits = max lectures 
+	//arrange globals in global file
+	//what aboout batches - in the format as syc-b1, syc-b2
+	//heading of tt -- as tt of teacher / tt of venue / tt of class
+	//teacher load individually
+	//venue capacity checking (soft constraint) venue of 70 cap and class of 90 not fair
+	//statistics venue utilization - day/week wise
+	//lunch check in ui- lunch is explicit i.e. empty slot does not mean its lunch time
+	//default entry from which we got popup	
+	//copy paste cut paste
+	//faculty subject/batch mapping 1-1 mapping only
+	//discard global input after first entry
+		//no global input - first entry will appear on adding first teacher / venue / class
+	//teacher, venue, class list should be imported from file
+	//view of grid
+		//scroll bars when not required. grid takes less space than available and shows scrollbars
+	//teacher lunch break
+		No batches here cause not required
+	//basic constraints remove teacher constraints
+	//cant cancel the dialouge
+	//saving on disk and opening 
+		if len(sel__dict__) changes, it need to be updated again.
+	//after opeing a file when you do new, old tt should disappear
+		restarting program to do this... find better way 
+		(checked with len(self.__dict__) may change over time change it at last)
+	//slot merging
+		background cells are active, take care while using it
+	//batches not working
+		//for teacher and venue
+	//deleting entries from grid with ui
+		//cant delete batches properly
+		//batches can be deleted from class only, other's slot gets empty
+	//teacher load should be soft constraint
+	//warning list  for soft constraints violation
+	// temp word should be avoided, treat is as keyword
+	
+/////////////////////////////////////////////////////////////////////////////////////////
+
+	**For ODS/PDF **
+	UI Design:
+
+	For classwise timetable:
+		show default venue in header
+		in grid show only name of subject 
+			and venue it its not default
+			and batches if its not for whole class
+		show mappings on next page
+
+	For Venuewise timetable:
+		show default class in header
+		in grid show only name of subject 
+			and class if its not default
+			and batches if its not for whole class		
+
+	For Teacherwise timetable:
+		in grid show only name of subject 
+			and class (batch if applicable)
+			and venue
+		therory load/lab load/total load
+
+/////////////////////////////////////////////////////////////////////////////////////////

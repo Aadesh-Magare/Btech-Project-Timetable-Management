@@ -1,0 +1,5 @@
+#Name	Abbrevation	Size	(Tab separated values)
+SYCOMP	SYC	80
+
+
+
