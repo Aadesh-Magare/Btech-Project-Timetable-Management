@@ -69,8 +69,8 @@ class MyGrid(gridlib.Grid):
             bottom_right = self.GetSelectionBlockBottomRight()[0]
             globaldata.selection_left = top_left
             globaldata.selection_right = bottom_right
-            print top_left
-            print bottom_right
+            # print top_left
+            # print bottom_right
 
             # self.printSelectedCells(top_left, bottom_right)
  
@@ -181,7 +181,8 @@ class MyGrid(gridlib.Grid):
         #     html = []
 
         html = []   
-        footer = {}
+        SubjectTeacher = {}
+        BatchTeacher = {}
         html.append('<h1 ALIGN="center"> %s </h1>' % globaldata.header1)
         html.append('<h2 ALIGN="center"> %s </h2>' % globaldata.header2)
         html.append('<h3 ALIGN="center"> %s </h3>' % globaldata.header3)
@@ -283,10 +284,12 @@ class MyGrid(gridlib.Grid):
                                 v = e[1]
                                 s = e[2]
                                 b = e[3]
-                                s += ' '
+                                s += ''
                                 if b != None:
-                                    s +=  '- ' + str(b)  + ' '
-                                footer[s] = t
+                                    s +=  '-' + str(b)  + ' '
+                                    BatchTeacher[s] = t
+                                else:
+                                    SubjectTeacher[s] = t
                                 try:
                                     if v != globaldata.class_venue_map[self.name]:
                                         s +=  '['+ str(v) + ']'
@@ -301,16 +304,51 @@ class MyGrid(gridlib.Grid):
         html.append("<br><br><br>")
 
         if self.type == 'Class':
-            html.append("<TABLE BORDER=1 CELLPADDING=0 CELLSPACING=0>")
+
+            html.append('<TABLE style="display:inline-block; margin-right:50px;" BORDER=1 CELLPADDING=2px CELLSPACING=2px>')
             html.append("<TR>")
-            html.append("<TD ALIGN='center' VALIGN='top'><B>Subject / Batch </B></TD>")
-            html.append("<TD ALIGN='center' VALIGN='top'><B>Teacher</B></TD>")
+            html.append("<TD ALIGN='center' VALIGN='top'><B>Subject</B></TD>")
+            html.append("<TD ALIGN='center' VALIGN='top'><B>Faculty</B></TD>")
             html.append("</TR>")
-            for e in footer:
-                print e, footer[e]
+            for e in SubjectTeacher:
+                # print e, footer[e]
                 html.append("<TR>")
                 html.append("<TD ALIGN='center' VALIGN='top'>%s</TD>" % e)
-                html.append("<TD ALIGN='center' VALIGN='top'>%s</TD>" % footer[e])
+                ShortTeacher = SubjectTeacher[e]
+                FullTeacher = globaldata.teacher_fullnames[globaldata.teacher_shortnames.index(ShortTeacher) - 1]
+                html.append("<TD ALIGN='center' VALIGN='top'>%s</TD>" % FullTeacher)
+                html.append("</TR>")
+            html.append("</TABLE>")
+
+            # html.append('<div style="width:20px display:inline-block"> </div>')    
+
+            html.append('<TABLE style="display:inline-block; margin-left:50px;" BORDER=1 CELLPADDING=2px CELLSPACING=2px>')
+            html.append("<TR>")
+            html.append("<TD ALIGN='center' VALIGN='top'><B>Lab - Batches</B></TD>")
+            html.append("<TD ALIGN='center' VALIGN='top'><B>Faculty</B></TD>")
+            html.append("</TR>")
+            for e in BatchTeacher:
+                # print e, footer[e]
+                html.append("<TR>")
+                html.append("<TD ALIGN='center' VALIGN='top'>%s</TD>" % e)
+                ShortTeacher = BatchTeacher[e]
+                FullTeacher = globaldata.teacher_fullnames[globaldata.teacher_shortnames.index(ShortTeacher) - 1]
+                html.append("<TD ALIGN='center' VALIGN='top'>%s</TD>" % FullTeacher)
+                html.append("</TR>")
+            html.append("</TABLE>")
+
+            html.append('<TABLE style="display:inline-block; margin-left:50px;" BORDER=1 CELLPADDING=2px CELLSPACING=2px>')
+            html.append("<TR>")
+            html.append("<TD ALIGN='center' VALIGN='top'><B>Shortname</B></TD>")
+            html.append("<TD ALIGN='center' VALIGN='top'><B>Subject</B></TD>")
+            html.append("</TR>")
+            for e in SubjectTeacher:
+                # print e, footer[e]
+                print globaldata.subject_shortnames
+                html.append("<TR>")
+                html.append("<TD ALIGN='center' VALIGN='top'>%s</TD>" % e)
+                Full = globaldata.subject_fullnames[globaldata.subject_shortnames.index(e) - 1]
+                html.append("<TD ALIGN='center' VALIGN='top'>%s</TD>" % Full)
                 html.append("</TR>")
             html.append("</TABLE>")
 
@@ -625,7 +663,7 @@ class MyGrid(gridlib.Grid):
         self.dia.Destroy()
 
     def Closed(self, event):
-        print 'Close pressed'
+        # print 'Close pressed'
         self.dia.Destroy()
 
     def OnDeleteEntry(self, a, b, event):
@@ -638,7 +676,7 @@ class MyGrid(gridlib.Grid):
         menuItem = menu.FindItemById(itemId)
         deleteId = int(menuItem.GetLabel().split()[2]) - 1
         if self.GetCellSize(a, b) == (1,1):
-            print 'name and to delete', self.name, entry[deleteId]
+            # print 'name and to delete', self.name, entry[deleteId]
             self.RemoveEntryFromTables(entry, deleteId)
         else:
             p, q = a, b
@@ -647,12 +685,12 @@ class MyGrid(gridlib.Grid):
                 for m in range(y):
                     self.rowSelect = p+l
                     self.colSelect = q+m
-                    print 'name and to delete', self.name, entry[deleteId]
+                    # print 'name and to delete', self.name, entry[deleteId]
                     self.RemoveEntryFromTables(entry, deleteId)
 
     def RemoveEntryFromTables(self, entry, deleteId):
-        print entry
-        print deleteId
+        # print entry
+        # print deleteId
         entryLength = len(entry[deleteId]) 
         #if has no attribute that means you haven't selected the cell yet
         a = self.rowSelect

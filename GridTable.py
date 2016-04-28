@@ -69,7 +69,7 @@ class GenericTable(wx.grid.PyGridTableBase):
             # return self.data[row][col]
 
     def SetValue(self, row, col, value):
-        print 'Update to', value, row, col
+        # print 'Update to', value, row, col
         if value != '':
             value = value.split()
             value = filter(None, value)
@@ -125,7 +125,7 @@ class GenericTable(wx.grid.PyGridTableBase):
                         project.insert_entry(t, v, c, s, i, j)
                         pub.sendMessage('UPDATE_VIEW', data = None)
                     except Exception as e:
-                        print e
+                        # print e
                         s = 'Conflict with: '
                         for t in e.value:
                             for e in t:

@@ -16,10 +16,11 @@
 //add new nnter select zala phije
 //show error when credits violation.
 //lab credits - one batch may consume all of it.
+//pdf madhe page-break , and other details
+//minimum credits are satisfied or not by sub
 
 multiple remove selected
 enter in pop up box
-minimum credits are satisfied or not by sub
 mapping after 
 progress bar
 remove space from the top of page
@@ -27,8 +28,6 @@ space above and below the text.
 double click to change some fileds
 keyboard shortcuts in menu and help section
 save ods file format to disk json / xml and read that for styling
-pdf madhe page-break , and other details
-
 
 #code is mixed ui and data manipulation. / clean
 #try exe

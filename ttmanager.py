@@ -575,10 +575,17 @@ class MyForm(wx.Frame):
             res = c.check_workload()
             if res == False:
                 s.append("Extra Workload for Class %s\n" % c.name)
+            res = c.check_subject_credits()
+            if len(res) > 0:
+                for sub in res:
+                    p = ''
+                    for e in res[sub]:
+                        p += e + ' '
+                    s.append("NoOfHours not Satisfied for %s for %s" % (sub, p))
 
         for t in globaldata.all_teachers:
             res = t.check_workload()
-            print 'teacher', res
+            # print 'teacher', res
             if res != True :
                 if res == False:
                     s.append("Extra Workload for Teacher %s\n" % t.name)
@@ -917,7 +924,7 @@ class MyForm(wx.Frame):
                 pub.sendMessage('UPDATE_VIEW', data = None)
 
     def TeacherData(self, evt):
-        print len(self.__dict__)
+        # print len(self.__dict__)
         # global teacher_fullnames, teacher_shortnames
         dlg = ListView(self, title='Add Teacher Data', key='Teacher')
         dlg.ShowModal()
@@ -1033,13 +1040,13 @@ class MyForm(wx.Frame):
         vDialouge.ShowModal()
 
     def SuccessBox(self,msg):
-        print len(self.__dict__)
+        # print len(self.__dict__)
         dlg = wx.MessageDialog(None, msg, "Notice", wx.OK|wx.ICON_INFORMATION)
         dlg.ShowModal()
         dlg.Destroy()
 
     def ImportTeacherData(self, evt):
-        print len(self.__dict__)
+        # print len(self.__dict__)
         openFileDialog = wx.FileDialog(self, "Open Teacher Data File", "", "",
                                        "txt files (*.txt)|*.txt", wx.FD_OPEN | wx.FD_FILE_MUST_EXIST)
         if openFileDialog.ShowModal() == wx.ID_CANCEL:

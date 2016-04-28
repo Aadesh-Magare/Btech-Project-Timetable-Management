@@ -71,7 +71,7 @@ class WarningView(wx.Dialog):
         # self.list.SetSize(t)
 
     def Closed(self, event):
-        print 'Close pressed'
+        # print 'Close pressed'
         self.Destroy()
 
     def onRefresh(self, event):
@@ -184,7 +184,7 @@ class ListView(wx.Dialog):
         self.Bind(wx.EVT_CLOSE, self.Closed)
 
     def Closed(self, event):
-        print 'Close pressed'
+        # print 'Close pressed'
         self.Destroy()
 
     def onDel(self, event):
@@ -276,7 +276,7 @@ class TwoItemList(wx.Dialog):
         self.Bind(wx.EVT_CLOSE, self.Closed)
 
     def Closed(self, event):
-        print 'Close pressed'
+        # print 'Close pressed'
         self.Destroy()
 
     def onOK(self, event):
@@ -339,7 +339,7 @@ class ThreeItemList(wx.Dialog):
         self.Bind(wx.EVT_CLOSE, self.Closed)
 
     def Closed(self, event):
-        print 'Close pressed'
+        # print 'Close pressed'
         self.result = None
         self.Destroy()
 
@@ -547,7 +547,7 @@ class Dialoge(wx.Dialog):
         self.Bind(wx.EVT_CLOSE, self.Closed)
 
     def Closed(self, event):
-        print 'Close pressed'
+        # print 'Close pressed'
         self.result = None
         self.Destroy()
 
@@ -639,7 +639,7 @@ class HeaderInfo(wx.Dialog):
 
 
     def Closed(self, event):
-        print 'Close pressed'
+        # print 'Close pressed'
         self.result = None
         self.Destroy()
 
@@ -784,7 +784,7 @@ class BasicConstraint(wx.Dialog):
         self.Bind(wx.EVT_CLOSE, self.Closed)
 
     def Closed(self, event):
-        print 'Close pressed'
+        # print 'Close pressed'
         self.result = None
         self.Destroy()
 

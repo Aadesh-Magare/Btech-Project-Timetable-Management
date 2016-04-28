@@ -204,18 +204,18 @@ class Venue(BaseStructure):
 		super(Venue, self).__init__(name)
 		self.capacity = capacity
 
-	def print_table(self):
-		for i in range(0, globaldata.days_per_week):
-			print i,
-			for j in range(0, globaldata.lectures_per_day):
-				try:
-					for data in self.mat[i][j]:
-						print data[1], '-', data[2],
-					print " ",
-				except:
-					print "None\t",
-			print
-		print	
+	# def print_table(self):
+	# 	for i in range(0, globaldata.days_per_week):
+	# 		print i,
+	# 		for j in range(0, globaldata.lectures_per_day):
+	# 			try:
+	# 				for data in self.mat[i][j]:
+	# 					print data[1], '-', data[2],
+	# 				print " ",
+	# 			except:
+	# 				print "None\t",
+	# 		print
+	# 	print	
 
 	def add_entry(self, teacher, Class, day, lecture, sub, List=''):
 		batch = None
@@ -260,15 +260,15 @@ class Classes(BaseStructure):
 				name = self.name + '-' + batch
 			else:
 				name = self.name
-			print 'Removing entry', name
-			print a[0][2]
-			print self.subjects[a[0][2]]
-			print self.subjects[a[0][2]][name]
+			# print 'Removing entry', name
+			# print a[0][2]
+			# print self.subjects[a[0][2]]
+			# print self.subjects[a[0][2]][name]
 			self.subjects[a[0][2]][name] -= 1
 		except:
 			pass #if its a lunch entry
 
-		print 'from remove', self.subjects
+		# print 'from remove', self.subjects
 
 		if super(Classes, self).remove_entry(day, lecture, values) == True :
 			#reduce workload of the class
@@ -349,6 +349,17 @@ class Classes(BaseStructure):
 			return False
 		else:
 			return True
+
+	def check_subject_credits(self):
+		res = {}
+		for sub in self.subjects:
+			res[sub] = []
+			for name in self.subjects[sub]:
+				if self.subjects[sub][name] != globaldata.subject_credits[globaldata.subject_shortnames.index(sub) - 1]:
+					res[sub].append(name)
+			if len(res[sub]) == 0:
+				del res[sub]
+		return res
 
 	def add_entry(self, teacher, venue, day, lecture, sub, List=''):
 		#check if we dont exceed max work load
@@ -541,32 +552,32 @@ def remove_lunch(Class, day, lecture, typeOf):
 # 		except:
 # 			pass
 
-def print_all_tables():
-	print 'Teachers:'
-	for teacher in globaldata.all_teachers:
-		print teacher
-		teacher.resize_matrix()
-		teacher.print_table()
+# def print_all_tables():
+# 	print 'Teachers:'
+# 	for teacher in globaldata.all_teachers:
+# 		print teacher
+# 		teacher.resize_matrix()
+# 		teacher.print_table()
 
-	print 'Classes:'
-	for Class in globaldata.all_classes:
-		print Class
-		Class.resize_matrix()
-		res = Class.valid_lunch_break()
-		if res == True :
-			print 'Valid Lunch break for Class'
-		else:
-			print 'Invalid Lunch break'
-			print res
-		Class.print_table()
+# 	print 'Classes:'
+# 	for Class in globaldata.all_classes:
+# 		print Class
+# 		Class.resize_matrix()
+# 		res = Class.valid_lunch_break()
+# 		if res == True :
+# 			print 'Valid Lunch break for Class'
+# 		else:
+# 			print 'Invalid Lunch break'
+# 			print res
+# 		Class.print_table()
 
-	print 'Venues:'
-	for venue in globaldata.all_venues:
-		print venue
-		venue.resize_matrix()
-		venue.print_table()
+# 	print 'Venues:'
+# 	for venue in globaldata.all_venues:
+# 		print venue
+# 		venue.resize_matrix()
+# 		venue.print_table()
 
-	print globaldata.days_per_week, globaldata.lectures_per_day
+# 	print globaldata.days_per_week, globaldata.lectures_per_day
 
 def FindVenueUtilization():
 	result = {}
@@ -599,29 +610,29 @@ def remove_all(teacher, venue, Class, day, lecture):
 	Class[0].remove_entry(day, lecture, Class)
 
 # poor argument fetching - change the way its done
-def main(args): 
-	args = args.split()
-	print args
-	if len(args) == 6:
-		try:
-			insert_entry(args[0], args[1], args[2], args[3], int(args[4]), int(args[5]))
-		except:
-			raise
-	elif len(args) == 4:
-		insert_lunch(args[1], int(args[2]), int(args[3]))
-	elif len(args) == 5:
-		globaldata.days_per_week = int(args[1])
-		globaldata.lectures_per_day = int(args[2])
-		print globaldata.days_per_week, globaldata.lectures_per_day
-	else:
-		args = args[0].split('#')
-		if len(args) == 6:
-			remove_all(args[0], args[1], args[2], int(args[4]), int(args[5]))
-		else:
-			remove_lunch(args[1], int(args[2]), int(args[3]))
+# def main(args): 
+# 	args = args.split()
+# 	print args
+# 	if len(args) == 6:
+# 		try:
+# 			insert_entry(args[0], args[1], args[2], args[3], int(args[4]), int(args[5]))
+# 		except:
+# 			raise
+# 	elif len(args) == 4:
+# 		insert_lunch(args[1], int(args[2]), int(args[3]))
+# 	elif len(args) == 5:
+# 		globaldata.days_per_week = int(args[1])
+# 		globaldata.lectures_per_day = int(args[2])
+# 		print globaldata.days_per_week, globaldata.lectures_per_day
+# 	else:
+# 		args = args[0].split('#')
+# 		if len(args) == 6:
+# 			remove_all(args[0], args[1], args[2], int(args[4]), int(args[5]))
+# 		else:
+# 			remove_lunch(args[1], int(args[2]), int(args[3]))
 
 
-if __name__ == "__main__":
-	pass
+# if __name__ == "__main__":
+	# pass
 	# main()
 	# main("ABHI AC201 SYC DSA 0 1")
