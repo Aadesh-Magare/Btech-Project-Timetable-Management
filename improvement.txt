@@ -4,6 +4,7 @@
 //import nnter disl phije
 //ods location is hard coded so causes problem when its not installed
 //khatavkar sir send after fixing the ods thing
+
 //conflict with lunch does not show whoes lunch it is conflicting with
 //class constraints should be soft
 //initial grid not showing / shows a box of very small size. - default size for row / col
@@ -18,17 +19,17 @@
 //lab credits - one batch may consume all of it.
 //pdf madhe page-break , and other details
 //minimum credits are satisfied or not by sub
+//enter in pop up box
 
 multiple remove selected
-enter in pop up box
-mapping after 
 progress bar
 remove space from the top of page
 space above and below the text.
 double click to change some fileds
 keyboard shortcuts in menu and help section
-save ods file format to disk json / xml and read that for styling
-
+DELETE AND BACKSPACE SHOUD WORK
+error messages should be detailed
+#save ods file format to disk json / xml and read that for styling
 #code is mixed ui and data manipulation. / clean
 #try exe
 #dependencies check / dont directly install while installing deb
