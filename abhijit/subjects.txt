@@ -1,0 +1,65 @@
+Subject		Lab-Hours
+Design and Analysis of Algorithms Lab	DAA-Lab	2
+System Programming Lab	SP-Lab	2
+S&V:  Storage and Virtualization Lab	S&V-Lab	2
+ADBMS:  Advanced Database Management Systems Lab	ADMBS-Lab	2
+IBA:  Introduction to Business Analytics Lab	IBA-Lab	2
+MAN:  Mobile and Ad-hoc Networks Lab	MAN-Lab	2
+IR:  Information Retrieval Lab	IR-Lab	2
+FF:  Foundation of Finance Lab	FF-Lab	2
+GTA:  Graph Theory and Applications Lab	GTA-Lab	2
+Network Architecture and Wireless Protocol  Lab	NAQP-Lab	2
+Graphics and Multimedia Lab	GML-Lab	2
+PG Laboratory 1 Lab	PGL	2
+Computer Workshop – Division 6 Lab	CW6	2
+Computer Workshop – Division 7 Lab	CW7	2
+Computer Workshop – Division 8 Lab	CW8	2
+Computer Workshop – Division 9 Lab	CW9	2
+Computer Workshop – Division 10 Lab	CS10	2
+Digital Systems Lab	DS-Lab	3
+Data Structures Lab	DSA-Lab	3
+Database Management Systems Lab	DBMS-Lab	3
+Computer Networks Lab	CN-Lab	3
+Compiler Construction Lab	CC-Lab	3
+Cryptography and Network Security Lab	CNS-Lab	3
+Information Security  Lab	IS-Lab	3
+Software Testing and Quality Assurance  Lab	STQA-Lab	3
+FCP Division 6  Lab	FCP6	4
+FCP Division 7  Lab	FCP7	4
+FCP Division 8 Lab	FCP8	4
+FCP Division 9  Lab	FCP9	4
+FCP Division 10  Lab	FCP10	4
+Discrete Structures and Graph Theory	DSGT	3
+Digital Systems	DSGT	3
+Data Structures	DSA	4
+Design and Analysis of Algorithms	DAA	3
+Database Management Systems	DBMS	3
+System Programming	SP	3
+Computer Networks	CN	3
+Computer Organization	CO	3
+Compiler Construction	CC	3
+Cryptography and Network Security	CNS	3
+S&V:  Storage and Virtualization	S&V	3
+ADBMS:  Advanced Database Management Systems	ADBMS	3
+IBA:  Introduction to Business Analytics	IBA	3
+MAN:  Mobile and Ad-hoc Networks	MAN	3
+IR:  Information Retrieval	IR	3
+FF:  Foundation of Finance	FF	3
+GTA:  Graph Theory and Applications	GTA	3
+Intermediate Programming Concepts And Tools	IPCT	3
+Network Architecture and Wireless Protocol 	NAWP	3
+Database Management Systems 	DBMS	3
+System Programming and Operating System	SPOS	3
+Graphics and Multimedia	G&M	3
+Human Computer Interaction	HCI	3
+Information Security	IS	3
+Software Testing and Quality Assurance	STQA	3
+Data Structures	DS	3
+Probability Statistics and Queuing Theory	PSQT	3
+Topics in Databases (TDB)	TDB	3
+Research Methodology	RM	1
+Advanced Computer  Networks (ACN)	ACN	3
+DOS:  Distributed Operating Systems	DOS	3
+ACA: Advanced Computer Architecture	ACA	3
+GV: Graphics and Visualiation	GV	3
+PG Laboratory 1	PGL	4
