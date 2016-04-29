@@ -1,0 +1,38 @@
+	Name	Abbrevation	Size	(Tab separated values)
+SY COMP	SYCE	90
+SY IT	SYIT	90
+SY Comp Batch B1	SYCE-B1	22
+SY Comp Batch B2	SYCE-B2	22
+SY Comp Batch B3	SYCE-B3	22
+SY Comp Batch B4	SYCE-B4	22
+SY IT Batch B1	SYIT-B1	22
+SY IT Batch B2	SYIT-B2	22
+SY IT Batch B3	SYIT-B3	22
+SY IT Batch B4	SYIT-B4	22
+TY COMP	TYCE	85
+TY IT	TYIT	85
+TY Comp Batch B1	TYCE-B1	20
+TY Comp Batch B2	TYCE-B2	20
+TY Comp Batch B3	TYCE-B3	20
+TY Comp Batch B4	TYCE-B4	20
+TY Comp Batch B4	TYCE-B4	20
+TY IT Batch B1	TYIT-B1	20
+TY IT Batch B2	TYIT-B2	20
+TY IT Batch B3	TYIT-B3	20
+TY IT Batch B4	TYIT-B4	20
+TY IT Batch B4	TYIT-B4	20
+BTech COMP	BTechCE	85
+BTech IT	BTechIT	85
+BTech Comp Batch B1	BTechCE-B1	20
+BTech Comp Batch B2	BTechCE-B2	20
+BTech Comp Batch B3	BTechCE-B3	20
+BTech Comp Batch B4	BTechCE-B4	20
+BTech Comp Batch B4	BTechCE-B4	20
+BTech IT Batch B1	BTechIT-B1	20
+BTech IT Batch B2	BTechIT-B2	20
+BTech IT Batch B3	BTechIT-B3	20
+BTech IT Batch B4	BTechIT-B4	20
+BTech IT Batch B4	BTechIT-B4	20
+MTech CE FY	MT-CEFY	20
+MTech CE SY	MT-CESY	20
+MTECH IS FY	MT-ISFY	20
