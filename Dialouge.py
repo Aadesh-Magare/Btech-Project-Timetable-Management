@@ -337,6 +337,7 @@ class ThreeItemList(wx.Dialog):
         self.SetSizer(self.mainSizer)
         self.result = None
         self.Bind(wx.EVT_CLOSE, self.Closed)
+        self.okbutton.SetFocus()
 
     def Closed(self, event):
         # print 'Close pressed'
@@ -488,6 +489,7 @@ class PromptingComboBox(wx.ComboBox) :
                     self.SetValue('Choose')
                     del self.res
                 dlg.Destroy()
+        self.parent.okbutton.SetFocus()
         event.Skip()
 
 class Dialoge(wx.Dialog):
@@ -509,6 +511,9 @@ class Dialoge(wx.Dialog):
         self.field4 = PromptingComboBox(self, "Choose", globaldata.subject_shortnames, 'Subject') 
     
         self.okbutton = wx.Button(self, label="OK", id=wx.ID_OK)
+        self.okbutton.SetFocus()
+
+        self.canbutton = wx.Button(self, label="CANCEL", id=wx.ID_CANCEL)
     
         #got name of Teacher/Venue/Class
         self.name = parent.name
@@ -536,16 +541,18 @@ class Dialoge(wx.Dialog):
         self.mainSizer.Add(self.label4, 1, flag=wx.ALIGN_CENTER_VERTICAL)
         self.mainSizer.Add(self.field4, 1, flag=wx.ALIGN_CENTER_VERTICAL)
         self.mainSizer.AddSpacer(10)
+        self.mainSizer.Add(self.canbutton, 1, flag=wx.ALIGN_CENTER_VERTICAL)
+        self.mainSizer.AddSpacer(5)
         self.mainSizer.Add(self.okbutton, 1, flag=wx.ALIGN_CENTER_VERTICAL)
-        self.mainSizer.AddSpacer(10)
+        self.mainSizer.AddSpacer(5)
         
         self.Bind(wx.EVT_BUTTON, self.onOK, id=wx.ID_OK)
-        self.Bind(wx.EVT_TEXT_ENTER, self.onOK)
+        # self.Bind(wx.EVT_TEXT_ENTER, self.onOK)
+        self.Bind(wx.EVT_CLOSE, self.Closed, id=wx.ID_CANCEL)
 
         self.SetSizer(self.mainSizer)
         self.result = None
-        self.Bind(wx.EVT_CLOSE, self.Closed)
-
+    
     def Closed(self, event):
         # print 'Close pressed'
         self.result = None

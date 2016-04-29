@@ -16,6 +16,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 '''
 
 import os, sys
@@ -380,11 +381,11 @@ class MyForm(wx.Frame):
             #fix last one in first row
             sheetV[i+12, 3+len(globaldata.colLabels)].style_name = "ce21"
             #first col
-            for l in range(1, len(globaldata.days_per_week)+1):
+            for l in range(1, globaldata.days_per_week+1):
                 sheetV[i+12+l, 3].set_value(globaldata.rowLabels[l-1])
                 sheetV[i+12+l, 3].style_name = "ce6"
             #fix last one in first col
-            sheetV[i+12 + len(globaldata.days_per_week), 3].style_name = "ce7"
+            sheetV[i+12 + globaldata.days_per_week, 3].style_name = "ce7"
 
             for l in range(1, globaldata.days_per_week+1):
                 for m in range(1, globaldata.lectures_per_day+1):
