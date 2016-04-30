@@ -1,5 +1,0 @@
-#Name	Abbrevation	NoOfHours	(Tab separated values)
-Data Structures	DSA	4
-
-
-

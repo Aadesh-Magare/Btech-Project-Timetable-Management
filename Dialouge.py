@@ -1,35 +1,39 @@
+# Timetable Management Software - Semi Automated Approach to Timetable Design.
+# Copyright (C) 2016  Aadesh Magare - aadeshmagare01@gmail.com, Abhijit A M - abhijit13@gmail.com, Sourabh Limbore - limboresourabh@gmail.com
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 #!/usr/bin/python
-'''
-Timetable Management Software - Semi Automated Approach to Timetable Design.
-Copyright (C) 2016  Aadesh Magare - aadeshmagare01@gmail.com, Abhijit A M - abhijit13@gmail.com, Sourabh Limbore - limboresourabh@gmail.com
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-'''
-
 import wx
 import globaldata
 from wx.lib.mixins.listctrl import ListCtrlAutoWidthMixin
+from wx.lib.mixins.listctrl import TextEditMixin
+# from threading import Thread
+# from wx.lib.pubsub import setuparg1
+# from wx.lib.pubsub import pub
+
 # class EditableListCtrl(wx.ListCtrl, listmix.TextEditMixin):
 #     def __init__(self, parent, ID=wx.ID_ANY, pos=wx.DefaultPosition,
 #                  size=wx.DefaultSize, style=0):
 #         """Constructor"""
 #         wx.ListCtrl.__init__(self, parent, ID, pos, size, style)
 #         listmix.TextEditMixin.__init__(self)
-class AutoWidthListCtrl(wx.ListCtrl, ListCtrlAutoWidthMixin):
-    def __init__(self, parent):
-        wx.ListCtrl.__init__(self, parent, -1, style=wx.LC_REPORT | wx.ALWAYS_SHOW_SB ,size=(700, 400))
+class AutoWidthListCtrl(wx.ListCtrl, ListCtrlAutoWidthMixin, TextEditMixin):
+    def __init__(self, parent, id=-1, style=wx.LC_REPORT | wx.ALWAYS_SHOW_SB, size=(700, 400)):
+        wx.ListCtrl.__init__(self, parent, id=-1, style=wx.LC_REPORT | wx.ALWAYS_SHOW_SB ,size=(700, 400))
         ListCtrlAutoWidthMixin.__init__(self)
+        TextEditMixin.__init__(self)
 
 class WarningView(wx.Dialog):
     def __init__(self, parent, source, size=(900,900), id=-1, title="Warnings"):
@@ -117,6 +121,35 @@ class WarningView(wx.Dialog):
         self.result = ''.join(res)
         self.Destroy()
 
+# class TestThread(Thread):
+#     def __init__(self):
+#         Thread.__init__(self)
+#         self.start()    # start the thread
+
+#     def run(self):
+#         dlg = MyProgressDialog()
+#         dlg.ShowModal()
+
+# class MyProgressDialog(wx.Dialog):
+
+#     def __init__(self):
+#         wx.Dialog.__init__(self, None, title="Progress")
+#         self.count = 0
+ 
+#         self.progress = wx.Gauge(self, range=10)
+ 
+#         sizer = wx.BoxSizer(wx.VERTICAL)
+#         sizer.Add(self.progress, 0, wx.EXPAND)
+#         self.SetSizer(sizer)
+#         pub.subscribe(self.UpdateProgress, "updatePro")
+    
+#     def UpdateProgress(self, msg):
+#         self.count += 1 
+#         if self.count >= 10:
+#             self.Destroy()
+#             return
+#         self.progress.SetValue(self.count)
+
 class ListView(wx.Dialog):
     def __init__(self, parent, size=(600,50), id=-1, title="Enter Values",key='', label1= " Name", label2= "Abbrevation"):
         wx.Dialog.__init__(self, parent, id, title, size=(500,500))
@@ -126,7 +159,9 @@ class ListView(wx.Dialog):
         self.label2 = label2
         self.mainSizer = wx.BoxSizer(wx.VERTICAL)
 
-        self.list = wx.ListCtrl(self,id, style=wx.LC_REPORT|wx.SUNKEN_BORDER, size=(300, 400))
+        # self.list = wx.ListCtrl(self,id, style=wx.LC_REPORT|wx.SUNKEN_BORDER, size=(300, 400))
+        self.list = AutoWidthListCtrl(self,id, style=wx.LC_REPORT|wx.SUNKEN_BORDER, size=(300, 400))
+
         self.list.Show(True)
         self.list.InsertColumn(0, key + label1, width=wx.LIST_AUTOSIZE_USEHEADER)
         self.list.InsertColumn(1, label2, width=wx.LIST_AUTOSIZE_USEHEADER)
@@ -162,6 +197,7 @@ class ListView(wx.Dialog):
         if key == "Subject" :
             self.list.InsertColumn(2,"NoOfHours", width=wx.LIST_AUTOSIZE_USEHEADER)
             for i in range(len(globaldata.subject_fullnames)):
+                print ([globaldata.subject_fullnames[i],globaldata.subject_shortnames[i+1],globaldata.subject_credits[i]])
                 self.list.Append([globaldata.subject_fullnames[i],globaldata.subject_shortnames[i+1],globaldata.subject_credits[i]])
 
         self.hh = wx.BoxSizer(wx.HORIZONTAL)
@@ -188,8 +224,10 @@ class ListView(wx.Dialog):
         self.Destroy()
 
     def onDel(self, event):
-        i = self.list.GetFirstSelected()
-        self.list.DeleteItem(i)
+        no = self.list.GetSelectedItemCount()
+        for j in range(no):
+            i = self.list.GetFirstSelected()
+            self.list.DeleteItem(i)
 
     def onAdd(self, event):
         if self.key == '':
@@ -365,7 +403,15 @@ class PromptingComboBox(wx.ComboBox) :
         self.name = name
         self.key = key
         self.Bind(wx.EVT_COMBOBOX, self.EvtCombobox) 
+        self.Bind(wx.EVT_TEXT_ENTER, self.TypedText) 
                 
+    def TypedText(self, event):
+        res = self.GetValue()
+        if res in self.choices:
+            self.EvtCombobox(event)
+        else:
+            self.SetValue("Choose")
+            
     def EvtCombobox(self, event):
         # print globaldata.teacher_class_map
         # print 'selected', self.GetValue()
@@ -547,7 +593,7 @@ class Dialoge(wx.Dialog):
         self.mainSizer.AddSpacer(5)
         
         self.Bind(wx.EVT_BUTTON, self.onOK, id=wx.ID_OK)
-        # self.Bind(wx.EVT_TEXT_ENTER, self.onOK)
+        self.Bind(wx.EVT_TEXT_ENTER, self.onOK)
         self.Bind(wx.EVT_CLOSE, self.Closed, id=wx.ID_CANCEL)
 
         self.SetSizer(self.mainSizer)

@@ -1,22 +1,20 @@
+# Timetable Management Software - Semi Automated Approach to Timetable Design.
+# Copyright (C) 2016  Aadesh Magare - aadeshmagare01@gmail.com, Abhijit A M - abhijit13@gmail.com, Sourabh Limbore - limboresourabh@gmail.com
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 #!/usr/bin/python
-'''
-Timetable Management Software - Semi Automated Approach to Timetable Design.
-Copyright (C) 2016  Aadesh Magare - aadeshmagare01@gmail.com, Abhijit A M - abhijit13@gmail.com, Sourabh Limbore - limboresourabh@gmail.com
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-'''
-
 import wx
 import wx.grid as gridlib
 from wx.lib.pubsub import pub
@@ -386,7 +384,7 @@ class MyGrid(gridlib.Grid):
     #     return "<TR>%s</TR>"%"\n\t".join([self.addcell(x) for x in ls])
 
     def OnSelectCell(self, event):
-        
+        # self.LeftClickEvent = event        
         self.rowSelect = event.GetRow()
         self.colSelect = event.GetCol()
         # print 'selected', self.rowSelect, self.colSelect
@@ -427,8 +425,8 @@ class MyGrid(gridlib.Grid):
                 clip[i].insert(2,temp)
                 clip[i] = tuple(clip[i])
         globaldata.clipboard = copy.deepcopy(clip)
-    def KeyPressed(self, event):
-        
+
+    def KeyPressed(self, event):        
         # If Ctrl+C is pressed...
         if event.ControlDown() and event.GetKeyCode() == 67:
             clipboard  = self.data[self.rowSelect][self.colSelect]
@@ -482,9 +480,40 @@ class MyGrid(gridlib.Grid):
                             self.RemoveEntryFromTables(clipboard, 0)
             print 'Cut', globaldata.clipboard
         
+        # If Backspace is pressed...
+        if event.GetKeyCode() == 8:
+            i = self.rowSelect
+            j = self.colSelect            
+            menu = wx.Menu()       
+            entry = self.data[i][j]
+            try:
+                for n in range(len(entry)):
+                    l = menu.Append(-1, "Delete Entry " + str(n+1))
+                    self.Bind(wx.EVT_MENU, lambda evt, a=i, b=j: self.OnDeleteEntry(a, b, evt) , l)
+            except:
+                pass
+
+            self.PopupMenu(menu)
+            menu.Destroy()
+            event.Skip()
+
         # If del is pressed...
-        # if event.GetKeyCode() == 127:
-        
+        if event.GetKeyCode() == 127:
+            i = self.rowSelect
+            j = self.colSelect            
+            menu = wx.Menu()       
+            entry = self.data[i][j]
+            try:
+                for n in range(len(entry)):
+                    l = menu.Append(-1, "Delete Entry " + str(n+1))
+                    self.Bind(wx.EVT_MENU, lambda evt, a=i, b=j: self.OnDeleteEntry(a, b, evt) , l)
+            except:
+                pass
+
+            self.PopupMenu(menu)
+            menu.Destroy()
+            event.Skip()
+                    
         #Skip other Key events
         if event.GetKeyCode():
             event.Skip()
@@ -606,7 +635,7 @@ class MyGrid(gridlib.Grid):
         self.dia.okbutton = wx.Button(self.dia, label="OK", id=wx.ID_OK)
         self.dia.mainSizer.Add(self.dia.okbutton, 1, flag=wx.ALIGN_CENTER_VERTICAL)
         self.dia.mainSizer.AddSpacer(10)
-        
+        self.dia.okbutton.SetFocus()        
         self.dia.SetSizer(self.dia.mainSizer)
         self.dia.result = None
         self.dia.Bind(wx.EVT_BUTTON, self.onOK, id=wx.ID_OK)

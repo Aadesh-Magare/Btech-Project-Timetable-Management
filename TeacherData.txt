@@ -1,4 +1,0 @@
-#Name	Abbrevation	WeeklyMax	DailyMax	(Tab separated values)
-Abhijit	AM	25	5
-
-

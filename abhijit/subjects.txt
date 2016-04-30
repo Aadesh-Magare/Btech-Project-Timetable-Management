@@ -11,11 +11,11 @@ GTA:  Graph Theory and Applications Lab	GTA-Lab	2
 Network Architecture and Wireless Protocol  Lab	NAQP-Lab	2
 Graphics and Multimedia Lab	GML-Lab	2
 PG Laboratory 1 Lab	PGL	2
-Computer Workshop – Division 6 Lab	CW6	2
-Computer Workshop – Division 7 Lab	CW7	2
-Computer Workshop – Division 8 Lab	CW8	2
-Computer Workshop – Division 9 Lab	CW9	2
-Computer Workshop – Division 10 Lab	CS10	2
+Computer Workshop - Division 6 Lab	CW6	2
+Computer Workshop - Division 7 Lab	CW7	2
+Computer Workshop - Division 8 Lab	CW8	2
+Computer Workshop - Division 9 Lab	CW9	2
+Computer Workshop - Division 10 Lab	CS10	2
 Digital Systems Lab	DS-Lab	3
 Data Structures Lab	DSA-Lab	3
 Database Management Systems Lab	DBMS-Lab	3

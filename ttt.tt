@@ -1,0 +1,1261 @@
+ccopy_reg
+_reconstructor
+p0
+(c__main__
+SaveClass
+p1
+c__builtin__
+object
+p2
+Ntp3
+Rp4
+(dp5
+S'daily_min'
+p6
+I0
+sS'venue_shortnames'
+p7
+(lp8
+S'ADD NEW'
+p9
+aS'201'
+p10
+aS'201'
+p11
+aS'SH'
+p12
+aS'DSL'
+p13
+aS'FOSS1'
+p14
+aS'FOSS2'
+p15
+aS'PL'
+p16
+aS'GML'
+p17
+aS'SSL'
+p18
+aS'ASL'
+p19
+aS'DBMSL'
+p20
+aS'ISL'
+p21
+aS'Cogni-2'
+p22
+aS'Cogni-3'
+p23
+aS'Cogni-4'
+p24
+aS'Cogni-34'
+p25
+aS'Cogni-5'
+p26
+aS'Cogni-6'
+p27
+aS'DML'
+p28
+asS'days_per_week'
+p29
+I7
+sS'venueCapacity'
+p30
+I80
+sS'class_teacher_map'
+p31
+(dp32
+sS'teacher_dailymax'
+p33
+(lp34
+I6
+aI4
+aI6
+aI4
+aI4
+aI6
+aI4
+aI4
+aI6
+aI6
+aI6
+aI4
+aI6
+aI6
+aI6
+aI6
+aI4
+aI6
+aI6
+aI3
+aI6
+aI6
+aI6
+aI6
+aI3
+aI3
+aI3
+aI3
+aI6
+aI6
+aI6
+aI6
+aI6
+aI6
+aI6
+aI10
+asS'all_teachers'
+p35
+(lp36
+g0
+(cproject
+Teacher
+p37
+g2
+Ntp38
+Rp39
+(dp40
+S'min_work_load'
+p41
+I0
+sS'mat'
+p42
+(lp43
+(lp44
+NaNaNaNaNaNaNaNaNaNaa(lp45
+NaNaNaNaNaNaNaNaNaNaa(lp46
+NaNaNaNaNaNaNaNaNaNaa(lp47
+NaNaNaNaNaNaNaNaNaNaa(lp48
+NaNaNaNaNaNaNaNaNaNaa(lp49
+NaNaNaNaNaNaNaNaNaNaa(lp50
+NaNaNaNaNaNaNaNaNaNaasS'min_daily_load'
+p51
+I0
+sS'max_daily_load'
+p52
+I6
+sS'current_work_load'
+p53
+I0
+sS'max_work_load'
+p54
+I16
+sS'name'
+p55
+S'AM'
+p56
+sbasS'class_min'
+p57
+I15
+sS'teacher_class_map'
+p58
+(dp59
+sS'class_fullnames'
+p60
+(lp61
+S'SY COMP'
+p62
+aS'SY IT'
+p63
+aS'SY Comp Batch B1'
+p64
+aS'SY Comp Batch B2'
+p65
+aS'SY Comp Batch B3'
+p66
+aS'SY Comp Batch B4'
+p67
+aS'SY IT Batch B1'
+p68
+aS'SY IT Batch B2'
+p69
+aS'SY IT Batch B3'
+p70
+aS'SY IT Batch B4'
+p71
+aS'TY COMP'
+p72
+aS'TY IT'
+p73
+aS'TY Comp Batch B1'
+p74
+aS'TY Comp Batch B2'
+p75
+aS'TY Comp Batch B3'
+p76
+aS'TY Comp Batch B4'
+p77
+aS'TY Comp Batch B4'
+p78
+aS'TY IT Batch B1'
+p79
+aS'TY IT Batch B2'
+p80
+aS'TY IT Batch B3'
+p81
+aS'TY IT Batch B4'
+p82
+aS'TY IT Batch B4'
+p83
+aS'BTech COMP'
+p84
+aS'BTech IT'
+p85
+aS'BTech Comp Batch B1'
+p86
+aS'BTech Comp Batch B2'
+p87
+aS'BTech Comp Batch B3'
+p88
+aS'BTech Comp Batch B4'
+p89
+aS'BTech Comp Batch B4'
+p90
+aS'BTech IT Batch B1'
+p91
+aS'BTech IT Batch B2'
+p92
+aS'BTech IT Batch B3'
+p93
+aS'BTech IT Batch B4'
+p94
+aS'BTech IT Batch B4'
+p95
+aS'MTech CE FY'
+p96
+aS'MTech CE SY'
+p97
+aS'MTECH IS FY'
+p98
+asS'subjects'
+p99
+(dp100
+S'MAN'
+p101
+I3
+sS'ACA'
+p102
+I3
+sS'SP-Lab'
+p103
+I2
+sS'GV'
+p104
+I3
+sS'IBA'
+p105
+I3
+sS'NAQP-Lab'
+p106
+I2
+sS'SV-Lab'
+p107
+I2
+sS'ACN'
+p108
+I3
+sS'FCP9'
+p109
+I4
+sS'CW7'
+p110
+I2
+sS'FF'
+p111
+I3
+sS'DOS'
+p112
+I3
+sS'DSA-Lab'
+p113
+I3
+sS'FCP7'
+p114
+I4
+sS'FCP6'
+p115
+I4
+sS'DS'
+p116
+I3
+sS'CNS'
+p117
+I3
+sS'CW9'
+p118
+I2
+sS'CW8'
+p119
+I2
+sS'DBMS'
+p120
+I3
+sS'IR-Lab'
+p121
+I2
+sS'STQA-Lab'
+p122
+I3
+sS'PGL'
+p123
+I4
+sS'ADMBS-Lab'
+p124
+I2
+sS'CW6'
+p125
+I2
+sS'FF-Lab'
+p126
+I2
+sS'CNS-Lab'
+p127
+I3
+sS'GTA-Lab'
+p128
+I2
+sS'PSQT'
+p129
+I3
+sS'RM'
+p130
+I1
+sS'IBA-Lab'
+p131
+I2
+sS'GTA'
+p132
+I3
+sS'CN-Lab'
+p133
+I3
+sS'CO'
+p134
+I3
+sS'CN'
+p135
+I3
+sS'STQA'
+p136
+I3
+sS'CC'
+p137
+I3
+sS'CS10'
+p138
+I2
+sS'IS'
+p139
+I3
+sS'IR'
+p140
+I3
+sS'ADBMS'
+p141
+I3
+sS'DAA-Lab'
+p142
+I2
+sS'DAA'
+p143
+I3
+sS'GM'
+p144
+I3
+sS'HCI'
+p145
+I3
+sS'DBMS-Lab'
+p146
+I3
+sS'DSGT'
+p147
+I3
+sS'DSA'
+p148
+I4
+sS'GML-Lab'
+p149
+I2
+sS'TDB'
+p150
+I3
+sS'SP'
+p151
+I3
+sS'IS-Lab'
+p152
+I3
+sS'SV'
+p153
+I3
+sS'NAWP'
+p154
+I3
+sS'SPOS'
+p155
+I3
+sS'IPCT'
+p156
+I3
+sS'MAN-Lab'
+p157
+I2
+sS'DS-Lab'
+p158
+I3
+sS'FCP10'
+p159
+I4
+sS'CC-Lab'
+p160
+I3
+sS'FCP8'
+p161
+I4
+ssS'all_classes'
+p162
+(lp163
+g0
+(cproject
+Classes
+p164
+g2
+Ntp165
+Rp166
+(dp167
+g41
+I15
+sS'batches'
+p168
+(lp169
+sS'capacity'
+p170
+I90
+sg42
+(lp171
+(lp172
+NaNaNaNaNaNaNaNaNaNaa(lp173
+NaNaNaNaNaNaNaNaNaNaa(lp174
+NaNaNaNaNaNaNaNaNaNaa(lp175
+NaNaNaNaNaNaNaNaNaNaa(lp176
+NaNaNaNaNaNaNaNaNaNaa(lp177
+NaNaNaNaNaNaNaNaNaNaa(lp178
+NaNaNaNaNaNaNaNaNaNaasg99
+(dp179
+sg53
+I0
+sg54
+I30
+sg55
+S'SYCE'
+p180
+sbasS'subject_shortnames'
+p181
+(lp182
+S'ADD NEW'
+p183
+aVDAA-Lab
+p184
+aVSP-Lab
+p185
+aVSV-Lab
+p186
+aVADMBS-Lab
+p187
+aVIBA-Lab
+p188
+aVMAN-Lab
+p189
+aVIR-Lab
+p190
+aVFF-Lab
+p191
+aVGTA-Lab
+p192
+aVNAQP-Lab
+p193
+aVGML-Lab
+p194
+aVPGL
+p195
+aVCW6
+p196
+aVCW7
+p197
+aVCW8
+p198
+aVCW9
+p199
+aVCS10
+p200
+aVDS-Lab
+p201
+aVDSA-Lab
+p202
+aVDBMS-Lab
+p203
+aVCN-Lab
+p204
+aVCC-Lab
+p205
+aVCNS-Lab
+p206
+aVIS-Lab
+p207
+aVSTQA-Lab
+p208
+aVFCP6
+p209
+aVFCP7
+p210
+aVFCP8
+p211
+aVFCP9
+p212
+aVFCP10
+p213
+aVDSGT
+p214
+aVDSGT
+p215
+aVDSA
+p216
+aVDAA
+p217
+aVDBMS
+p218
+aVSP
+p219
+aVCN
+p220
+aVCO
+p221
+aVCC
+p222
+aVCNS
+p223
+aVSV
+p224
+aVADBMS
+p225
+aVIBA
+p226
+aVMAN
+p227
+aVIR
+p228
+aVFF
+p229
+aVGTA
+p230
+aVIPCT
+p231
+aVNAWP
+p232
+aVDBMS
+p233
+aVSPOS
+p234
+aVGM
+p235
+aVHCI
+p236
+aVIS
+p237
+aVSTQA
+p238
+aVDS
+p239
+aVPSQT
+p240
+aVTDB
+p241
+aVRM
+p242
+aVACN
+p243
+aVDOS
+p244
+aVACA
+p245
+aVGV
+p246
+aVPGL
+p247
+asS'weekly_min'
+p248
+I0
+sS'class_capacity'
+p249
+(lp250
+I90
+aI90
+aI22
+aI22
+aI22
+aI22
+aI22
+aI22
+aI22
+aI22
+aI85
+aI85
+aI20
+aI20
+aI20
+aI20
+aI20
+aI20
+aI20
+aI20
+aI20
+aI20
+aI85
+aI85
+aI20
+aI20
+aI20
+aI20
+aI20
+aI20
+aI20
+aI20
+aI20
+aI20
+aI20
+aI20
+aI20
+asS'teacher_weeklymax'
+p251
+(lp252
+I16
+aI12
+aI16
+aI14
+aI3
+aI16
+aI12
+aI12
+aI16
+aI16
+aI16
+aI12
+aI16
+aI16
+aI16
+aI16
+aI12
+aI16
+aI16
+aI12
+aI16
+aI16
+aI16
+aI16
+aI12
+aI12
+aI12
+aI12
+aI16
+aI16
+aI16
+aI16
+aI16
+aI16
+aI16
+aI30
+asS'header2'
+p253
+V
+p254
+sS'header3'
+p255
+g254
+sS'header1'
+p256
+g254
+sS'venue_capacity'
+p257
+(lp258
+I100
+aI100
+aI90
+aI25
+aI25
+aI25
+aI21
+aI20
+aI24
+aI21
+aI21
+aI22
+aI27
+aI24
+aI24
+aI24
+aI27
+aI27
+aI20
+asS'class_venue_map'
+p259
+(dp260
+sS'teacher_shortnames'
+p261
+(lp262
+g9
+ag56
+aS'VHJ'
+p263
+aS'RA'
+p264
+aS'SPG'
+p265
+aS'GS'
+p266
+aS'VVK'
+p267
+aS'AAS'
+p268
+aS'YBL'
+p269
+aS'JM'
+p270
+aS'VKK'
+p271
+aS'RBA'
+p272
+aS'JA'
+p273
+aS'SSK'
+p274
+aS'VMK'
+p275
+aS'APARNA'
+p276
+aS'GSN'
+p277
+aS'VKP'
+p278
+aS'TRP'
+p279
+aS'ABP'
+p280
+aS'JVA'
+p281
+aS'SKG'
+p282
+aS'UUG'
+p283
+aS'PK'
+p284
+aS'RM'
+p285
+aS'VHZ'
+p286
+aS'SUG'
+p287
+aS'SPD'
+p288
+aS'SNG'
+p289
+aS'NSM'
+p290
+aS'SBM'
+p291
+aS'SKG'
+p292
+aS'SR'
+p293
+aS'JK'
+p294
+aS'RS'
+p295
+aS'ASM'
+p296
+aS'OD'
+p297
+asS'lectures_per_day'
+p298
+I10
+sS'daily_max'
+p299
+I5
+sS'weekly_max'
+p300
+I20
+sS'subject_fullnames'
+p301
+(lp302
+VDesign and Analysis of Algorithms Lab
+p303
+aVSystem Programming Lab
+p304
+aVSV:  Storage and Virtualization Lab
+p305
+aVADBMS:  Advanced Database Management Systems Lab
+p306
+aVIBA:  Introduction to Business Analytics Lab
+p307
+aVMAN:  Mobile and Ad-hoc Networks Lab
+p308
+aVIR:  Information Retrieval Lab
+p309
+aVFF:  Foundation of Finance Lab
+p310
+aVGTA:  Graph Theory and Applications Lab
+p311
+aVNetwork Architecture and Wireless Protocol  Lab
+p312
+aVGraphics and Multimedia Lab
+p313
+aVPG Laboratory 1 Lab
+p314
+aVComputer Workshop - Division 6 Lab
+p315
+aVComputer Workshop - Division 7 Lab
+p316
+aVComputer Workshop - Division 8 Lab
+p317
+aVComputer Workshop - Division 9 Lab
+p318
+aVComputer Workshop - Division 10 Lab
+p319
+aVDigital Systems Lab
+p320
+aVData Structures Lab
+p321
+aVDatabase Management Systems Lab
+p322
+aVComputer Networks Lab
+p323
+aVCompiler Construction Lab
+p324
+aVCryptography and Network Security Lab
+p325
+aVInformation Security  Lab
+p326
+aVSoftware Testing and Quality Assurance  Lab
+p327
+aVFCP Division 6  Lab
+p328
+aVFCP Division 7  Lab
+p329
+aVFCP Division 8 Lab
+p330
+aVFCP Division 9  Lab
+p331
+aVFCP Division 10  Lab
+p332
+aVDiscrete Structures and Graph Theory
+p333
+aVDigital Systems
+p334
+aVData Structures
+p335
+aVDesign and Analysis of Algorithms
+p336
+aVDatabase Management Systems
+p337
+aVSystem Programming
+p338
+aVComputer Networks
+p339
+aVComputer Organization
+p340
+aVCompiler Construction
+p341
+aVCryptography and Network Security
+p342
+aVSV:  Storage and Virtualization
+p343
+aVADBMS:  Advanced Database Management Systems
+p344
+aVIBA:  Introduction to Business Analytics
+p345
+aVMAN:  Mobile and Ad-hoc Networks
+p346
+aVIR:  Information Retrieval
+p347
+aVFF:  Foundation of Finance
+p348
+aVGTA:  Graph Theory and Applications
+p349
+aVIntermediate Programming Concepts And Tools
+p350
+aVNetwork Architecture and Wireless Protocol 
+p351
+aVDatabase Management Systems 
+p352
+aVSystem Programming and Operating System
+p353
+aVGraphics and Multimedia
+p354
+aVHuman Computer Interaction
+p355
+aVInformation Security
+p356
+aVSoftware Testing and Quality Assurance
+p357
+aVData Structures
+p358
+aVProbability Statistics and Queuing Theory
+p359
+aVTopics in Databases (TDB)
+p360
+aVResearch Methodology
+p361
+aVAdvanced Computer  Networks (ACN)
+p362
+aVDOS:  Distributed Operating Systems
+p363
+aVACA: Advanced Computer Architecture
+p364
+aVGV: Graphics and Visualiation
+p365
+aVPG Laboratory 1
+p366
+asS'rowLabels'
+p367
+(lp368
+S'Monday'
+p369
+aS'Tuesday'
+p370
+aS'Wednesday'
+p371
+aS'Thursday'
+p372
+aS'Friday'
+p373
+aS'Saturday'
+p374
+aS'Sunday'
+p375
+asS'subject_teacher_map'
+p376
+(dp377
+sS'teacher_fullnames'
+p378
+(lp379
+S'Abhijit A.M.'
+p380
+aS'Vandana Inamdar'
+p381
+aS'Radhika Adki'
+p382
+aS'Shirish Gosavi'
+p383
+aS'Gauri Shah'
+p384
+aS'Vibhavari Kamble'
+p385
+aS'A A Sawant'
+p386
+aS'Yashodhara Haribhakta'
+p387
+aS'Jignesh Mangukiya'
+p388
+aS'Vaibhav Khatavkar'
+p389
+aS'Rahul Adhav'
+p390
+aS'Jibi Abraham'
+p391
+aS'Satish Kumbhar'
+p392
+aS'Vijay Khadse'
+p393
+aS'Aparna Biswas'
+p394
+aS'Soma Ghosh'
+p395
+aS'Vinod Pachghare'
+p396
+aS'Tanuja Pattanshetti'
+p397
+aS'Archana Patil'
+p398
+aS'J V Aghav'
+p399
+aS'S K Gaikwad'
+p400
+aS'Uma Gajendragadkar'
+p401
+aS'Priti Kale'
+p402
+aS'Rajani Moona'
+p403
+aS'Vahida Attar'
+p404
+aS'Shahi Ghumbre'
+p405
+aS'S P Dixit'
+p406
+aS'S N Ghotkar'
+p407
+aS'Nishchay Mhatre'
+p408
+aS'Sunil B Mane'
+p409
+aS'Shikha Gupta'
+p410
+aS'Shital Rathod'
+p411
+aS'Jagdish Kamble'
+p412
+aS'Rohini Sarode'
+p413
+aS'Asmita Manna'
+p414
+aS'Other Dept'
+p415
+asS'all_venues'
+p416
+(lp417
+g0
+(cproject
+Venue
+p418
+g2
+Ntp419
+Rp420
+(dp421
+g170
+I100
+sg42
+(lp422
+(lp423
+NaNaNaNaNaNaNaNaNaNaa(lp424
+NaNaNaNaNaNaNaNaNaNaa(lp425
+NaNaNaNaNaNaNaNaNaNaa(lp426
+NaNaNaNaNaNaNaNaNaNaa(lp427
+NaNaNaNaNaNaNaNaNaNaa(lp428
+NaNaNaNaNaNaNaNaNaNaa(lp429
+NaNaNaNaNaNaNaNaNaNaasg55
+g10
+sbasS'colLables'
+p430
+(lp431
+S'9-10'
+p432
+aS'10-11'
+p433
+aS'11-12'
+p434
+aS'12-1'
+p435
+aS'1-2'
+p436
+aS'2-3'
+p437
+aS'3-4'
+p438
+aS'4-5'
+p439
+aS'5-6'
+p440
+aS'6-7'
+p441
+asS'venue_class_map'
+p442
+(dp443
+sS'class_shortnames'
+p444
+(lp445
+g9
+ag180
+aS'SYIT'
+p446
+aS'SYCE-B1'
+p447
+aS'SYCE-B2'
+p448
+aS'SYCE-B3'
+p449
+aS'SYCE-B4'
+p450
+aS'SYIT-B1'
+p451
+aS'SYIT-B2'
+p452
+aS'SYIT-B3'
+p453
+aS'SYIT-B4'
+p454
+aS'TYCE'
+p455
+aS'TYIT'
+p456
+aS'TYCE-B1'
+p457
+aS'TYCE-B2'
+p458
+aS'TYCE-B3'
+p459
+aS'TYCE-B4'
+p460
+aS'TYCE-B4'
+p461
+aS'TYIT-B1'
+p462
+aS'TYIT-B2'
+p463
+aS'TYIT-B3'
+p464
+aS'TYIT-B4'
+p465
+aS'TYIT-B4'
+p466
+aS'BTechCE'
+p467
+aS'BTechIT'
+p468
+aS'BTechCE-B1'
+p469
+aS'BTechCE-B2'
+p470
+aS'BTechCE-B3'
+p471
+aS'BTechCE-B4'
+p472
+aS'BTechCE-B4'
+p473
+aS'BTechIT-B1'
+p474
+aS'BTechIT-B2'
+p475
+aS'BTechIT-B3'
+p476
+aS'BTechIT-B4'
+p477
+aS'BTechIT-B4'
+p478
+aS'MT-CEFY'
+p479
+aS'MT-CESY'
+p480
+aS'MT-ISFY'
+p481
+asS'venue_fullnames'
+p482
+(lp483
+S'AC 202'
+p484
+aS'AC 203'
+p485
+aS'Seminar Hall Entc Extn'
+p486
+aS'Digital Systems Lab'
+p487
+aS'FOSS Lab-1'
+p488
+aS'FOSS Lab-2'
+p489
+aS'Programming Lab'
+p490
+aS'Graphics and Multimedia Lab'
+p491
+aS'System Software Lab'
+p492
+aS'Advanced Software Lab'
+p493
+aS'Database Management Lab'
+p494
+aS'Information Security Lab'
+p495
+aS'Cognizant Lab-2'
+p496
+aS'Cognizant Lab-3'
+p497
+aS'Cognizant Lab-4'
+p498
+aS'Cognizant Lab-34'
+p499
+aS'Cognizant Lab-5'
+p500
+aS'Cognizant Lab-6'
+p501
+aS'Data Mining Lab'
+p502
+asS'classCapacity'
+p503
+I80
+sS'teacher_subject_map'
+p504
+(dp505
+sS'subject_credits'
+p506
+(lp507
+I2
+aI2
+aI2
+aI2
+aI2
+aI2
+aI2
+aI2
+aI2
+aI2
+aI2
+aI2
+aI2
+aI2
+aI2
+aI2
+aI2
+aI3
+aI3
+aI3
+aI3
+aI3
+aI3
+aI3
+aI3
+aI4
+aI4
+aI4
+aI4
+aI4
+aI3
+aI3
+aI4
+aI3
+aI3
+aI3
+aI3
+aI3
+aI3
+aI3
+aI3
+aI3
+aI3
+aI3
+aI3
+aI3
+aI3
+aI3
+aI3
+aI3
+aI3
+aI3
+aI3
+aI3
+aI3
+aI3
+aI3
+aI3
+aI1
+aI3
+aI3
+aI3
+aI3
+aI4
+asS'class_max'
+p508
+I30
+sS'clipboard'
+p509
+S''
+p510
+sb.

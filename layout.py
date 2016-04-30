@@ -32,7 +32,7 @@ class SaveClass(object):
     pass
 
 class MyForm(wx.Frame):
-    def update(self, value):        
+    def update(self, value):
         for teacher in globaldata.all_teachers:
             name = teacher.name
             if not hasattr(self, name):
@@ -47,7 +47,6 @@ class MyForm(wx.Frame):
                 hthird.SetFont(self.fonth3)     
                 hfourth.SetFont(self.fonth4)
 
-
                 vbox = wx.BoxSizer(wx.VERTICAL)
                 vbox.AddSpacer(10)
                 vbox.Add(hfirst, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
@@ -61,11 +60,11 @@ class MyForm(wx.Frame):
                 self.sizer1.Add(vbox, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
 
                 vbox1 = wx.BoxSizer(wx.VERTICAL)
-                self.temp = MyGrid(self.panel1, teacher.mat, teacher.name, 'Teacher')
-
-                setattr(self, name, self.temp)
-                vbox1.Add(getattr(self,name), 1, flag=wx.ALIGN_CENTER_HORIZONTAL)
+                temp = MyGrid(self.panel1, teacher.mat, teacher.name, 'Teacher')
+                setattr(self, name, temp)
+                vbox1.Add(getattr(self, name), 1, flag=wx.ALIGN_CENTER_HORIZONTAL)
                 vbox1.AddSpacer(20)
+
                 self.sizer1.Add(vbox1, 1, flag=wx.ALIGN_CENTER_HORIZONTAL)
                 self.sizer1.AddSpacer(200)
                 self.sizer1.Layout()
@@ -155,6 +154,7 @@ class MyForm(wx.Frame):
         # self.Layout()
 
     def OnListClick(self, evt):
+
         sel = self.listboxTeacher.GetSelection()
         if sel == -1:
             sel = self.listboxVenue.GetSelection()
@@ -567,7 +567,7 @@ class MyForm(wx.Frame):
                             s.append("No Lunch Breaks for %s-%s on %s\n" % (c.name, key, m[key]))
             res = c.check_workload()
             if res == False:
-                s.append("Workload for Class %s is not within Limits\n" % c.name)
+                s.append("Extra Workload for Class %s\n" % c.name)
             res = c.check_subject_credits()
             if len(res) > 0:
                 for sub in res:
@@ -901,20 +901,20 @@ class MyForm(wx.Frame):
         dlg.ShowModal()
         dlg.Destroy()
 
-    # def ShowFirstGrid(self, type):
-    #     if type == 'Teacher':
-    #         if len(globaldata.teacher_shortnames) > 1:
-    #             project.push_object(globaldata.teacher_shortnames[1], 'Teacher')
-    #             pub.sendMessage('UPDATE_VIEW', data = None)
-    #             # self.AppendFirstEntry(globaldata.teacher_shortnames[1], self.panel1, self.sizer1, 'Teacher')
-    #     if type == 'Venue':
-    #         if len(globaldata.venue_shortnames) > 1:
-    #             project.push_object(globaldata.venue_shortnames[1], 'Venue')
-    #             pub.sendMessage('UPDATE_VIEW', data = None)
-    #     if type == 'Class':
-    #         if len(globaldata.class_shortnames) > 1:
-    #             project.push_object(globaldata.class_shortnames[1], 'Class')
-    #             pub.sendMessage('UPDATE_VIEW', data = None)
+    def ShowFirstGrid(self, type):
+        if type == 'Teacher':
+            if len(globaldata.teacher_shortnames) > 1:
+                project.push_object(globaldata.teacher_shortnames[1], 'Teacher')
+                pub.sendMessage('UPDATE_VIEW', data = None)
+                # self.AppendFirstEntry(globaldata.teacher_shortnames[1], self.panel1, self.sizer1, 'Teacher')
+        if type == 'Venue':
+            if len(globaldata.venue_shortnames) > 1:
+                project.push_object(globaldata.venue_shortnames[1], 'Venue')
+                pub.sendMessage('UPDATE_VIEW', data = None)
+        if type == 'Class':
+            if len(globaldata.class_shortnames) > 1:
+                project.push_object(globaldata.class_shortnames[1], 'Class')
+                pub.sendMessage('UPDATE_VIEW', data = None)
 
     def TeacherData(self, evt):
         # print len(self.__dict__)
@@ -928,12 +928,8 @@ class MyForm(wx.Frame):
             globaldata.teacher_shortnames = temp
             globaldata.teacher_weeklymax = dlg.result3
             globaldata.teacher_dailymax = dlg.result4
-            for t in globaldata.teacher_shortnames:
-                if t != "ADD NEW" and not hasattr(self, t):
-                    project.push_object(t, 'Teacher')
-                    pub.sendMessage('UPDATE_VIEW', data = None)
-            # if len(self.__dict__) == 32:    #default attr are 32
-            #     self.ShowFirstGrid('Teacher')
+            if len(self.__dict__) == 32:    #default attr are 32
+                self.ShowFirstGrid('Teacher')
 
     def VenueData(self, evt):
         # global venue_fullnames, venue_shortnames
@@ -945,10 +941,8 @@ class MyForm(wx.Frame):
             temp.extend(dlg.result2) 
             globaldata.venue_shortnames =  temp      
             globaldata.venue_capacity = dlg.result3
-            for t in globaldata.venue_shortnames:
-                if t != "ADD NEW" and not hasattr(self, t):
-                    project.push_object(t, 'Venue')
-                    pub.sendMessage('UPDATE_VIEW', data = None)
+            if len(self.__dict__) == 32:    #default attr are 32
+                self.ShowFirstGrid('Venue')
 
     def ClassData(self, evt):
         # global class_fullnames, class_shortnames
@@ -960,10 +954,8 @@ class MyForm(wx.Frame):
             temp.extend(dlg.result2)
             globaldata.class_shortnames = temp
             globaldata.class_capacity = dlg.result3
-            for t in globaldata.class_shortnames:
-                if t != "ADD NEW" and not hasattr(self, t):
-                    project.push_object(t, 'Class')
-                    pub.sendMessage('UPDATE_VIEW', data = None)
+            if len(self.__dict__) == 32:    #default attr are 32
+                self.ShowFirstGrid('Venue')
 
     def SubjectData(self, evt):
         dlg = ListView(self, title='Add Subject Data', key='Subject')
@@ -1071,11 +1063,9 @@ class MyForm(wx.Frame):
                 globaldata.teacher_dailymax.append(int(p[3]))
         except:
             self.ErrorBox('Error in File Format')
-
-        self.TeacherData(evt)
-        # self.SuccessBox('Imported Successfully')
-        # if len(globaldata.all_teachers) == 0:    #default attr are 32
-        #     self.ShowFirstGrid('Teacher')
+        self.SuccessBox('Imported Successfully')
+        if len(globaldata.all_teachers) == 0:    #default attr are 32
+            self.ShowFirstGrid('Teacher')
 
     def ImportVenueData(self, evt):
         openFileDialog = wx.FileDialog(self, "Open Venue Data File", "", "",
@@ -1096,10 +1086,9 @@ class MyForm(wx.Frame):
         except:
             self.ErrorBox('Error in File Format')
 
-        self.VenueData(evt)
-        # self.SuccessBox('Imported Successfully')    
-        # if len(globaldata.all_venues) == 0:    #default attr are 32
-        #     self.ShowFirstGrid('Venue')
+        self.SuccessBox('Imported Successfully')    
+        if len(globaldata.all_venues) == 0:    #default attr are 32
+            self.ShowFirstGrid('Venue')
 
     def ImportClassData(self, evt):
         openFileDialog = wx.FileDialog(self, "Open Class Data File", "", "",
@@ -1120,10 +1109,9 @@ class MyForm(wx.Frame):
         except:
             self.ErrorBox('Error in File Format')
 
-        self.ClassData(evt)
-        # self.SuccessBox('Imported Successfully')    
-        # if len(globaldata.all_classes) == 0:    #default attr are 32
-        #     self.ShowFirstGrid('Class')
+        self.SuccessBox('Imported Successfully')    
+        if len(globaldata.all_classes) == 0:    #default attr are 32
+            self.ShowFirstGrid('Class')
 
     def ImportSubjectData(self, evt):
         openFileDialog = wx.FileDialog(self, "Open Subject Data File", "", "",
@@ -1149,13 +1137,139 @@ class MyForm(wx.Frame):
 
 
     def UpdateHeaders(self, evt):
+
         dlg = HeaderInfo(self)
         dlg.ShowModal()
         if hasattr(dlg, 'result1') and hasattr(dlg, 'result2') and hasattr(dlg, 'result3'):
-            globaldata.header1 = dlg.result1
-            globaldata.header2 = dlg.result2
-            globaldata.header3 = dlg.result3  
-            self.update(None) 
+            if globaldata.header1 != dlg.result1 or globaldata.header2 != dlg.result2 or globaldata.header3 != dlg.result3:
+
+                globaldata.header1 = dlg.result1
+                globaldata.header2 = dlg.result2
+                globaldata.header3 = dlg.result3
+
+                i = 1
+                for child in self.panel1.GetChildren():
+                    if i % 4 == 0:
+                        self.sizer1.Remove(child)
+                    else:
+                        child.Destroy()
+                    i += 1
+                i = 1
+                for child in self.panel2.GetChildren():
+                    if i % 4 == 0:
+                        self.sizer2.Remove(child)
+                    else:
+                        child.Destroy()
+                    i += 1
+                i = 1
+                for child in self.panel3.GetChildren():
+                    if i % 4 == 0:
+                        self.sizer3.Remove(child)
+                    else:
+                        child.Destroy()
+                    i += 1
+
+                for teacher in globaldata.all_teachers:
+                    name = teacher.name
+                    hfirst = wx.StaticText(self.panel1, label=globaldata.header1)
+                    hsecond = wx.StaticText(self.panel1, label=globaldata.header2)
+                    hthird = wx.StaticText(self.panel1, label=globaldata.header3)
+                    hfourth = wx.StaticText(self.panel1, label= 'Timetable For Teacher: ' + teacher.name)
+                    hthird.SetForegroundColour(wx.Colour(255,55,125))
+                    hfirst.SetFont(self.fonth1)
+                    hsecond.SetFont(self.fonth2)
+                    hthird.SetFont(self.fonth3)     
+                    hfourth.SetFont(self.fonth4)
+
+                    vbox = wx.BoxSizer(wx.VERTICAL)
+                    vbox.AddSpacer(10)
+                    vbox.Add(hfirst, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
+                    vbox.AddSpacer(10)
+                    vbox.Add(hsecond, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
+                    vbox.AddSpacer(2)
+                    vbox.Add(hthird, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
+                    vbox.AddSpacer(10)
+                    vbox.Add(hfourth, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
+                    vbox.AddSpacer(20)
+                    self.sizer1.Add(vbox, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
+
+                    vbox1 = wx.BoxSizer(wx.VERTICAL)
+                    # temp = MyGrid(self.panel1, teacher.mat, teacher.name, 'Teacher')
+                    # setattr(self, name, temp)
+                    vbox1.Add(getattr(self, name), 1, flag=wx.ALIGN_CENTER_HORIZONTAL)
+                    vbox1.AddSpacer(20)
+
+                    self.sizer1.Add(vbox1, 1, flag=wx.ALIGN_CENTER_HORIZONTAL)
+                    self.sizer1.AddSpacer(200)
+                    self.sizer1.Layout()
+
+                for venue in globaldata.all_venues:
+                    name = venue.name
+                    # temp = MyGrid(self.panel2, venue.mat, venue.name, 'Venue')        
+                    hfirst = wx.StaticText(self.panel2, label=globaldata.header1)
+                    hsecond = wx.StaticText(self.panel2, label=globaldata.header2)
+                    hthird = wx.StaticText(self.panel2, label=globaldata.header3)
+                    hfourth = wx.StaticText(self.panel2, label='Timetable For Venue: ' + venue.name)
+                    hthird.SetForegroundColour(wx.Colour(255,55,125))
+                    hfirst.SetFont(self.fonth1)
+                    hsecond.SetFont(self.fonth2)
+                    hthird.SetFont(self.fonth3)     
+                    hfourth.SetFont(self.fonth4)
+
+                    vbox = wx.BoxSizer(wx.VERTICAL)
+                    vbox.AddSpacer(10)
+                    vbox.Add(hfirst, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
+                    vbox.AddSpacer(10)
+                    vbox.Add(hsecond, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
+                    vbox.AddSpacer(2)
+                    vbox.Add(hthird, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
+                    vbox.AddSpacer(10)
+                    vbox.Add(hfourth, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
+                    vbox.AddSpacer(20)
+                    self.sizer2.Add(vbox, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
+                    
+                    vbox1 = wx.BoxSizer(wx.VERTICAL)
+                    # setattr(self, name, temp)
+                    vbox1.Add(getattr(self,name), 1, flag=wx.ALIGN_CENTER_HORIZONTAL)
+                    vbox1.AddSpacer(20)
+                    self.sizer2.Add(vbox1, 1, flag=wx.ALIGN_CENTER_HORIZONTAL)
+                    self.sizer2.AddSpacer(200)
+                    self.sizer2.Layout()
+
+                for Class in globaldata.all_classes:
+                    name = Class.name
+                    # temp = MyGrid(self.panel3, Class.mat, Class.name, 'Class')        
+                    hfirst = wx.StaticText(self.panel3, label=globaldata.header1)
+                    hsecond = wx.StaticText(self.panel3, label=globaldata.header2)
+                    hthird = wx.StaticText(self.panel3, label=globaldata.header3)
+                    hfourth = wx.StaticText(self.panel3, label='Timetable For Class: ' + Class.name)
+                    hthird.SetForegroundColour(wx.Colour(255,55,125))
+                    hfirst.SetFont(self.fonth1)
+                    hsecond.SetFont(self.fonth2)
+                    hthird.SetFont(self.fonth3)     
+                    hfourth.SetFont(self.fonth4)
+                    
+                    vbox = wx.BoxSizer(wx.VERTICAL)
+                    vbox.AddSpacer(10)
+                    vbox.Add(hfirst, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
+                    vbox.AddSpacer(10)
+                    vbox.Add(hsecond, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
+                    vbox.AddSpacer(2)
+                    vbox.Add(hthird, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
+                    vbox.AddSpacer(10)
+                    vbox.Add(hfourth, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
+                    vbox.AddSpacer(20)
+                    self.sizer3.Add(vbox, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
+
+                    vbox1 = wx.BoxSizer(wx.VERTICAL)
+                    # setattr(self, name, temp)
+                    vbox1.Add(getattr(self,name), 1, flag=wx.ALIGN_CENTER_HORIZONTAL)
+                    vbox1.AddSpacer(20)
+                    self.sizer3.Add(vbox1, 1, flag=wx.ALIGN_CENTER_HORIZONTAL)
+                    self.sizer3.AddSpacer(200)
+                    self.sizer3.Layout()
+                self.update(None) 
+    
         dlg.Destroy()
 
     def _init_menubar(self):
