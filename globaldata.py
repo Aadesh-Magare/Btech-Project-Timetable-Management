@@ -66,3 +66,5 @@ teacher_subject_map = {}
 subject_teacher_map = {}
 venue_class_map = {}
 class_venue_map = {}
+subject_class_map = {}
+class_subject_map = {}

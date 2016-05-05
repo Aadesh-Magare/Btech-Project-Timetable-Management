@@ -693,6 +693,8 @@ class MyForm(wx.Frame):
         globaldata.subject_teacher_map = saveObject.subject_teacher_map
         globaldata.venue_class_map = saveObject.venue_class_map
         globaldata.class_venue_map = saveObject.class_venue_map
+        globaldata.class_subject_map = saveObject.class_subject_map
+        globaldata.subject_class_map = saveObject.subject_class_map
         
         # self.AppendGlobalInput(None)
         self.update(None)
@@ -760,6 +762,8 @@ class MyForm(wx.Frame):
         saveObject.subject_teacher_map = globaldata.subject_teacher_map
         saveObject.venue_class_map = globaldata.venue_class_map
         saveObject.class_venue_map = globaldata.class_venue_map
+        saveObject.class_subject_map = globaldata.class_subject_map
+        saveObject.subject_class_map = globaldata.subject_class_map
 
         if not hasattr(self, "savefilepath"):
             saveFileDialog = wx.FileDialog(self, "Save Project File", "", ".tt",
@@ -1065,6 +1069,7 @@ class MyForm(wx.Frame):
         try:
             for l in lines:
                 p = l.split('\t')
+                p = filter(None, p)
                 globaldata.teacher_fullnames.append(p[0])
                 globaldata.teacher_shortnames.append(p[1])
                 globaldata.teacher_weeklymax.append(int(p[2]))
@@ -1090,6 +1095,7 @@ class MyForm(wx.Frame):
         try:
             for l in lines:
                 p = l.split('\t')
+                p = filter(None, p)
                 globaldata.venue_fullnames.append(p[0])
                 globaldata.venue_shortnames.append(p[1])
                 globaldata.venue_capacity.append(int(p[2]))
@@ -1114,6 +1120,7 @@ class MyForm(wx.Frame):
         try:
             for l in lines:
                 p = l.split('\t')
+                p = filter(None, p)
                 globaldata.class_fullnames.append(p[0])
                 globaldata.class_shortnames.append(p[1])
                 globaldata.class_capacity.append(int(p[2]))
@@ -1138,15 +1145,27 @@ class MyForm(wx.Frame):
         try:
             for l in lines:
                 p = l.split('\t')
+                p = filter(None, p)
                 globaldata.subject_fullnames.append(p[0])
                 globaldata.subject_shortnames.append(p[1])
                 globaldata.subject_credits.append(int(p[2]))
                 globaldata.subjects[p[1]] = int(p[2])
+                for className in p[3:]:
+                    globaldata.subject_class_map[p[1]] = className
+                    if className in globaldata.class_subject_map:
+                        globaldata.class_subject_map[className].append(p[1])
+                    else:
+                        globaldata.class_subject_map[className] = [p[1]]
         except:
             self.ErrorBox('Error in File Format')                
         
         self.SuccessBox('Imported Successfully') 
 
+        # for i in globaldata.class_subject_map:
+        #     print i, globaldata.class_subject_map[i]
+
+        # for i in globaldata.subject_class_map:
+        #     print i, globaldata.subject_class_map[i]
 
     def UpdateHeaders(self, evt):
         dlg = HeaderInfo(self)

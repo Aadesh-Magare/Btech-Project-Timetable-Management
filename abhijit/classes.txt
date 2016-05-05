@@ -1,4 +1,4 @@
-	Name	Abbrevation	Size	(Tab separated values)
+#Name	Abbrevation	Size	(Tab separated values)
 SY COMP	SYCE	90
 SY IT	SYIT	90
 SY Comp Batch B1	SYCE-B1	22
@@ -33,6 +33,7 @@ BTech IT Batch B2	BTechIT-B2	20
 BTech IT Batch B3	BTechIT-B3	20
 BTech IT Batch B4	BTechIT-B4	20
 BTech IT Batch B4	BTechIT-B4	20
-MTech CE FY	MT-CEFY	20
-MTech CE SY	MT-CESY	20
-MTECH IS FY	MT-ISFY	20
+MTech CE FY	MTCEFY	20
+MTech CE SY	MTCESY	20
+MTECH IT FY	MTITFY	20
+MTECH IT SY	MTITSY	20

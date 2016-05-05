@@ -466,6 +466,22 @@ class PromptingComboBox(wx.ComboBox) :
                         self.parent.field1.SetValue(val)
                         self.parent.field1.res = val
 
+                    #ClassSubject map
+                    try:
+                        key = key.split('-')[0]
+                        val = globaldata.class_subject_map[key]
+                    except:
+                        val = None
+                    if val != None:
+                        #make sub dropdown
+                        self.parent.field4.Clear()
+                        for sub in val:
+                            self.parent.field4.Append(sub)
+                    else:
+                        self.parent.field4.Clear()
+                        for sub in globaldata.subject_shortnames[1:]:
+                            self.parent.field4.Append(sub)
+
                 elif self.name == "Subject":
                     #SubjectTeacher map
                     try:
@@ -475,6 +491,16 @@ class PromptingComboBox(wx.ComboBox) :
                     if val != None and self.parent.field1.GetValue() == "Choose":
                         self.parent.field1.SetValue(val)
                         self.parent.field1.res = val
+
+                    #SubjectClass map
+                    try:
+                        val = globaldata.subject_class_map[key]
+                    except:
+                        val = None
+                    if val != None and self.parent.field3.GetValue() == "Choose":
+                        self.parent.field3.SetValue(val)
+                        self.parent.field3.res = val
+
                 # del self.res
         if self.res == "ADD NEW" :
             if self.name == "Teacher":
