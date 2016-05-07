@@ -18,7 +18,7 @@ We have implemented a semi-automated approach for solving this constraint heavy 
 \item All constraints need to be ready at beginning.
 \item All data input is mandatory at beginning. 
 \item No flexibility.
-\item Algorithm works mechanically, cant be modified.
+\item Algorithm works mechanically, can't be modified.
 \item Personalization not possible.
 \end{itemize}
 
@@ -41,27 +41,32 @@ To design and implement an application which can be used to manage the timetable
 
 \section{Requirements}
 \begin{itemize}
-\item User-friendly cell formatting (colours and styling).
-\item Export in \textit{ods, pdf, html} formats.
+\item The application should suggest create new or open project suggestion on startup.
+\item It should ask for titles (headers) when creating new project, which would be displayed at the top of timetable. 
+\item Titles should be changeable dynamically.
+\item It should ask for basic constraints like working days per week, number of lectures per day, maximum workload for class and lecture start time for the institution at the time of creation of timetable.
+\item There should be three tabs, \textit{Class, Venue and Teacher} which will show classwise, venuewise and teacherwise timetable respectively.
+\item Timetable should be displayed in a grid i.e. a table having cells.
+\item Cells in a grid should contain abbreviated names of teacher, venue, class and subjects. (and batches if applicable)
+\item It should show pop-up box for input in cells, having dropdown style choices for teacher, venue, class and subject.
+\item It should support typing in cell directly.
+\item There should be user-friendly cell formatting (colours and styling).
+\item It should support merge, unmerge of cells.
+\item It should have support for batches in class for e.g. \textit{syce-b1, syit-b1} etc.
+\item There should be a panel for easy scrolling on left side of screen.
 \item Standard keyboard short-cuts like copy, paste, merge should work.
-\item Support merge, unmerge of cells.
-\item Ability to manage data of \textit{teachers, venues, classes, subjects} at runtime.
-\item Support for batches in class for e.g. \textit{syce-b1, syit-b1} etc.
-\item Individual \textit{teacher workload.}
-\item Dynamic changing of titles.
-\item Show venue utilisation statistics.
-\item Check constraints option in menu.
-\item \textit{teacher-subject, venue-class and teacher-class} mapping.
-\item \textit{teacher, venue, class, subject} data should be imported from file.
-\item Improve the grid layout.
-\item Define styling for \textit{ods} document.
-\item Support typing in cell directly.
-\item Open file through command line argument.
-\item Show suggestions in pop-up box while typing.
-\item Capacity, number of hours, workload should be changeable at runtime.
-\item \textit{subject} list should filter as per \textit{class-subject} mapping.
-\item Show keyboard short-cuts in menu.
-\item Port to web-platform.
+\item Project file should be opened via command line argument.
+\item It should have an ability to manage data of \textit{teachers, venues, classes, subjects} at runtime and import it from files.
+\item It should have ability to specify individual \textit{teacher workload.}
+\item It should support \textit{teacher-subject, venue-class and teacher-class} mapping and importing from file.
+\item \textit{Subject} list in the pop-up box should filter as per \textit{class-subject} mapping.
+\item While typing in pop-up box, suggestions should be shown.
+\item Venue/class capacity, number of hours for a subject, workload for a teacher should be changeable at runtime.
+\item Venue utilisation statistics should be shown.
+\item There should be a check constraints option in menu.
+\item It should export timetable in \textit{ods, pdf, html} formats.
+\item It should have ability to define styling for \textit{ods} document.
+\item It should show keyboard short-cuts in menu.
 \end{itemize}
 
 %\begin{figure}[htbp]			

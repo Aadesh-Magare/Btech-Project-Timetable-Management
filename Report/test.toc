@@ -1,30 +1,31 @@
-\contentsline {chapter}{List of Figures}{5}
+\contentsline {chapter}{List of Tables}{5}
+\contentsline {chapter}{List of Figures}{6}
 \contentsline {chapter}{\numberline {1}Introduction}{1}
 \contentsline {section}{\numberline {1.1}Problem Statement}{2}
 \contentsline {section}{\numberline {1.2}Requirements}{2}
-\contentsline {chapter}{\numberline {2}Literature review}{4}
-\contentsline {section}{\numberline {2.1}Existing Solutions}{4}
-\contentsline {subsection}{\numberline {2.1.1}FET}{4}
-\contentsline {subsection}{\numberline {2.1.2}aSc Timetable}{4}
-\contentsline {subsection}{\numberline {2.1.3}Mimosa}{5}
-\contentsline {section}{\numberline {2.2}Proposed Solution}{6}
-\contentsline {chapter}{\numberline {3}System design criteria}{7}
-\contentsline {section}{\numberline {3.1}Requirements}{7}
-\contentsline {subsection}{\numberline {3.1.1}Hardware requirements (Same as for Python platform)}{7}
-\contentsline {subsection}{\numberline {3.1.2}Software requirements}{7}
-\contentsline {section}{\numberline {3.2}Constraints}{8}
-\contentsline {subsection}{\numberline {3.2.1}Hard constraints}{8}
-\contentsline {subsection}{\numberline {3.2.2}Soft constraints}{8}
-\contentsline {section}{\numberline {3.3}Approach of design}{9}
-\contentsline {subsection}{\numberline {3.3.1}List of Features}{10}
-\contentsline {chapter}{\numberline {4}Implementation}{12}
-\contentsline {section}{\numberline {4.1}Technologies used}{12}
-\contentsline {subsection}{\numberline {4.1.1}Python}{12}
-\contentsline {subsection}{\numberline {4.1.2}wxPython}{12}
-\contentsline {subsection}{\numberline {4.1.3}Wxwidgets}{12}
-\contentsline {subsection}{\numberline {4.1.4}Python modules}{13}
-\contentsline {section}{\numberline {4.2}Front-end}{14}
-\contentsline {section}{\numberline {4.3}Back-end}{18}
-\contentsline {chapter}{\numberline {5}Conclusion}{25}
-\contentsline {chapter}{\numberline {6}Future Scope}{26}
-\contentsline {chapter}{\numberline {7}Diagrams}{27}
+\contentsline {chapter}{\numberline {2}Literature review}{5}
+\contentsline {section}{\numberline {2.1}Existing Solutions}{5}
+\contentsline {subsection}{\numberline {2.1.1}FET}{5}
+\contentsline {subsection}{\numberline {2.1.2}aSc Timetable}{5}
+\contentsline {subsection}{\numberline {2.1.3}Mimosa}{6}
+\contentsline {section}{\numberline {2.2}Proposed Solution}{7}
+\contentsline {chapter}{\numberline {3}System design criteria}{8}
+\contentsline {section}{\numberline {3.1}Requirements}{8}
+\contentsline {subsection}{\numberline {3.1.1}Hardware requirements (Same as for Python platform)}{8}
+\contentsline {subsection}{\numberline {3.1.2}Software requirements}{8}
+\contentsline {section}{\numberline {3.2}Constraints}{9}
+\contentsline {subsection}{\numberline {3.2.1}Hard constraints}{9}
+\contentsline {subsection}{\numberline {3.2.2}Soft constraints}{9}
+\contentsline {section}{\numberline {3.3}Approach of design}{10}
+\contentsline {subsection}{\numberline {3.3.1}List of Implemented Features}{11}
+\contentsline {chapter}{\numberline {4}Implementation}{13}
+\contentsline {section}{\numberline {4.1}Technologies used}{13}
+\contentsline {subsection}{\numberline {4.1.1}Python}{13}
+\contentsline {subsection}{\numberline {4.1.2}wxPython}{13}
+\contentsline {subsection}{\numberline {4.1.3}Wxwidgets}{13}
+\contentsline {subsection}{\numberline {4.1.4}Python modules}{14}
+\contentsline {section}{\numberline {4.2}Front-end}{15}
+\contentsline {section}{\numberline {4.3}Back-end}{19}
+\contentsline {chapter}{\numberline {5}Conclusion}{26}
+\contentsline {chapter}{\numberline {6}Future Scope}{27}
+\contentsline {chapter}{\numberline {7}Diagrams}{28}

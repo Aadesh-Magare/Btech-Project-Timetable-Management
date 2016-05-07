@@ -54,18 +54,18 @@ An example of venue data entry.
 \end{figure}
 
 \newpage
-An example of class data entry.
+An example of venue-class mapping entry.
 \begin{figure}[ht!]
 	\centering
-	\includegraphics[width=160mm]{7.png}
-	\caption{Class data entry}
+	\includegraphics[width=160mm]{mapping.png}
+	\caption{Venue-class mapping }
 \end{figure}
 
-An example of subject data entry.
+An example of importing data from file.
 \begin{figure}[ht!]
 	\centering
-	 \includegraphics[width=160mm]{8.png}
-	\caption{Subject data entry}
+	 \includegraphics[width=160mm]{import_file.png}
+	\caption{Importing data from file}
 \end{figure}
 
 \newpage
@@ -295,7 +295,7 @@ A wrong entry causes Exception. In that case, its handled and its affects are un
 
 \newpage Hard constraint violation is not permitted where as soft-constraint violation causes warning which is saved in global warnings section. These global warnings are stored in file on filesystem. User can remove warnings from the file (which he/she chose to ignore). The warnings can be refreshed which causes the system to check all constraints and build the warning list again.
 
-\textit{pickle} module is used to save the timetable on filesystem. It allows to save / open the timetable by dumping the in-memory contents on the disk. Exporting the timetable in ods, pdf and html formats is possible. Python modules \textit{ezodf} and \textit{pdfkit} are used to export the timetable. \textit{styling\_reference} is used as a reference style for the ods export.
+\textit{pickle} module is used to save the timetable on filesystem. It allows to save / open the timetable by dumping the in-memory contents on the disk. Exporting the timetable in ods, pdf and html formats is possible. Python modules \textit{ezodf} and \textit{pdfkit} are used to export the timetable. \textit{styling\_reference.ods} is used as a reference style for the ods export.
 
 %\subsection{Vorpal blade}
 %And this is a subsection.			
