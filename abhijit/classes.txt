@@ -15,11 +15,9 @@ TY Comp Batch B1	TYCE-B1	20
 TY Comp Batch B2	TYCE-B2	20
 TY Comp Batch B3	TYCE-B3	20
 TY Comp Batch B4	TYCE-B4	20
-TY Comp Batch B4	TYCE-B4	20
 TY IT Batch B1	TYIT-B1	20
 TY IT Batch B2	TYIT-B2	20
 TY IT Batch B3	TYIT-B3	20
-TY IT Batch B4	TYIT-B4	20
 TY IT Batch B4	TYIT-B4	20
 BTech COMP	BTechCE	85
 BTech IT	BTechIT	85
@@ -27,11 +25,9 @@ BTech Comp Batch B1	BTechCE-B1	20
 BTech Comp Batch B2	BTechCE-B2	20
 BTech Comp Batch B3	BTechCE-B3	20
 BTech Comp Batch B4	BTechCE-B4	20
-BTech Comp Batch B4	BTechCE-B4	20
 BTech IT Batch B1	BTechIT-B1	20
 BTech IT Batch B2	BTechIT-B2	20
 BTech IT Batch B3	BTechIT-B3	20
-BTech IT Batch B4	BTechIT-B4	20
 BTech IT Batch B4	BTechIT-B4	20
 MTech CE FY	MTCEFY	20
 MTech CE SY	MTCESY	20

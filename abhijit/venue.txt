@@ -1,6 +1,6 @@
 	Name	Abbrevation	Capacity	(Tab separated values)
-AC 202	201	100
-AC 203	201	100
+AC 202	202	100
+AC 203	203	100
 Seminar Hall Entc Extn	SH	90
 Digital Systems Lab	DSL	25
 FOSS Lab-1	FOSS1	25
