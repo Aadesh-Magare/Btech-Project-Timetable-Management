@@ -1167,6 +1167,11 @@ class MyForm(wx.Frame):
         # for i in globaldata.subject_class_map:
         #     print i, globaldata.subject_class_map[i]
 
+    def KeyboardShortcuts(self, evt):
+        dlg = HelpWindow(self)
+        dlg.ShowModal()
+        dlg.Destroy()
+
     def UpdateHeaders(self, evt):
         dlg = HeaderInfo(self)
         dlg.ShowModal()
@@ -1262,7 +1267,8 @@ class MyForm(wx.Frame):
 
 
         help = wx.Menu()
-        help.Append(-1,'Content')
+        ks = help.Append(-1,'Keyboard Shortcuts')
+        self.Bind(wx.EVT_MENU, self.KeyboardShortcuts, ks)
         help.Append(-1,'About')
 
         menubar.Append(file, '&File')

@@ -1,14 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////////////////
 
-cell- display formatting / add colosr
-export as ods - nice form, pdf
-header box instead of line
-enter should work
-
-/////////////////////////////////////////////////////////////////////////////////////////
-
 								***bugs***
 
+	//cell- display formatting / add colosr
+	//export as ods - nice form, pdf
+	//enter should work
 	//new wizard -> headers, basic constraints, popup for data
 	//data --> teachers, venue, classes, subjects
 	//suggestions dropdown box for teacher/venue/class names

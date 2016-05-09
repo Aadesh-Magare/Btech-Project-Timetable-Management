@@ -28,9 +28,8 @@
 //capacity/NoOfHours/Workload changeable at runtime
 //all timetables should be visible i.e. blank ones visible initially
 //subject list should filter as per class / subject class mapping
+//keyboard shortcuts in menu and help section
 
-#keyboard shortcuts in menu and help section
-#error messages should be detailed
 #after import fails app dies
 #try exe
 #dependencies check / dont directly install while installing deb

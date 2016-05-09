@@ -35,6 +35,39 @@ class AutoWidthListCtrl(wx.ListCtrl, ListCtrlAutoWidthMixin, TextEditMixin):
         ListCtrlAutoWidthMixin.__init__(self)
         TextEditMixin.__init__(self)
 
+class HelpWindow(wx.Dialog):
+    def __init__(self, parent, size=(900,900), id=-1, title="Keyboard Shortcuts"):
+        wx.Dialog.__init__(self, parent, id, title, size)
+        self.mainSizer = wx.BoxSizer(wx.VERTICAL)
+        self.list = AutoWidthListCtrl(self)
+        self.list.Show(True)
+        self.list.InsertColumn(0, 'Keyboard Shortcut', width=wx.LIST_AUTOSIZE_USEHEADER)
+        self.list.InsertColumn(1, 'Description', width=wx.LIST_AUTOSIZE_USEHEADER)
+
+        self.list.Append(['CTRL + N', 'New Project'])
+        self.list.Append(['CTRL + O', 'Open Project'])
+        self.list.Append(['CTRL + S', 'Save'])
+        self.list.Append(['CTRL + SHIFT + S', 'Save As'])
+        self.list.Append(['CTRL + C', 'Copy Cell Content'])
+        self.list.Append(['CTRL + X', 'Cut Cell Content'])
+        self.list.Append(['CTRL + V', 'Paste Copied Content'])
+        self.list.Append(['CTRL + M', 'Merge Selected Cells'])
+        self.list.Append(['CTRL + U', 'Unmerge Selected Cells'])
+        self.list.Append(['CTRL + Q', 'Quit Application'])
+
+        self.closebutton = wx.Button(self, label="Close")        
+        self.Bind(wx.EVT_BUTTON, self.Closed, self.closebutton)
+        self.closebutton.SetFocus()
+        self.mainSizer.Add(self.list, 0, flag=wx.EXPAND|wx.ALIGN_CENTER)
+        self.mainSizer.Add(self.closebutton, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
+
+        self.SetSizer(self.mainSizer)
+        self.Bind(wx.EVT_CLOSE, self.Closed)
+
+
+    def Closed(self, event):
+        self.Destroy()
+
 class WarningView(wx.Dialog):
     def __init__(self, parent, source, size=(900,900), id=-1, title="Warnings"):
         self.parent = parent
@@ -501,6 +534,7 @@ class PromptingComboBox(wx.ComboBox) :
                         self.parent.field3.SetValue(val)
                         self.parent.field3.res = val
 
+                    
                 # del self.res
         if self.res == "ADD NEW" :
             if self.name == "Teacher":
