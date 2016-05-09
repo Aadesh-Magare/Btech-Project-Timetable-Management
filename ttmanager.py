@@ -1,4 +1,3 @@
-
 #!/usr/bin/python
 
 # Timetable Management Software - Semi Automated Approach to Timetable Design.
