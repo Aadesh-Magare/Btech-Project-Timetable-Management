@@ -47,15 +47,19 @@
 //export data that is added t, v, c, s
 //if constraints are not given dont allow any other thing.
 //import mapping
+//all lists sorted
 
 page down page up
 titles should be changeable during running / try grid for headers
 generating empty timetable, show while its being done / progress bar
 auto completion for input name in popbox (suggestion)
-all lists sorted
 teacher rename krta aal phije.
 subject class mapping after subject has been manually added.
 total credit for subjects which has tutorial class shoud be
 theory + tut e.g. math has theory + tut = 4
+while doing new ask prev save
+open kel ki notice nko
+ctrl + s -> after opening asks for save path
 
 #dependencies check / dont directly install while installing deb
+

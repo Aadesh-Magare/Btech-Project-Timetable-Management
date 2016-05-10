@@ -18,7 +18,7 @@
 import wx
 import globaldata
 from wx.lib.mixins.listctrl import ListCtrlAutoWidthMixin
-from wx.lib.mixins.listctrl import TextEditMixin
+from wx.lib.mixins.listctrl import TextEditMixin, ColumnSorterMixin
 # from threading import Thread
 # from wx.lib.pubsub import setuparg1
 # from wx.lib.pubsub import pub
@@ -29,11 +29,15 @@ from wx.lib.mixins.listctrl import TextEditMixin
 #         """Constructor"""
 #         wx.ListCtrl.__init__(self, parent, ID, pos, size, style)
 #         listmix.TextEditMixin.__init__(self)
-class AutoWidthListCtrl(wx.ListCtrl, ListCtrlAutoWidthMixin, TextEditMixin):
+class AutoWidthListCtrl(wx.ListCtrl, ListCtrlAutoWidthMixin, TextEditMixin, ColumnSorterMixin):
     def __init__(self, parent, id=-1, style=wx.LC_REPORT | wx.ALWAYS_SHOW_SB, size=(700, 400)):
         wx.ListCtrl.__init__(self, parent, id=-1, style=wx.LC_REPORT | wx.ALWAYS_SHOW_SB ,size=(700, 400))
         ListCtrlAutoWidthMixin.__init__(self)
         TextEditMixin.__init__(self)
+        ColumnSorterMixin.__init__(self, 3)
+
+    def GetListCtrl(self):
+        return self
 
 class HelpWindow(wx.Dialog):
     def __init__(self, parent, size=(900,900), id=-1, title="Keyboard Shortcuts"):
@@ -93,6 +97,9 @@ class WarningView(wx.Dialog):
         self.refbutton = wx.Button(self, label="Refresh")        
         self.Bind(wx.EVT_BUTTON, self.onRefresh, self.refbutton)
 
+        self.canbutton = wx.Button(self, wx.ID_CANCEL, label='Close')
+        self.Bind(wx.EVT_BUTTON, self.onClosed, self.canbutton)
+
         self.hh.Add(self.okbutton, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
         self.hh.Add(self.delbutton, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
         self.hh.Add(self.refbutton, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
@@ -100,14 +107,16 @@ class WarningView(wx.Dialog):
         self.mainSizer.Add(self.list, 0, flag=wx.EXPAND|wx.ALIGN_CENTER)
         self.mainSizer.Add(self.hh, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
         self.SetSizer(self.mainSizer)
-        self.Bind(wx.EVT_CLOSE, self.Closed)
+        self.Bind(wx.EVT_CLOSE, self.onClosed)
+        self.okbutton.SetFocus()
+
         # self.list.EnsureVisible(-1)
         # self.list.SetColumnWidth(0, wx.LIST_AUTOSIZE)
         # self.list.SetColumnWidth(1, wx.LIST_AUTOSIZE)
         # t = self.list.GetSize()
         # self.list.SetSize(t)
 
-    def Closed(self, event):
+    def onClosed(self, event):
         # print 'Close pressed'
         self.Destroy()
 
@@ -192,8 +201,10 @@ class ListView(wx.Dialog):
         self.label2 = label2
         self.mainSizer = wx.BoxSizer(wx.VERTICAL)
 
+        myData = {}
+        Cindex = 0
         # self.list = wx.ListCtrl(self,id, style=wx.LC_REPORT|wx.SUNKEN_BORDER, size=(300, 400))
-        self.list = AutoWidthListCtrl(self,id, style=wx.LC_REPORT|wx.SUNKEN_BORDER, size=(300, 400))
+        self.list = AutoWidthListCtrl(self,id, style=wx.LC_REPORT|wx.SUNKEN_BORDER|wx.LC_SORT_ASCENDING, size=(300, 400))
 
         self.list.Show(True)
         self.list.InsertColumn(0, key + label1, width=wx.LIST_AUTOSIZE_USEHEADER)
@@ -219,19 +230,29 @@ class ListView(wx.Dialog):
             self.list.InsertColumn(3,"DailyMax Load", width=wx.LIST_AUTOSIZE_USEHEADER)
             for i in range(len(globaldata.teacher_fullnames)):
                 self.list.Append([globaldata.teacher_fullnames[i],globaldata.teacher_shortnames[i+1], globaldata.teacher_weeklymax[i], globaldata.teacher_dailymax[i]])
+                myData[i] = (globaldata.teacher_fullnames[i],globaldata.teacher_shortnames[i+1], globaldata.teacher_weeklymax[i], globaldata.teacher_dailymax[i])
+                self.list.SetItemData(i, i)
+
         if key == "Venue" :
             self.list.InsertColumn(2,"Capacity", width=wx.LIST_AUTOSIZE_USEHEADER)
             for i in range(len(globaldata.venue_fullnames)):
                 self.list.Append([globaldata.venue_fullnames[i],globaldata.venue_shortnames[i+1],globaldata.venue_capacity[i]])
+                myData[i] = (globaldata.venue_fullnames[i],globaldata.venue_shortnames[i+1], globaldata.venue_capacity[i])
+                self.list.SetItemData(i, i)
+
         if key == "Class" :
             self.list.InsertColumn(2,"Capacity", width=wx.LIST_AUTOSIZE_USEHEADER)
             for i in range(len(globaldata.class_fullnames)):
                 self.list.Append([globaldata.class_fullnames[i],globaldata.class_shortnames[i+1],globaldata.class_capacity[i]])
+                myData[i] = (globaldata.class_fullnames[i],globaldata.class_shortnames[i+1], globaldata.class_capacity[i])
+                self.list.SetItemData(i, i)
+
         if key == "Subject" :
             self.list.InsertColumn(2,"NoOfHours", width=wx.LIST_AUTOSIZE_USEHEADER)
             for i in range(len(globaldata.subject_fullnames)):
-                print ([globaldata.subject_fullnames[i],globaldata.subject_shortnames[i+1],globaldata.subject_credits[i]])
                 self.list.Append([globaldata.subject_fullnames[i],globaldata.subject_shortnames[i+1],globaldata.subject_credits[i]])
+                myData[i] = (globaldata.subject_fullnames[i],globaldata.subject_shortnames[i+1],globaldata.subject_credits[i])
+                self.list.SetItemData(i, i)
 
         self.hh = wx.BoxSizer(wx.HORIZONTAL)
         self.okbutton = wx.Button(self, label="OK")        
@@ -256,7 +277,12 @@ class ListView(wx.Dialog):
         self.mainSizer.Add(self.hh, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
         self.SetSizer(self.mainSizer)
         self.okbutton.SetFocus()
+        self.list.itemDataMap = myData
+        self.Bind(wx.EVT_LIST_COL_CLICK, self.OnColClick, self.list)
 
+
+    def OnColClick(self, evt):
+        print 'col clicked'
     def onClosed(self, event):
         # print 'Close pressed'
         self.Destroy()

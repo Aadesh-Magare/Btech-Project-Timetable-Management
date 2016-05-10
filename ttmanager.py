@@ -759,8 +759,9 @@ class MyForm(wx.Frame):
         globaldata.class_venue_map = saveObject.class_venue_map
         globaldata.class_subject_map = saveObject.class_subject_map
         globaldata.subject_class_map = saveObject.subject_class_map
-        
+        self.BasicRequirements = True
         # self.AppendGlobalInput(None)
+        self.MakeLables(None)
         self.update(None)
         dlg = wx.MessageDialog(None, "Loaded Successfully", "Notice", wx.OK|wx.ICON_INFORMATION)
         dlg.ShowModal()
@@ -929,6 +930,23 @@ class MyForm(wx.Frame):
     #     if typeOf == "Class":
     #             self.listboxClass.Append(value)
 
+    def MakeLables(self, evt):
+        print globaldata.start_time
+        if len(globaldata.start_time) == 2:
+            h = int(globaldata.start_time[0])
+            m = int(globaldata.start_time[1])
+            for i in range(globaldata.lectures_per_day):
+                aa = str(h+i)
+                bb = str(m)
+                cc = str(h+i+1)
+                globaldata.colLabels.append('%s:%s-%s:%s' % (aa, bb, cc, bb))
+        else:
+            h = int(globaldata.start_time[0])
+            for i in range(globaldata.lectures_per_day):
+                aa = str(h+i)
+                bb = str(h+i+1)
+                globaldata.colLabels.append('%s-%s' % (aa, bb))
+
     def GetBasicConstraints(self, evt):
         # print 'ccliked'
         dlg = BasicConstraint(self)
@@ -941,23 +959,7 @@ class MyForm(wx.Frame):
             # globaldata.daily_min = int(dlg.daily_min)
             globaldata.class_max = int(dlg.class_max)
             globaldata.start_time = dlg.start_time.split(':')
-            if len(globaldata.start_time) == 2:
-                h = int(globaldata.start_time[0])
-                m = int(globaldata.start_time[1])
-                for i in range(globaldata.lectures_per_day):
-                    aa = str(h+i)
-                    bb = str(m)
-                    cc = str(h+i+1)
-                    globaldata.colLabels.append('%s:%s-%s:%s' % (aa, bb, cc, bb))
-            else:
-                h = int(globaldata.start_time[0])
-                for i in range(globaldata.lectures_per_day):
-                    aa = str(h+i)
-                    bb = str(h+i+1)
-                    globaldata.colLabels.append('%s-%s' % (aa, bb))
-
-            print globaldata.colLabels
-
+            self.MakeLables(evt)
             # diff = globaldata.lectures_per_day - len(globaldata.colLabels)
             # temp = []
             # if diff > 0 :
