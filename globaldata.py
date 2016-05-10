@@ -34,14 +34,15 @@ lectures_per_day = 10
 daily_max = 5
 daily_min = 0
 class_max = 25
-class_min = 0
+start_time = 0
 weekly_max = 20
 weekly_min = 0
 venueCapacity = 80
 classCapacity = 80
 
 rowLabels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-colLabels = ['9-10','10-11', '11-12', '12-1', '1-2', '2-3', '3-4', '4-5', '5-6', '6-7']
+colLabels = []
+# colLabels = ['9-10','10-11', '11-12', '12-1', '1-2', '2-3', '3-4', '4-5', '5-6', '6-7']
 
 teacher_fullnames = []
 teacher_shortnames = ['ADD NEW']

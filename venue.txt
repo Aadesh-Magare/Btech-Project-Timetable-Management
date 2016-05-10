@@ -1,0 +1,19 @@
+AC 202	202	100
+AC 203	203	100
+Seminar Hall Entc Extn	SH	90
+Digital Systems Lab	DSL	25
+FOSS Lab-1	FOSS1	25
+FOSS Lab-2	FOSS2	25
+Programming Lab	PL	21
+Graphics and Multimedia Lab	GML	20
+System Software Lab	SSL	24
+Advanced Software Lab	ASL	21
+Database Management Lab	DBMSL	21
+Information Security Lab	ISL	22
+Cognizant Lab-2	Cogni-2	27
+Cognizant Lab-3	Cogni-3	24
+Cognizant Lab-4	Cogni-4	24
+Cognizant Lab-34	Cogni-34	24
+Cognizant Lab-5	Cogni-5	27
+Cognizant Lab-6	Cogni-6	27
+Data Mining Lab	DML	20

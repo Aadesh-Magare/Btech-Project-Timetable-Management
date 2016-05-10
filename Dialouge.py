@@ -70,8 +70,8 @@ class HelpWindow(wx.Dialog):
 
 class WarningView(wx.Dialog):
     def __init__(self, parent, source, size=(900,900), id=-1, title="Warnings"):
+        wx.Dialog.__init__(self, parent, id, title, size, style=wx.DEFAULT_DIALOG_STYLE|wx.MAXIMIZE_BOX|wx.RESIZE_BORDER)
         self.parent = parent
-        wx.Dialog.__init__(self, parent, id, title, size)
         self.mainSizer = wx.BoxSizer(wx.VERTICAL)
         self.list = AutoWidthListCtrl(self)
         # self.list = wx.ListCtrl(self,id, style=wx.LC_REPORT, size=(900, 400))
@@ -234,26 +234,30 @@ class ListView(wx.Dialog):
                 self.list.Append([globaldata.subject_fullnames[i],globaldata.subject_shortnames[i+1],globaldata.subject_credits[i]])
 
         self.hh = wx.BoxSizer(wx.HORIZONTAL)
-        self.okbutton = wx.Button(self, label="OK", id=wx.ID_OK)        
-        self.Bind(wx.EVT_BUTTON, self.onOK, id=wx.ID_OK)
-        self.okbutton.SetFocus()
+        self.okbutton = wx.Button(self, label="OK")        
+        self.Bind(wx.EVT_BUTTON, self.onOK, self.okbutton)
 
-        self.addbutton = wx.Button(self, label="Add", id=wx.ID_ADD)        
-        self.Bind(wx.EVT_BUTTON, self.onAdd, id=wx.ID_ADD)
+        self.addbutton = wx.Button(self, label="Add")        
+        self.Bind(wx.EVT_BUTTON, self.onAdd, self.addbutton)
 
         self.delbutton = wx.Button(self, label="Remove")        
         self.Bind(wx.EVT_BUTTON, self.onDel, self.delbutton)
 
+        self.canbutton = wx.Button(self, wx.ID_CANCEL, label='Cancel')
+        self.Bind(wx.EVT_BUTTON, self.onClosed, self.canbutton)
+        # self.Bind(wx.EVT_CLOSE, self.onClosed)
+
         self.hh.Add(self.okbutton, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
         self.hh.Add(self.addbutton, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
         self.hh.Add(self.delbutton, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
+        self.hh.Add(self.canbutton, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
 
         self.mainSizer.Add(self.list, 0, flag=wx.EXPAND|wx.ALIGN_CENTER)
         self.mainSizer.Add(self.hh, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
         self.SetSizer(self.mainSizer)
-        self.Bind(wx.EVT_CLOSE, self.Closed)
+        self.okbutton.SetFocus()
 
-    def Closed(self, event):
+    def onClosed(self, event):
         # print 'Close pressed'
         self.Destroy()
 
@@ -274,10 +278,22 @@ class ListView(wx.Dialog):
             dlg.ShowModal()
             if self.key == "Teacher":
                 if hasattr(dlg, 'result1') and hasattr(dlg, 'result2') and hasattr(dlg, 'result3') and hasattr(dlg, 'result4') :
+                    if dlg.result1 in globaldata.teacher_fullnames or dlg.result2 in globaldata.teacher_shortnames:
+                        dl = wx.MessageDialog(None, 'Duplicate Entry: ' + dlg.result1 + ' ' + dlg.result2, "Error", wx.OK|wx.ICON_ERROR)
+                        dl.ShowModal()
+                        dl.Destroy()
+                        return
                     self.list.Append([dlg.result1, dlg.result2, dlg.result3, dlg.result4])
             else:
                 if hasattr(dlg, 'result1') and hasattr(dlg, 'result2') and hasattr(dlg, 'result3'):
+                    if dlg.result1 in globaldata.venue_fullnames or dlg.result1 in globaldata.class_fullnames or dlg.result1 in globaldata.subject_fullnames or dlg.result2 in globaldata.venue_shortnames or dlg.result2 in globaldata.class_shortnames or dlg.result2 in globaldata.subject_shortnames:
+                        dl = wx.MessageDialog(None, 'Duplicate Entry: ' + dlg.result1 + ' ' + dlg.result2, "Error", wx.OK|wx.ICON_ERROR)
+                        dl.ShowModal()
+                        dl.Destroy()
+                        return
                     self.list.Append([dlg.result1, dlg.result2, dlg.result3])
+        # dlg.Destroy()
+
     def onOK(self, event):
         self.result1 = []
         self.result2 = []
@@ -338,17 +354,21 @@ class TwoItemList(wx.Dialog):
         self.mainSizer.Add(self.field2, 1, flag=wx.ALIGN_CENTER_VERTICAL)
         self.mainSizer.AddSpacer(10)
 
-        self.okbutton = wx.Button(self, label="OK", id=wx.ID_OK)
+        self.okbutton = wx.Button(self, label="OK")
         self.mainSizer.Add(self.okbutton, 1, flag=wx.ALIGN_CENTER_VERTICAL)
         self.mainSizer.AddSpacer(10)
-        self.Bind(wx.EVT_BUTTON, self.onOK, id=wx.ID_OK)
+        self.canbutton = wx.Button(self, wx.ID_CANCEL, label='Cancel')
+        self.mainSizer.Add(self.canbutton, 1, flag=wx.ALIGN_CENTER_VERTICAL)
+        self.Bind(wx.EVT_BUTTON, self.onClosed, self.canbutton)
+        self.Bind(wx.EVT_BUTTON, self.onOK, self.okbutton)
         self.Bind(wx.EVT_TEXT_ENTER, self.onOK)
         self.SetSizer(self.mainSizer)
         self.result = None
-        self.Bind(wx.EVT_CLOSE, self.Closed)
+        # self.Bind(wx.EVT_CLOSE, self.onClosed)
+        self.okbutton.SetFocus()
 
-    def Closed(self, event):
-        # print 'Close pressed'
+    def onClosed(self, event):
+        print 'Close pressed'
         self.Destroy()
 
     def onOK(self, event):
@@ -401,18 +421,21 @@ class ThreeItemList(wx.Dialog):
             self.mainSizer.Add(self.field3, 1, flag=wx.ALIGN_CENTER_VERTICAL)
             self.mainSizer.AddSpacer(10)
 
-        self.okbutton = wx.Button(self, label="OK", id=wx.ID_OK)
+        self.okbutton = wx.Button(self, label="OK")
         self.mainSizer.Add(self.okbutton, 1, flag=wx.ALIGN_CENTER_VERTICAL)
         self.mainSizer.AddSpacer(10)
-        self.Bind(wx.EVT_BUTTON, self.onOK, id=wx.ID_OK)
+        self.canbutton = wx.Button(self, wx.ID_CANCEL, label='Cancel')
+        self.mainSizer.Add(self.canbutton, 1, flag=wx.ALIGN_CENTER_VERTICAL)
+        self.Bind(wx.EVT_BUTTON, self.onClosed, self.canbutton)
+        self.Bind(wx.EVT_BUTTON, self.onOK, self.okbutton)
         self.Bind(wx.EVT_TEXT_ENTER, self.onOK)
         self.SetSizer(self.mainSizer)
         self.result = None
-        self.Bind(wx.EVT_CLOSE, self.Closed)
+        # self.Bind(wx.EVT_CLOSE, self.onClosed)
         self.okbutton.SetFocus()
 
-    def Closed(self, event):
-        # print 'Close pressed'
+    def onClosed(self, event):
+        print 'Close pressed'
         self.result = None
         self.Destroy()
 
@@ -876,7 +899,7 @@ class BasicConstraint(wx.Dialog):
         self.h4.Add(self.tclassmax, 1, flag=wx.EXPAND)
  
         self.h5 = wx.BoxSizer(wx.HORIZONTAL)
-        self.lclassmin = wx.StaticText(self, label="Weekly Minimum Workload ")
+        self.lclassmin = wx.StaticText(self, label="Lecture Start Time")
         self.tclassmin = wx.TextCtrl(self, value="15",size=(140,-1))
         self.h5.Add(self.lclassmin, 1, flag=wx.ALIGN_CENTER|wx.EXPAND)
         self.h5.Add(self.tclassmin, 1, flag=wx.EXPAND)
@@ -915,7 +938,7 @@ class BasicConstraint(wx.Dialog):
         # self.weekly_min = self.tweeklymin.GetValue()
 
         self.class_max = self.tclassmax.GetValue()
-        self.class_min = self.tclassmin.GetValue()
+        self.start_time = self.tclassmin.GetValue()
         self.Destroy()
 
     # def onCancel(self, event):

@@ -723,11 +723,9 @@ class MyForm(wx.Frame):
         globaldata.days_per_week = saveObject.days_per_week
         globaldata.lectures_per_day = saveObject.lectures_per_day
         globaldata.daily_max = saveObject.daily_max
-        globaldata.daily_min = saveObject.daily_min
         globaldata.class_max = saveObject.class_max
-        globaldata.class_min = saveObject.class_min
+        globaldata.start_time = saveObject.start_time
         globaldata.weekly_max = saveObject.weekly_max
-        globaldata.weekly_min = saveObject.weekly_min
 
         globaldata.venueCapacity = saveObject.venueCapacity
         globaldata.classCapacity = saveObject.classCapacity
@@ -795,11 +793,9 @@ class MyForm(wx.Frame):
         saveObject.days_per_week = globaldata.days_per_week
         saveObject.lectures_per_day = globaldata.lectures_per_day
         saveObject.daily_max = globaldata.daily_max
-        saveObject.daily_min = globaldata.daily_min
         saveObject.class_max = globaldata.class_max
-        saveObject.class_min = globaldata.class_min
+        saveObject.start_time = globaldata.start_time
         saveObject.weekly_max = globaldata.weekly_max
-        saveObject.weekly_min = globaldata.weekly_min
         saveObject.venueCapacity = globaldata.venueCapacity
         saveObject.classCapacity = globaldata.classCapacity
 
@@ -937,19 +933,36 @@ class MyForm(wx.Frame):
         # print 'ccliked'
         dlg = BasicConstraint(self)
         dlg.ShowModal()
-        if hasattr(dlg, 'days') and hasattr(dlg, 'lectures') and hasattr(dlg, 'class_max') and hasattr(dlg, 'class_min'):
+        if hasattr(dlg, 'days') and hasattr(dlg, 'lectures') and hasattr(dlg, 'class_max') and hasattr(dlg, 'start_time'):
             # print dlg.daily_max, dlg.weekly_max, dlg.class_max
             globaldata.days_per_week = int(dlg.days)
             globaldata.lectures_per_day = int(dlg.lectures)
             # globaldata.daily_max = int(dlg.daily_max)
             # globaldata.daily_min = int(dlg.daily_min)
             globaldata.class_max = int(dlg.class_max)
-            globaldata.class_min = int(dlg.class_min)
-            diff = globaldata.lectures_per_day - len(globaldata.colLabels)
-            temp = []
-            if diff > 0 :
-                temp = ['.'] * diff
-            globaldata.colLabels.extend(temp)
+            globaldata.start_time = dlg.start_time.split(':')
+            if len(globaldata.start_time) == 2:
+                h = int(globaldata.start_time[0])
+                m = int(globaldata.start_time[1])
+                for i in range(globaldata.lectures_per_day):
+                    aa = str(h+i)
+                    bb = str(m)
+                    cc = str(h+i+1)
+                    globaldata.colLabels.append('%s:%s-%s:%s' % (aa, bb, cc, bb))
+            else:
+                h = int(globaldata.start_time[0])
+                for i in range(globaldata.lectures_per_day):
+                    aa = str(h+i)
+                    bb = str(h+i+1)
+                    globaldata.colLabels.append('%s-%s' % (aa, bb))
+
+            print globaldata.colLabels
+
+            # diff = globaldata.lectures_per_day - len(globaldata.colLabels)
+            # temp = []
+            # if diff > 0 :
+            #     temp = ['.'] * diff
+            # globaldata.colLabels.extend(temp)
             # globaldata.weekly_max = int(dlg.weekly_max)
             # globaldata.weekly_min = int(dlg.weekly_min)
         # print len(self.__dict__)
@@ -959,7 +972,9 @@ class MyForm(wx.Frame):
         self.BasicRequirements = True
     
     def OnNew(self, evt):
-        if len(self.__dict__) > 32:    #default attr are 32
+        # print len(self.__dict__)
+        globaldata.colLabels = []
+        if len(self.__dict__) > 33:    #default attr are 32
             os.execl(sys.executable, sys.executable, *sys.argv)
 
         dlg = HeaderInfo(self)
@@ -1248,6 +1263,112 @@ class MyForm(wx.Frame):
         # if len(globaldata.all_venues) == 0:    #default attr are 32
         #     self.ShowFirstGrid('Venue')
 
+
+    def ImportTeacherSubjectMapping(self, evt):
+        if not self.BasicRequirements:
+            self.ErrorBox('Please Define Constraints First')
+            return
+
+        openFileDialog = wx.FileDialog(self, "Open Teacher-Subject Data File", "", "",
+                                       "txt files (*.txt)|*.txt", wx.FD_OPEN | wx.FD_FILE_MUST_EXIST)
+        if openFileDialog.ShowModal() == wx.ID_CANCEL:
+            return         
+        filepath = openFileDialog.GetPath()
+        f = open(filepath, "r")
+        lines = f.read().split('\n')
+        # del lines[0]
+        lines = filter(None, lines)
+        msg = 'Imported Successfully\nDuplicates:'
+        try:
+            imp = 0
+            err = 0
+            for l in lines:
+                p = l.split('\t')
+                p = filter(None, p)
+                if p[0]  not in globaldata.teacher_shortnames or p[1] not in globaldata.subject_shortnames:
+                    raise
+                if p[0] in globaldata.teacher_subject_map :             
+                    err += 1
+                    msg += '\n' + p[0] + ', ' + p[1]
+                    continue
+                globaldata.teacher_subject_map[p[0]] = p[1]
+                globaldata.subject_teacher_map[p[1]] = p[0]
+                imp += 1
+            msg += '\nTotal Imported = %s\nTotal Duplicates Ignored= %s' % (imp, err)
+            self.SuccessBox(msg)    
+        except:
+            self.ErrorBox('Error in File Format %s' % l)
+
+    def ImportTeacherClassMapping(self, evt):
+        if not self.BasicRequirements:
+            self.ErrorBox('Please Define Constraints First')
+            return
+
+        openFileDialog = wx.FileDialog(self, "Open Teacher-Class Data File", "", "",
+                                       "txt files (*.txt)|*.txt", wx.FD_OPEN | wx.FD_FILE_MUST_EXIST)
+        if openFileDialog.ShowModal() == wx.ID_CANCEL:
+            return         
+        filepath = openFileDialog.GetPath()
+        f = open(filepath, "r")
+        lines = f.read().split('\n')
+        # del lines[0]
+        lines = filter(None, lines)
+        msg = 'Imported Successfully\nDuplicates:'
+        try:
+            imp = 0
+            err = 0
+            for l in lines:
+                p = l.split('\t')
+                p = filter(None, p)
+                if p[0]  not in globaldata.teacher_shortnames or p[1] not in globaldata.class_shortnames:
+                    raise
+                if p[0] in globaldata.teacher_class_map:             
+                    err += 1
+                    msg += '\n' + p[0] + ', ' + p[1]
+                    continue
+                globaldata.teacher_class_map[p[0]] = p[1]
+                globaldata.class_teacher_map[p[1]] = p[0]
+                imp += 1
+            msg += '\nTotal Imported = %s\nTotal Duplicates Ignored= %s' % (imp, err)
+            self.SuccessBox(msg)    
+        except:
+            self.ErrorBox('Error in File Format %s' % l)
+
+    def ImportVenueClassMapping(self, evt):
+        if not self.BasicRequirements:
+            self.ErrorBox('Please Define Constraints First')
+            return
+
+        openFileDialog = wx.FileDialog(self, "Open Venue-Class Data File", "", "",
+                                       "txt files (*.txt)|*.txt", wx.FD_OPEN | wx.FD_FILE_MUST_EXIST)
+        if openFileDialog.ShowModal() == wx.ID_CANCEL:
+            return         
+        filepath = openFileDialog.GetPath()
+        f = open(filepath, "r")
+        lines = f.read().split('\n')
+        # del lines[0]
+        lines = filter(None, lines)
+        msg = 'Imported Successfully\nDuplicates:'
+        try:
+            imp = 0
+            err = 0
+            for l in lines:
+                p = l.split('\t')
+                p = filter(None, p)
+                if p[0]  not in globaldata.venue_shortnames or p[1] not in globaldata.class_shortnames:
+                    raise
+                if p[0] in globaldata.venue_class_map:             
+                    err += 1
+                    msg += '\n' + p[0] + ', ' + p[1]
+                    continue
+                globaldata.venue_class_map[p[0]] = p[1]
+                globaldata.class_venue_map[p[1]] = p[0]
+                imp += 1
+            msg += '\nTotal Imported = %s\nTotal Duplicates Ignored= %s' % (imp, err)
+            self.SuccessBox(msg)    
+        except:
+            self.ErrorBox('Error in File Format %s' % l)
+
     def ImportClassData(self, evt):
         if not self.BasicRequirements:
             self.ErrorBox('Please Define Constraints First')
@@ -1353,6 +1474,54 @@ class MyForm(wx.Frame):
         dlg.ShowModal()
         dlg.Destroy()
 
+    def ExportData(self, evt):
+        t = open('teachers.txt', "w")
+        msg = ''
+        for i in range(len(globaldata.teacher_fullnames)):
+            msg += globaldata.teacher_fullnames[i] + '\t' + globaldata.teacher_shortnames[i+1] + '\t' + str(globaldata.teacher_weeklymax[i]) + '\t' + str(globaldata.teacher_dailymax[i]) + '\n'
+        t.write(msg)
+        t.close()
+
+        v = open('venue.txt', "w")
+        msg = ''
+        for i in range(len(globaldata.venue_fullnames)):
+            msg += globaldata.venue_fullnames[i] + '\t' + globaldata.venue_shortnames[i+1] + '\t' + str(globaldata.venue_capacity[i]) + '\n'
+        v.write(msg)
+        v.close()
+
+        c = open('class.txt', "w")
+        msg = ''
+        for i in range(len(globaldata.class_fullnames)):
+            msg += globaldata.class_fullnames[i] + '\t' + globaldata.class_shortnames[i+1] + '\t' + str(globaldata.class_capacity[i]) + '\n'
+        c.write(msg)
+        c.close()
+
+        s = open('subjects.txt', "w")
+        msg = ''
+        for i in range(len(globaldata.subject_fullnames)):
+            msg += globaldata.subject_fullnames[i] + '\t' + globaldata.subject_shortnames[i+1] + '\t' + str(globaldata.subject_credits[i]) + '\n'
+        s.write(msg)
+        s.close()
+
+        st = open('subjectsTeachersMap.txt', "w")
+        msg = ''
+        for i in globaldata.subject_teacher_map:
+            msg += i + '\t' + globaldata.subject_teacher_map[i] + '\n'
+        st.write(msg)
+        st.close()
+
+        sc = open('subjectsClassMap.txt', "w")
+        msg = ''
+        for i in globaldata.subject_class_map:
+            msg += i 
+            for c in globaldata.subject_class_map[i]:
+                msg += '\t' + c
+            msg += '\n'
+        sc.write(msg)
+        sc.close()
+
+        self.SuccessBox("Exported Successfully")
+        
     def UpdateHeaders(self, evt):
         dlg = HeaderInfo(self)
         dlg.ShowModal()
@@ -1379,6 +1548,8 @@ class MyForm(wx.Frame):
         imp = wx.Menu()
         exhtml = imp.Append(-1,'Export HTML')
         self.Bind(wx.EVT_MENU, self.ExportHTML, exhtml)
+        exdata = imp.Append(-1,'Export Data')
+        self.Bind(wx.EVT_MENU, self.ExportData, exdata)
         expdf = imp.Append(-1,'Export Pdf')
         self.Bind(wx.EVT_MENU, self.ExportPDF, expdf)
         exods = imp.Append(-1,'Export Ods')
@@ -1411,7 +1582,16 @@ class MyForm(wx.Frame):
         self.Bind(wx.EVT_MENU, self.ImportClassData, imp3)
         imp4 = imp.Append(-1,'&Import Subject Data')
         self.Bind(wx.EVT_MENU, self.ImportSubjectData, imp4)
-        
+
+        imp5 = imp.Append(-1,'&Teacher-Class Mapping')
+        self.Bind(wx.EVT_MENU, self.ImportTeacherClassMapping, imp5)
+
+        imp6 = imp.Append(-1,'&Teacher-Subject Mapping')
+        self.Bind(wx.EVT_MENU, self.ImportTeacherSubjectMapping, imp6)
+
+        imp7 = imp.Append(-1,'&Venue-Class Mapping')
+        self.Bind(wx.EVT_MENU, self.ImportVenueClassMapping, imp7)
+
         data.AppendMenu(-1,'Import From File', imp)
  
         teacher = data.Append(-1,'&Teachers')

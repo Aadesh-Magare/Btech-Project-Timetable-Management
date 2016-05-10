@@ -534,7 +534,7 @@ class MyGrid(gridlib.Grid):
 
         #Skip other Key events
         if event.GetKeyCode():
-            print event.GetKeyCode()
+            # print event.GetKeyCode()
             # event.ResumePropagation(1)
             event.Skip()
             return

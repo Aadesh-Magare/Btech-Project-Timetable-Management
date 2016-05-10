@@ -110,9 +110,7 @@ class Teacher(BaseStructure):
 	def __init__(self, name, weekly_max=globaldata.weekly_max, daily_max=globaldata.daily_max):
 		super(Teacher, self).__init__(name)
 		self.max_work_load = weekly_max
-		self.min_work_load = globaldata.weekly_min
 		self.max_daily_load = daily_max
-		self.min_daily_load = globaldata.daily_min
 		self.current_work_load = 0
 
 	def remove_entry(self, day, lecture, values=''):
@@ -159,8 +157,8 @@ class Teacher(BaseStructure):
 			raise ExistingEntry(entries)		
 
 	def check_workload(self):
-		#work load should be greater than min and less than max
-		if self.current_work_load > self.max_work_load or self.current_work_load < self.min_work_load:
+		#work load should be less than max
+		if self.current_work_load > self.max_work_load:
 			return False
 		# else:
 		# 	return False
@@ -239,7 +237,6 @@ class Classes(BaseStructure):
 		self.subjects = {}
 		self.batches = []
 		self.max_work_load = globaldata.class_max
-		self.min_work_load = globaldata.class_min
 		self.current_work_load = 0
 		self.capacity = capacity
 	
@@ -277,8 +274,8 @@ class Classes(BaseStructure):
 				pass #if its lunch entry
 	
 	def check_workload(self):
-		#work load should be greater than min and less than max
-		if self.current_work_load <= self.max_work_load and self.current_work_load >= self.min_work_load:
+		#work load should be less than max
+		if self.current_work_load <= self.max_work_load:
 			return True
 		else:
 			return False
@@ -343,8 +340,8 @@ class Classes(BaseStructure):
 			self.mat[day][lecture].append(('LUNCH', batch))
 
 	def check_workload(self):
-		#work load should be greater than min and less than max
-		if self.current_work_load > self.max_work_load or self.current_work_load < self.min_work_load:
+		#work load should be less than max
+		if self.current_work_load > self.max_work_load:
 			return False
 		else:
 			return True
