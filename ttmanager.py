@@ -75,7 +75,6 @@ class MyForm(wx.Frame):
             name = venue.name
             if not hasattr(self, name):
                 self.listboxVenue.Append(name)
-                self.temp = MyGrid(self.panel2, venue.mat, venue.name, 'Venue')        
                 hfirst = wx.StaticText(self.panel2, label=globaldata.header1)
                 hsecond = wx.StaticText(self.panel2, label=globaldata.header2)
                 hthird = wx.StaticText(self.panel2, label=globaldata.header3)
@@ -85,6 +84,8 @@ class MyForm(wx.Frame):
                 hsecond.SetFont(self.fonth2)
                 hthird.SetFont(self.fonth3)     
                 hfourth.SetFont(self.fonth4)
+
+                self.temp = MyGrid(self.panel2, venue.mat, venue.name, 'Venue')        
 
                 vbox = wx.BoxSizer(wx.VERTICAL)
                 vbox.AddSpacer(10)
@@ -110,7 +111,6 @@ class MyForm(wx.Frame):
             name = Class.name
             if not hasattr(self, name):
                 self.listboxClass.Append(name)
-                self.temp = MyGrid(self.panel3, Class.mat, Class.name, 'Class')        
                 hfirst = wx.StaticText(self.panel3, label=globaldata.header1)
                 hsecond = wx.StaticText(self.panel3, label=globaldata.header2)
                 hthird = wx.StaticText(self.panel3, label=globaldata.header3)
@@ -120,6 +120,8 @@ class MyForm(wx.Frame):
                 hsecond.SetFont(self.fonth2)
                 hthird.SetFont(self.fonth3)     
                 hfourth.SetFont(self.fonth4)
+
+                self.temp = MyGrid(self.panel3, Class.mat, Class.name, 'Class')        
                 
                 vbox = wx.BoxSizer(wx.VERTICAL)
                 vbox.AddSpacer(10)
@@ -220,7 +222,7 @@ class MyForm(wx.Frame):
     #         event.Skip()
     #         return
 
-    def RenewUI(self):
+    def RenewUI(self, flag):
 
         self.mainPanel = wx.Panel(self, -1)
         self.mainSizer = wx.BoxSizer(wx.VERTICAL)
@@ -352,10 +354,10 @@ class MyForm(wx.Frame):
         self.psizer2.Layout()
         self.psizer3.Layout()
         self.mainSizer.Layout()
-
-        dlg = wx.MessageDialog(None, "Create a New Project:\nFile -> New\nOr Open an Existing one:\nFile -> Open","Notice", wx.OK|wx.ICON_INFORMATION)
-        dlg.ShowModal()
-        dlg.Destroy()
+        if not flag :
+            dlg = wx.MessageDialog(None, "Create a New Project:\nFile -> New\nOr Open an Existing one:\nFile -> Open","Notice", wx.OK|wx.ICON_INFORMATION)
+            dlg.ShowModal()
+            dlg.Destroy()
 
 
     def __init__(self, flag):
@@ -365,10 +367,11 @@ class MyForm(wx.Frame):
         self.BasicRequirements = False
         # window.Bind(wx.EVT_ENTER_WINDOW, lambda event: self.SetFocus())
         if flag :
-            self.RenewUI()
+            self.RenewUI(flag)
+            self.savefilepath = sys.argv[1]
             self.PostOpenPath(sys.argv[1])
         else:
-            self.RenewUI()
+            self.RenewUI(flag)
 
     def OnQuit(self, evt):
         self.Close()
@@ -977,6 +980,7 @@ class MyForm(wx.Frame):
         # print len(self.__dict__)
         globaldata.colLabels = []
         if len(self.__dict__) > 33:    #default attr are 32
+            #here add confimation to save or not
             os.execl(sys.executable, sys.executable, *sys.argv)
 
         dlg = HeaderInfo(self)
@@ -1531,7 +1535,33 @@ class MyForm(wx.Frame):
             globaldata.header1 = dlg.result1
             globaldata.header2 = dlg.result2
             globaldata.header3 = dlg.result3  
-            self.update(None) 
+
+            child = self.panel1.GetChildren()
+            for i in range(0, len(child), 5):
+                if i+2 < len(child):
+                    child[i].SetLabel(globaldata.header1)
+                    child[i+1].SetLabel(globaldata.header2)
+                    child[i+2].SetLabel(globaldata.header3)
+            self.panel1.Layout()
+
+            child = self.panel2.GetChildren()
+            # print child
+            for i in range(0, len(child), 5):
+                if i+2 < len(child):
+                    child[i].SetLabel(globaldata.header1)
+                    child[i+1].SetLabel(globaldata.header2)
+                    child[i+2].SetLabel(globaldata.header3)
+            self.panel2.Layout()
+
+            child = self.panel3.GetChildren()
+            # print child
+            for i in range(0, len(child), 5):
+                if i+2 < len(child):
+                    child[i].SetLabel(globaldata.header1)
+                    child[i+1].SetLabel(globaldata.header2)
+                    child[i+2].SetLabel(globaldata.header3)
+            self.panel3.Layout()
+
         dlg.Destroy()
 
     def _init_menubar(self):
