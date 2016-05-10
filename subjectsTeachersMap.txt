@@ -1,2 +1,0 @@
-AM	DSA
-VVK	PGL

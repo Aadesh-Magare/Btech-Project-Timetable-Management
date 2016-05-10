@@ -18,15 +18,15 @@ Soma Ghosh	GSN	16	6
 Vinod Pachghare	VKP	12	4
 Tanuja Pattanshetti	TRP	16	6
 Archana Patil	ABP	16	6
+S R Patil	SRP	16	6
 J V Aghav	JVA	12	3
 S K Gaikwad	SKG	16	6
 Uma Gajendragadkar	UUG	16	6
 Priti Kale	PK	16	6
-Rajani Moona	RM	16	6	6
 Vahida Attar	VZA	12	3
 Rajani Moona	RM	16	6
 Shahi Ghumbre	SUG	12	3
-S P Dixit	SPD	12	3	
+S P Dixit	SPD	12	3
 S N Ghotkar	SNG	12	3
 Nishchay Mhatre	NSM	16	6
 Sunil B Mane	SBM	16	6
@@ -37,4 +37,11 @@ Rohini Sarode	RS	16	6
 Asmita Manna	ASM	16	6
 Other Dept	OD	30	10
 K V Dalvi	KVD	30	10
+Kshipra Moghe	KM	30	10
+Swapnil Shirsat	SS	30	10
 Other Dept	OD	30	10
+Institute Faculty	INST.FAC	30	10
+Shindikar M R	SMR	30	10
+Shalaka Deshpande	SD	30	10
+Kshripra Moghe	KM	30	10
+Snehal Kulkarni	SK	30	10

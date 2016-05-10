@@ -37,28 +37,28 @@ MTech CE FY	MTCEFY	20
 MTech CE SY	MTCESY	20
 MTECH IT FY	MTITFY	20
 MTECH IT SY	MTITSY	20
-First Year Division 1	FYDiv1	100
-First Year Division 2	FYDiv2	100
-First Year Division 3	FYDiv3	100
-First Year Division 4	FYDiv4	100
-First Year Division 5	FYDiv5	100
-First Year Division 1 Batch 1	FYDiv1-B1	25
-First Year Division 1 Batch 2	FYDiv1-B2	25
-First Year Division 1 Batch 3	FYDiv1-B3	25
-First Year Division 1 Batch 4	FYDiv1-B4	25
-First Year Division 2 Batch 1	FYDiv2-B1	25
-First Year Division 2 Batch 2	FYDiv2-B2	25
-First Year Division 2 Batch 3	FYDiv2-B3	25
-First Year Division 2 Batch 4	FYDiv2-B4	25
-First Year Division 3 Batch 1	FYDiv3-B1	25
-First Year Division 3 Batch 2	FYDiv3-B2	25
-First Year Division 3 Batch 3	FYDiv3-B3	25
-First Year Division 3 Batch 4	FYDiv3-B4	25
-First Year Division 4 Batch 1	FYDiv4-B1	25
-First Year Division 4 Batch 2	FYDiv4-B2	25
-First Year Division 4 Batch 3	FYDiv4-B3	25
-First Year Division 4 Batch 4	FYDiv4-B4	25
-First Year Division 5 Batch 1	FYDiv5-B1	25
-First Year Division 5 Batch 2	FYDiv5-B2	25
-First Year Division 5 Batch 3	FYDiv5-B3	25
-First Year Division 5 Batch 4	FYDiv5-B4	25
+First Year Division 6	FYDiv6	100
+First Year Division 7	FYDiv7	100
+First Year Division 8	FYDiv8	100
+First Year Division 9	FYDiv9	100
+First Year Division 10	FYDiv10	100
+First Year Division 6 Batch 1	FYDiv6-B1	25
+First Year Division 6 Batch 2	FYDiv6-B2	25
+First Year Division 6 Batch 3	FYDiv6-B3	25
+First Year Division 6 Batch 4	FYDiv6-B4	25
+First Year Division 7 Batch 1	FYDiv7-B1	25
+First Year Division 7 Batch 2	FYDiv7-B2	25
+First Year Division 7 Batch 3	FYDiv7-B3	25
+First Year Division 7 Batch 4	FYDiv7-B4	25
+First Year Division 8 Batch 1	FYDiv8-B1	25
+First Year Division 8 Batch 2	FYDiv8-B2	25
+First Year Division 8 Batch 3	FYDiv8-B3	25
+First Year Division 8 Batch 4	FYDiv8-B4	25
+First Year Division 9 Batch 1	FYDiv9-B1	25
+First Year Division 9 Batch 2	FYDiv9-B2	25
+First Year Division 9 Batch 3	FYDiv9-B3	25
+First Year Division 9 Batch 4	FYDiv9-B4	25
+First Year Division 10 Batch 1	FYDiv10-B1	25
+First Year Division 10 Batch 2	FYDiv10-B2	25
+First Year Division 10 Batch 3	FYDiv10-B3	25
+First Year Division 10 Batch 4	FYDiv10-B4	25

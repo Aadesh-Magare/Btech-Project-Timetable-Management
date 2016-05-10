@@ -11,6 +11,11 @@ GTA:  Graph Theory and Applications Lab	GTA-Lab	2	BTechCE	BTechIT
 Network Architecture and Wireless Protocol	NAQP-Lab	2	TYIT
 Graphics and Multimedia Lab	GML-Lab	2	TYIT
 PG Laboratory 1 Lab	PGL	2	MTCEFY
+Computer Workshop - Division 6 Lab	CW6	2	FYDiv6	FYDiv7	FYDiv8	FYDiv9	FYDiv10
+Computer Workshop - Division 7 Lab	CW7	2	FYDiv6	FYDiv7	FYDiv8	FYDiv9	FYDiv10
+Computer Workshop - Division 8 Lab	CW8	2	FYDiv6	FYDiv7	FYDiv8	FYDiv9	FYDiv10
+Computer Workshop - Division 9 Lab	CW9	2	FYDiv6	FYDiv7	FYDiv8	FYDiv9	FYDiv10
+Computer Workshop - Division 10 Lab	CS10	2	FYDiv6	FYDiv7	FYDiv8	FYDiv9	FYDiv10
 Digital Systems Lab	DS-Lab	3	SYCE	SYIT
 Data Structures Lab	DSA-Lab	3	SYCE	SYIT
 Database Management Systems Lab	DBMS-Lab	3	TYCE	TYIT
@@ -19,8 +24,13 @@ Compiler Construction Lab	CC-Lab	3	BTechCE
 Cryptography and Network Security Lab	CNS-Lab	3	BTechCE
 Information Security  Lab	IS-Lab	3	BTechIT
 Software Testing and Quality Assurance  Lab	STQA-Lab	3	BTechIT
+FCP Division 6  Lab	FCP6	4	FYDiv6	FYDiv7	FYDiv8	FYDiv9	FYDiv10
+FCP Division 7  Lab	FCP7	4	FYDiv6	FYDiv7	FYDiv8	FYDiv9	FYDiv10
+FCP Division 8 Lab	FCP8	4	FYDiv6	FYDiv7	FYDiv8	FYDiv9	FYDiv10
+FCP Division 9  Lab	FCP9	4	FYDiv6	FYDiv7	FYDiv8	FYDiv9	FYDiv10
+FCP Division 10  Lab	FCP10	4	FYDiv6	FYDiv7	FYDiv8	FYDiv9	FYDiv10
 Discrete Structures and Graph Theory	DSGT	3	SYCE	SYIT
-Digital Systems	DSGT	3	SYCE	SYIT
+Digital Systems	DS	3	SYCE	SYIT
 Data Structures	DSA	4	SYCE	SYIT
 Design and Analysis of Algorithms	DAA	3	TYCE
 Database Management Systems	DBMS	3	TYCE	TYIT
@@ -44,7 +54,7 @@ Graphics and Multimedia	G&M	3	TYIT
 Human Computer Interaction	HCI	3	TYIT
 Information Security	IS	3	TYIT
 Software Testing and Quality Assurance	STQA	3	BTechIT
-Data Structures	DS	3	SYIT	SYCE
+Data Structures	DSA	3	SYIT	SYCE
 Probability Statistics and Queuing Theory	PSQT	3	MTCEFY	MTITFY
 Topics in Databases (TDB)	TDB	3	MTCEFY	MTITFY
 Research Methodology	RM	1	MTCEFY	MTITFY
@@ -60,3 +70,8 @@ Foundations of Physics(DSY)	FP	3	SYCE	SYIT
 Environmental Studies	EVS	3	SYCE	SYIT
 Professional Communication	PC	2	SYCE	SYIT
 Applied Psychology	AP	2	SYCE	SYIT
+Constitution of India	CONSTITUTION	2	TYCE	TYIT
+FOUNDATIONS OF MECHANICAL ENGINERING	FME	3	FYDiv6	FYDiv7	FYDiv8	FYDiv9	FYDiv10
+LINEAR ALGEBRA, SEQUENCES AND SERIES	LSS	3	FYDiv6	FYDiv7	FYDiv8	FYDiv9	FYDiv10
+OPTICS AND MODERN PHYSICS	OMP	3	FYDiv6	FYDiv7	FYDiv8	FYDiv9	FYDiv10
+APPLIED CHEMISTRY	ACH	3	FYDiv6	FYDiv7	FYDiv8	FYDiv9	FYDiv10	
