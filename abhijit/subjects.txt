@@ -1,13 +1,13 @@
 #Subject	ShortName	Lab-Hours	ClassName
 Design and Analysis of Algorithms Lab	DAA-Lab	2	TYCE
 System Programming Lab	SP-Lab	2	TYCE
-S&V: Storage and Virtualization Lab	S&V-Lab	2	BtechCE	BtechIT
-ADBMS:  Advanced Database Management Systems Lab	ADMBS-Lab	2	BtechCE	BtechIT
-IBA:  Introduction to Business Analytics Lab	IBA-Lab	2	BtechCE	BtechIT
-MAN:  Mobile and Ad-hoc Networks Lab	MAN-Lab	2	BtechCE	BtechIT
-IR:  Information Retrieval Lab	IR-Lab	2	BtechCE	BtechIT
-FF:  Foundation of Finance Lab	FF-Lab	2	BtechCE	BtechIT
-GTA:  Graph Theory and Applications Lab	GTA-Lab	2	BtechCE	BtechIT
+S&V: Storage and Virtualization Lab	S&V-Lab	2	BTechCE	BTechIT
+ADBMS:  Advanced Database Management Systems Lab	ADMBS-Lab	2	BTechCE	BTechIT
+IBA:  Introduction to Business Analytics Lab	IBA-Lab	2	BTechCE	BTechIT
+MAN:  Mobile and Ad-hoc Networks Lab	MAN-Lab	2	BTechCE	BTechIT
+IR:  Information Retrieval Lab	IR-Lab	2	BTechCE	BTechIT
+FF:  Foundation of Finance Lab	FF-Lab	2	BTechCE	BTechIT
+GTA:  Graph Theory and Applications Lab	GTA-Lab	2	BTechCE	BTechIT
 Network Architecture and Wireless Protocol	NAQP-Lab	2	TYIT
 Graphics and Multimedia Lab	GML-Lab	2	TYIT
 PG Laboratory 1 Lab	PGL	2	MTCEFY
@@ -20,10 +20,10 @@ Digital Systems Lab	DS-Lab	3	SYCE	SYIT
 Data Structures Lab	DSA-Lab	3	SYCE	SYIT
 Database Management Systems Lab	DBMS-Lab	3	TYCE	TYIT
 Computer Networks Lab	CN-Lab	3	TYCE
-Compiler Construction Lab	CC-Lab	3	BtechCE
-Cryptography and Network Security Lab	CNS-Lab	3	BtechCE
-Information Security  Lab	IS-Lab	3	BtechIT
-Software Testing and Quality Assurance  Lab	STQA-Lab	3	BtechIT
+Compiler Construction Lab	CC-Lab	3	BTechCE
+Cryptography and Network Security Lab	CNS-Lab	3	BTechCE
+Information Security  Lab	IS-Lab	3	BTechIT
+Software Testing and Quality Assurance  Lab	STQA-Lab	3	BTechIT
 FCP Division 6  Lab	FCP6	4	FY-Div1	FY-Div2	FY-Div3	FY-Div4	FY-Div5
 FCP Division 7  Lab	FCP7	4	FY-Div1	FY-Div2	FY-Div3	FY-Div4	FY-Div5
 FCP Division 8 Lab	FCP8	4	FY-Div1	FY-Div2	FY-Div3	FY-Div4	FY-Div5
@@ -37,23 +37,23 @@ Database Management Systems	DBMS	3	TYCE	TYIT
 System Programming	SP	3	TYCE
 Computer Networks	CN	3	TYCE
 Computer Organization	CO	3	TYCE
-Compiler Construction	CC	3	BtechCE
+Compiler Construction	CC	3	BTechCE
 Cryptography and Network Security	CNS	3	TYCE
-S&V:  Storage and Virtualization	S&V	3	BtechCE	BtechIT
-ADBMS:  Advanced Database Management Systems	ADBMS	3	BtechCE	BtechIT
-IBA:  Introduction to Business Analytics	IBA	3	BtechCE	BtechIT
-MAN:  Mobile and Ad-hoc Networks	MAN	3	BtechCE	BtechIT
-IR:  Information Retrieval	IR	3	BtechCE	BtechIT
-FF:  Foundation of Finance	FF	3	BtechCE	BtechIT
-GTA:  Graph Theory and Applications	GTA	3	BtechCE	BtechIT
-Intermediate Programming Concepts And Tools	IPCT	3	BtechCE	BtechIT
+S&V:  Storage and Virtualization	S&V	3	BTechCE	BTechIT
+ADBMS:  Advanced Database Management Systems	ADBMS	3	BTechCE	BTechIT
+IBA:  Introduction to Business Analytics	IBA	3	BTechCE	BTechIT
+MAN:  Mobile and Ad-hoc Networks	MAN	3	BTechCE	BTechIT
+IR:  Information Retrieval	IR	3	BTechCE	BTechIT
+FF:  Foundation of Finance	FF	3	BTechCE	BTechIT
+GTA:  Graph Theory and Applications	GTA	3	BTechCE	BTechIT
+Intermediate Programming Concepts And Tools	IPCT	3	BTechCE	BTechIT
 Network Architecture and Wireless Protocol 	NAWP	3	TYIT
 Database Management Systems 	DBMS	3	TYCOMP	TYIT
 System Programming and Operating System	SPOS	3	TYIT
 Graphics and Multimedia	G&M	3	TYIT
 Human Computer Interaction	HCI	3	TYIT
 Information Security	IS	3	TYIT
-Software Testing and Quality Assurance	STQA	3	BtechIT
+Software Testing and Quality Assurance	STQA	3	BTechIT
 Data Structures	DS	3	SYIT	SYCE
 Probability Statistics and Queuing Theory	PSQT	3	MTCEFY	MTITFY
 Topics in Databases (TDB)	TDB	3	MTCEFY	MTITFY

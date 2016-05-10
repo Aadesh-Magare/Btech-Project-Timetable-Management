@@ -27,6 +27,7 @@ import globaldata
 class MyGrid(gridlib.Grid):
     def __init__(self, parent, data, name, typeOf):
         gridlib.Grid.__init__(self, parent, -1)
+        self.parent = parent
         self.data = data
         self.name = name
         self.type = typeOf
@@ -427,7 +428,24 @@ class MyGrid(gridlib.Grid):
         globaldata.clipboard = copy.deepcopy(clip)
 
     def KeyPressed(self, event):        
-        # If Ctrl+C is pressed...
+        # If PageUp is pressed...
+
+        # # If PageDown is pressed...
+        # if event.GetKeyCode() == 366:
+        #     print 'PageU'
+
+        #     self.parent.SetFocus()
+        #     # print self.parent.GetViewStart()
+        #     event.Skip()
+        #     # return
+        #     # self.parent.Scroll()
+        # if event.GetKeyCode() == 367:
+        #     print 'PageD'
+        #     self.parent.SetFocus()
+        #     # print self.parent.GetViewStart()
+        #     event.Skip()
+        #     # return
+
         if event.ControlDown() and event.GetKeyCode() == 67:
             clipboard  = self.data[self.rowSelect][self.colSelect]
             self.ParseIntoClipboard(clipboard)
@@ -495,7 +513,7 @@ class MyGrid(gridlib.Grid):
 
             self.PopupMenu(menu)
             menu.Destroy()
-            event.Skip()
+            # event.Skip()
 
         # If del is pressed...
         if event.GetKeyCode() == 127:
@@ -512,10 +530,12 @@ class MyGrid(gridlib.Grid):
 
             self.PopupMenu(menu)
             menu.Destroy()
-            event.Skip()
-                    
+            # event.Skip()
+
         #Skip other Key events
         if event.GetKeyCode():
+            print event.GetKeyCode()
+            # event.ResumePropagation(1)
             event.Skip()
             return
 

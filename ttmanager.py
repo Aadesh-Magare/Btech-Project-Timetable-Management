@@ -40,7 +40,8 @@ class MyForm(wx.Frame):
                 hfirst = wx.StaticText(self.panel1, label=globaldata.header1)
                 hsecond = wx.StaticText(self.panel1, label=globaldata.header2)
                 hthird = wx.StaticText(self.panel1, label=globaldata.header3)
-                hfourth = wx.StaticText(self.panel1, label= 'Timetable For Teacher: ' + teacher.name)
+                index = globaldata.teacher_shortnames.index(teacher.name) - 1
+                hfourth = wx.StaticText(self.panel1, label= 'Timetable For Teacher: Prof. ' + globaldata.teacher_fullnames[index])
                 hthird.SetForegroundColour(wx.Colour(255,55,125))
                 hfirst.SetFont(self.fonth1)
                 hsecond.SetFont(self.fonth2)
@@ -176,6 +177,49 @@ class MyForm(wx.Frame):
         self.listboxVenue.SetSelection(-1)
         self.listboxClass.SetSelection(-1)
     
+        # self.panel1.SetFocus()
+    # def KeyPressed(self, event):        
+    #     # If PageUp is pressed...
+
+    #     # If PageDown is pressed...
+    #     k = event.GetKeyCode()
+    #     if  k == 366 or k == 367:
+    #         if k == 366:
+    #             n = 1
+    #         else:
+    #             n = -1
+    #         sel = self.listboxTeacher.GetSelection()
+    #         if sel == -1:
+    #             sel = self.listboxVenue.GetSelection()
+    #             if sel == -1:
+    #                 sel = self.listboxClass.GetSelection()
+    #                 try:
+    #                     text = self.listboxClass.GetString(sel+n)
+    #                 except:
+    #                     text = self.listboxClass.GetString(sel)
+    #                 self.panel3.Scroll(-1, 0)
+    #                 self.panel3.ScrollChildIntoView(getattr(self,text))
+    #             else:
+    #                 try:
+    #                     text = self.listboxVenue.GetString(sel+n)
+    #                 except:
+    #                     text = self.listboxVenue.GetString(sel)                    
+    #                 self.panel2.Scroll(-1, 0)
+    #                 self.panel2.ScrollChildIntoView(getattr(self,text))
+    #         else:
+    #             try:
+    #                 text = self.listboxTeacher.GetString(sel+n)
+    #             except:
+    #                 text = self.listboxVenue.GetString(sel)
+    #             self.panel1.Scroll(-1, 0)
+    #             self.panel1.ScrollChildIntoView(getattr(self,text))
+
+    #     #Skip other Key events
+    #     if event.GetKeyCode():
+    #         print event.GetKeyCode()
+    #         event.Skip()
+    #         return
+
     def RenewUI(self):
 
         self.mainPanel = wx.Panel(self, -1)
@@ -218,10 +262,14 @@ class MyForm(wx.Frame):
         self.sfont.SetPointSize(10)
 
 
+        # self.panel1.Bind(wx.EVT_SCROLLWIN_PAGEDOWN, self.OnPageDown) 
+        # self.panel1.Bind(wx.EVT_SCROLLWIN_PAGEUP, self.OnPageUp) 
 
         self.panel1.SetSizer(self.sizer1)
         self.panel2.SetSizer(self.sizer2)
         self.panel3.SetSizer(self.sizer3)
+
+        # wx.EVT_KEY_DOWN(self, self.KeyPressed)  
 
 
         self.listboxTeacher = wx.ListBox(self.left1, -1,size=(90,400))
@@ -309,10 +357,13 @@ class MyForm(wx.Frame):
         dlg.ShowModal()
         dlg.Destroy()
 
+
     def __init__(self, flag):
         wx.Frame.__init__(self,parent=None, title="Timetable Management", size=(1024,1000))
         self._init_menubar()
         self._init_toolbar()
+        self.BasicRequirements = False
+        # window.Bind(wx.EVT_ENTER_WINDOW, lambda event: self.SetFocus())
         if flag :
             self.RenewUI()
             self.PostOpenPath(sys.argv[1])
@@ -324,6 +375,10 @@ class MyForm(wx.Frame):
     def OnRedo(self, evt):
         self.Close()
     def ExportODS(self, evt):
+        if not self.BasicRequirements:
+            self.ErrorBox('Please Define Constraints First')
+            return
+
         import ezodf
         # ods = ezodf.newdoc('ods')
 
@@ -487,6 +542,10 @@ class MyForm(wx.Frame):
 
     def ExportHTML(self, evt):
 
+        if not self.BasicRequirements:
+            self.ErrorBox('Please Define Constraints First')
+            return
+
         saveFileDialog = wx.DirDialog (None, "Choose Directory", "",
                     wx.DD_DEFAULT_STYLE | wx.DD_DIR_MUST_EXIST)
         if saveFileDialog.ShowModal() == wx.ID_CANCEL:
@@ -521,6 +580,10 @@ class MyForm(wx.Frame):
         dlg.Destroy()
 
     def ExportPDF(self, evt):
+        if not self.BasicRequirements:
+            self.ErrorBox('Please Define Constraints First')
+            return
+
         import pdfkit
         saveFileDialog = wx.DirDialog (None, "Choose Directory", "",
                     wx.DD_DEFAULT_STYLE | wx.DD_DIR_MUST_EXIST)
@@ -600,6 +663,9 @@ class MyForm(wx.Frame):
         #Check if file is exsisting else take it from the code below
         #   s = fromfile()
         #
+        if not self.BasicRequirements:
+            self.ErrorBox('Please Define Constraints First')
+            return
         if os.path.isfile('warning.data') == True:
             f = open('warning.data')
             s = f.read()
@@ -711,6 +777,10 @@ class MyForm(wx.Frame):
         self.OnSave(None)
 
     def OnSave(self, evt):
+        if not self.BasicRequirements:
+            self.ErrorBox('Please Enter Constraints First')
+            return
+
         saveObject = SaveClass()
         saveObject.header1 = globaldata.header1
         saveObject.header2 = globaldata.header2
@@ -785,43 +855,43 @@ class MyForm(wx.Frame):
         dlg.ShowModal()
         dlg.Destroy()
 
-    def AppendGlobalInput(self, evt):
-        if not hasattr(self, "GlobalInput"):
-            GlobalInput = [[None for i in range(globaldata.lectures_per_day)] for j in range(globaldata.days_per_week)]
-            self.GlobalInput = MyGrid(self.panel1, GlobalInput, "GlobalInput", 'None')
+    # def AppendGlobalInput(self, evt):
+    #     if not hasattr(self, "GlobalInput"):
+    #         GlobalInput = [[None for i in range(globaldata.lectures_per_day)] for j in range(globaldata.days_per_week)]
+    #         self.GlobalInput = MyGrid(self.panel1, GlobalInput, "GlobalInput", 'None')
 
-            hfirst = wx.StaticText(self.panel1, label=globaldata.header1)
-            hsecond = wx.StaticText(self.panel1, label=globaldata.header2)
-            hthird = wx.StaticText(self.panel1, label=globaldata.header3)
-            hthird.SetForegroundColour(wx.Colour(255,55,125))
-            hfourth = wx.StaticText(self.panel1, label='Global Input Screen :')
-            hfirst.SetFont(self.fonth1)
-            hsecond.SetFont(self.fonth2)
-            hthird.SetFont(self.fonth3)
-            hfourth.SetFont(self.fonth4)
+    #         hfirst = wx.StaticText(self.panel1, label=globaldata.header1)
+    #         hsecond = wx.StaticText(self.panel1, label=globaldata.header2)
+    #         hthird = wx.StaticText(self.panel1, label=globaldata.header3)
+    #         hthird.SetForegroundColour(wx.Colour(255,55,125))
+    #         hfourth = wx.StaticText(self.panel1, label='Global Input Screen :')
+    #         hfirst.SetFont(self.fonth1)
+    #         hsecond.SetFont(self.fonth2)
+    #         hthird.SetFont(self.fonth3)
+    #         hfourth.SetFont(self.fonth4)
 
-            vbox = wx.BoxSizer(wx.VERTICAL)
-            vbox.AddSpacer(150)
-            vbox.Add(hfirst, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
-            vbox.AddSpacer(10)
-            vbox.Add(hsecond, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
-            vbox.AddSpacer(2)
-            vbox.Add(hthird, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
-            vbox.AddSpacer(10)
-            vbox.Add(hfourth, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
-            vbox.AddSpacer(20)
+    #         vbox = wx.BoxSizer(wx.VERTICAL)
+    #         vbox.AddSpacer(150)
+    #         vbox.Add(hfirst, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
+    #         vbox.AddSpacer(10)
+    #         vbox.Add(hsecond, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
+    #         vbox.AddSpacer(2)
+    #         vbox.Add(hthird, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
+    #         vbox.AddSpacer(10)
+    #         vbox.Add(hfourth, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
+    #         vbox.AddSpacer(20)
 
-            vbox1 = wx.BoxSizer(wx.VERTICAL)        
-            vbox1.Add(self.GlobalInput, 1, flag=wx.ALIGN_CENTER_HORIZONTAL)
-            vbox1.AddSpacer(200)
+    #         vbox1 = wx.BoxSizer(wx.VERTICAL)        
+    #         vbox1.Add(self.GlobalInput, 1, flag=wx.ALIGN_CENTER_HORIZONTAL)
+    #         vbox1.AddSpacer(200)
             
-            self.sizer1.Add(vbox, 1, wx.EXPAND)
-            self.sizer1.Add(vbox1, 1, wx.EXPAND)
-            # self.panel1.Layout()
-            self.sizer1.Layout()
-            self.psizer1.Layout()
-            # self.Close()
-            # self.listboxTeacher.Append("GlobalInput")
+    #         self.sizer1.Add(vbox, 1, wx.EXPAND)
+    #         self.sizer1.Add(vbox1, 1, wx.EXPAND)
+    #         # self.panel1.Layout()
+    #         self.sizer1.Layout()
+    #         self.psizer1.Layout()
+    #         # self.Close()
+    #         # self.listboxTeacher.Append("GlobalInput")
 
     # def AppendFirstEntry(self, value, panel, sizer, typeOf):
     #     # if not hasattr(self, "GlobalInput"):
@@ -886,6 +956,7 @@ class MyForm(wx.Frame):
         # for i in  self.__dict__ :
         #     print i
         # self.AppendGlobalInput(None)
+        self.BasicRequirements = True
     
     def OnNew(self, evt):
         if len(self.__dict__) > 32:    #default attr are 32
@@ -921,6 +992,10 @@ class MyForm(wx.Frame):
     #             pub.sendMessage('UPDATE_VIEW', data = None)
 
     def TeacherData(self, evt):
+        if not self.BasicRequirements:
+            self.ErrorBox('Please Define Constraints First')
+            return
+
         # print len(self.__dict__)
         # global teacher_fullnames, teacher_shortnames
         dlg = ListView(self, title='Add Teacher Data', key='Teacher')
@@ -933,6 +1008,7 @@ class MyForm(wx.Frame):
             globaldata.teacher_weeklymax = dlg.result3
             globaldata.teacher_dailymax = dlg.result4
             for t in globaldata.teacher_shortnames:
+                # t = t.split('-')[0]
                 if t != "ADD NEW" and not hasattr(self, t):
                     project.push_object(t, 'Teacher')
                     pub.sendMessage('UPDATE_VIEW', data = None)
@@ -940,6 +1016,10 @@ class MyForm(wx.Frame):
             #     self.ShowFirstGrid('Teacher')
 
     def VenueData(self, evt):
+        if not self.BasicRequirements:
+            self.ErrorBox('Please Define Constraints First')
+            return
+
         # global venue_fullnames, venue_shortnames
         dlg = ListView(self, title='Add Venue Data', key='Venue')
         dlg.ShowModal()
@@ -950,11 +1030,16 @@ class MyForm(wx.Frame):
             globaldata.venue_shortnames =  temp      
             globaldata.venue_capacity = dlg.result3
             for t in globaldata.venue_shortnames:
+                # t = t.split('-')[0]
                 if t != "ADD NEW" and not hasattr(self, t):
                     project.push_object(t, 'Venue')
                     pub.sendMessage('UPDATE_VIEW', data = None)
 
     def ClassData(self, evt):
+        if not self.BasicRequirements:
+            self.ErrorBox('Please Define Constraints First')
+            return
+
         # global class_fullnames, class_shortnames
         dlg = ListView(self, title='Add Class Data', key='Class')
         dlg.ShowModal()
@@ -965,11 +1050,16 @@ class MyForm(wx.Frame):
             globaldata.class_shortnames = temp
             globaldata.class_capacity = dlg.result3
             for t in globaldata.class_shortnames:
+                t = t.split('-')[0]
                 if t != "ADD NEW" and not hasattr(self, t):
                     project.push_object(t, 'Class')
                     pub.sendMessage('UPDATE_VIEW', data = None)
 
     def SubjectData(self, evt):
+        if not self.BasicRequirements:
+            self.ErrorBox('Please Define Constraints First')
+            return
+
         dlg = ListView(self, title='Add Subject Data', key='Subject')
         dlg.ShowModal()
         if hasattr(dlg, 'result1') and hasattr(dlg, 'result2') and hasattr(dlg, 'result3'):
@@ -982,6 +1072,10 @@ class MyForm(wx.Frame):
                 globaldata.subjects[dlg.result2[i]] = dlg.result3[i]
 
     def TeacherClass(self, evt):
+        if not self.BasicRequirements:
+            self.ErrorBox('Please Define Constraints First')
+            return
+
         dlg = ListView(self, title='Add Mapping', label1="Teacher", label2="Class / Batch")
         dlg.ShowModal()
         if hasattr(dlg, 'result1') and hasattr(dlg, 'result2'):
@@ -996,6 +1090,10 @@ class MyForm(wx.Frame):
             globaldata.class_teacher_map = class_teacher_map
 
     def TeacherSubject(self, evt):
+        if not self.BasicRequirements:
+            self.ErrorBox('Please Define Constraints First')
+            return
+
         dlg = ListView(self, title='Add Mapping', label1="Teacher", label2="Subject")
         dlg.ShowModal()
         if hasattr(dlg, 'result1') and hasattr(dlg, 'result2'):
@@ -1009,6 +1107,10 @@ class MyForm(wx.Frame):
             globaldata.subject_teacher_map = subject_teacher_map
 
     def VenueClass(self, evt):
+        if not self.BasicRequirements:
+            self.ErrorBox('Please Define Constraints First')
+            return
+
         dlg = ListView(self, title='Add Mapping', label1="Venue", label2="Class / Batch")
         dlg.ShowModal()
         if hasattr(dlg, 'result1') and hasattr(dlg, 'result2'):
@@ -1022,6 +1124,10 @@ class MyForm(wx.Frame):
             globaldata.class_venue_map = class_venue_map
 
     def VenueUtilization(self, evt):
+        if not self.BasicRequirements:
+            self.ErrorBox('Please Define Constraints First')
+            return
+
         res = project.FindVenueUtilization()
         vDialouge = wx.Dialog(self, -1, title='Venue Utilization', size=(500,500))
         lables = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun",]
@@ -1057,6 +1163,10 @@ class MyForm(wx.Frame):
 
     def ImportTeacherData(self, evt):
         # print len(self.__dict__)
+        if not self.BasicRequirements:
+            self.ErrorBox('Please Define Constraints First')
+            return
+
         openFileDialog = wx.FileDialog(self, "Open Teacher Data File", "", "",
                                        "txt files (*.txt)|*.txt", wx.FD_OPEN | wx.FD_FILE_MUST_EXIST)
         if openFileDialog.ShowModal() == wx.ID_CANCEL:
@@ -1066,23 +1176,41 @@ class MyForm(wx.Frame):
         lines = f.read().split('\n')    
         del lines[0]
         lines = filter(None, lines)
+        msg = 'Imported Successfully\nDuplicates:'
         try:
+            imp = 0
+            err = 0
             for l in lines:
                 p = l.split('\t')
                 p = filter(None, p)
+                if p[0] in globaldata.teacher_fullnames or p[1] in globaldata.teacher_shortnames:
+                    err += 1
+                    msg += '\n' + p[0] + ', ' + p[1]
+                    continue
+                if len(p) != 4:
+                    raise
+                p2 = int(p[2])
+                p3 = int(p[3])
                 globaldata.teacher_fullnames.append(p[0])
                 globaldata.teacher_shortnames.append(p[1])
-                globaldata.teacher_weeklymax.append(int(p[2]))
-                globaldata.teacher_dailymax.append(int(p[3]))
-        except:
-            self.ErrorBox('Error in File Format')
+                globaldata.teacher_weeklymax.append(p2)
+                globaldata.teacher_dailymax.append(p3)
+                imp += 1
+            msg += '\nTotal Imported = %s\nTotal Duplicates Ignored= %s' % (imp, err)
+            self.TeacherData(evt)
+            self.SuccessBox(msg)
 
-        self.TeacherData(evt)
-        # self.SuccessBox('Imported Successfully')
+        except:
+            self.ErrorBox('Error in File Format at %s' % l)
+
         # if len(globaldata.all_teachers) == 0:    #default attr are 32
         #     self.ShowFirstGrid('Teacher')
 
     def ImportVenueData(self, evt):
+        if not self.BasicRequirements:
+            self.ErrorBox('Please Define Constraints First')
+            return
+
         openFileDialog = wx.FileDialog(self, "Open Venue Data File", "", "",
                                        "txt files (*.txt)|*.txt", wx.FD_OPEN | wx.FD_FILE_MUST_EXIST)
         if openFileDialog.ShowModal() == wx.ID_CANCEL:
@@ -1092,22 +1220,39 @@ class MyForm(wx.Frame):
         lines = f.read().split('\n')
         del lines[0]
         lines = filter(None, lines)
+        msg = 'Imported Successfully\nDuplicates:'
         try:
+            imp = 0
+            err = 0
             for l in lines:
                 p = l.split('\t')
                 p = filter(None, p)
+                if p[0] in globaldata.venue_fullnames or p[1] in globaldata.venue_shortnames:
+                    err += 1
+                    msg += '\n' + p[0] + ', ' + p[1]
+                    continue
+                if len(p) != 3:
+                    raise
+                p2 = int(p[2])
                 globaldata.venue_fullnames.append(p[0])
                 globaldata.venue_shortnames.append(p[1])
-                globaldata.venue_capacity.append(int(p[2]))
-        except:
-            self.ErrorBox('Error in File Format')
+                globaldata.venue_capacity.append(p2)
+                imp += 1
+            msg += '\nTotal Imported = %s\nTotal Duplicates Ignored= %s' % (imp, err)
+            self.VenueData(evt)
+            self.SuccessBox(msg)    
 
-        self.VenueData(evt)
-        # self.SuccessBox('Imported Successfully')    
+        except:
+            self.ErrorBox('Error in File Format %s' % l)
+
         # if len(globaldata.all_venues) == 0:    #default attr are 32
         #     self.ShowFirstGrid('Venue')
 
     def ImportClassData(self, evt):
+        if not self.BasicRequirements:
+            self.ErrorBox('Please Define Constraints First')
+            return
+
         openFileDialog = wx.FileDialog(self, "Open Class Data File", "", "",
                                        "txt files (*.txt)|*.txt", wx.FD_OPEN | wx.FD_FILE_MUST_EXIST)
         if openFileDialog.ShowModal() == wx.ID_CANCEL:
@@ -1117,22 +1262,39 @@ class MyForm(wx.Frame):
         lines = f.read().split('\n')
         del lines[0]
         lines = filter(None, lines)
+        msg = 'Imported Successfully\nDuplicates:'
         try:
+            err = 0
+            imp = 0
             for l in lines:
                 p = l.split('\t')
                 p = filter(None, p)
+                if p[0] in globaldata.class_fullnames or p[1] in globaldata.class_shortnames:
+                    err += 1
+                    msg += '\n' + p[0] + ', ' + p[1]
+                    continue
+                if len(p) != 3:
+                    raise
+                p2 = int(p[2])
                 globaldata.class_fullnames.append(p[0])
                 globaldata.class_shortnames.append(p[1])
-                globaldata.class_capacity.append(int(p[2]))
-        except:
-            self.ErrorBox('Error in File Format')
+                globaldata.class_capacity.append(p2)
+                imp += 1
 
-        self.ClassData(evt)
-        # self.SuccessBox('Imported Successfully')    
+            msg += '\nTotal Imported = %s\nTotal Duplicates Ignored= %s' % (imp, err)
+            self.ClassData(evt)
+            self.SuccessBox(msg)    
+
+        except:
+            self.ErrorBox('Error in File Format %s' % l)
         # if len(globaldata.all_classes) == 0:    #default attr are 32
         #     self.ShowFirstGrid('Class')
 
     def ImportSubjectData(self, evt):
+        if not self.BasicRequirements:
+            self.ErrorBox('Please Define Constraints First')
+            return
+
         openFileDialog = wx.FileDialog(self, "Open Subject Data File", "", "",
                                        "txt files (*.txt)|*.txt", wx.FD_OPEN | wx.FD_FILE_MUST_EXIST)
         if openFileDialog.ShowModal() == wx.ID_CANCEL:
@@ -1142,25 +1304,43 @@ class MyForm(wx.Frame):
         lines = f.read().split('\n')
         del lines[0]
         lines = filter(None, lines)
+        errorStr = 'Error in File Format'
+        msg = 'Imported Successfully\nDuplicates:'
+        err = 0
+        imp = 0
         try:
             for l in lines:
-                print l
                 p = l.split('\t')
                 p = filter(None, p)
-                globaldata.subject_fullnames.append(p[0])
-                globaldata.subject_shortnames.append(p[1])
-                globaldata.subject_credits.append(int(p[2]))
-                globaldata.subjects[p[1]] = int(p[2])
+
+                if p[0] in globaldata.subject_fullnames or p[1] in globaldata.subject_shortnames:
+                    err += 1
+                    msg += '\n' + p[0] + ', ' + p[1]
+                    continue
+                if len(p) < 3:
+                    raise
+                p2 = int(p[2])
                 for className in p[3:]:
+                    if className not in globaldata.class_shortnames:
+                        errorStr += '\nInvalid Class ' + className
+                        raise  
                     globaldata.subject_class_map[p[1]] = className
                     if className in globaldata.class_subject_map:
                         globaldata.class_subject_map[className].append(p[1])
                     else:
                         globaldata.class_subject_map[className] = [p[1]]
+                globaldata.subject_fullnames.append(p[0])
+                globaldata.subject_shortnames.append(p[1])
+                globaldata.subject_credits.append(p2)
+                globaldata.subjects[p[1]] = p2
+                imp += 1
+
+            msg += '\nTotal Imported = %s\nTotal Duplicates Ignored= %s' % (imp, err)    
+            self.SuccessBox(msg) 
+
         except:
-            self.ErrorBox('Error in File Format')                
+            self.ErrorBox(errorStr + '\n%s' % l)                
         
-        self.SuccessBox('Imported Successfully') 
 
         # for i in globaldata.class_subject_map:
         #     print i, globaldata.class_subject_map[i]

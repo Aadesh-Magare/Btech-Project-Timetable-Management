@@ -741,6 +741,7 @@ class HeaderInfo(wx.Dialog):
         self.mainSizer.AddSpacer(10)
 
         self.okbutton = wx.Button(self, label="OK", id=wx.ID_OK)
+        self.okbutton.SetFocus()
         self.mainSizer.Add(self.okbutton, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
         self.mainSizer.AddSpacer(10)
         
@@ -888,6 +889,7 @@ class BasicConstraint(wx.Dialog):
         self.mainSizer.AddSpacer(10)
                 
         self.okbutton = wx.Button(self, label="OK", id=wx.ID_OK)
+        self.okbutton.SetFocus()
         self.mainSizer.Add(self.okbutton, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
         self.mainSizer.AddSpacer(20)
 
