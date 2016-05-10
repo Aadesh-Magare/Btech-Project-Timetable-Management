@@ -23,7 +23,7 @@ S K Gaikwad	SKG	16	6
 Uma Gajendragadkar	UUG	16	6
 Priti Kale	PK	16	6
 Rajani Moona	RM	16	6	6
-Vahida Attar	VHZ	12	3
+Vahida Attar	VZA	12	3
 Shahi Ghumbre	SUG	12	3
 S P Dixit	SPD	12	3	
 S N Ghotkar	SNG	12	3
@@ -35,3 +35,4 @@ Jagdish Kamble	JK	16	6
 Rohini Sarode	RS	16	6
 Asmita Manna	ASM	16	6
 Other Dept	OD	30	10
+K V Dalvi	KVD	30	10

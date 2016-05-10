@@ -1,4 +1,4 @@
-#Name	Abbrevation	Size	(Tab separated values)
+	Name	Abbrevation	Size	(Tab separated values)
 SY COMP	SYCE	90
 SY IT	SYIT	90
 SY Comp Batch B1	SYCE-B1	22
@@ -15,25 +15,50 @@ TY Comp Batch B1	TYCE-B1	20
 TY Comp Batch B2	TYCE-B2	20
 TY Comp Batch B3	TYCE-B3	20
 TY Comp Batch B4	TYCE-B4	20
-TY Comp Batch B4	TYCE-B4	20
+TY Comp Batch B5	TYCE-B5	20
 TY IT Batch B1	TYIT-B1	20
 TY IT Batch B2	TYIT-B2	20
 TY IT Batch B3	TYIT-B3	20
 TY IT Batch B4	TYIT-B4	20
-TY IT Batch B4	TYIT-B4	20
+TY IT Batch B5	TYIT-B5	20
 BTech COMP	BTechCE	85
 BTech IT	BTechIT	85
 BTech Comp Batch B1	BTechCE-B1	20
 BTech Comp Batch B2	BTechCE-B2	20
 BTech Comp Batch B3	BTechCE-B3	20
 BTech Comp Batch B4	BTechCE-B4	20
-BTech Comp Batch B4	BTechCE-B4	20
+BTech Comp Batch B5	BTechCE-B5	20
 BTech IT Batch B1	BTechIT-B1	20
 BTech IT Batch B2	BTechIT-B2	20
 BTech IT Batch B3	BTechIT-B3	20
 BTech IT Batch B4	BTechIT-B4	20
-BTech IT Batch B4	BTechIT-B4	20
+BTech IT Batch B5	BTechIT-B5	20
 MTech CE FY	MTCEFY	20
 MTech CE SY	MTCESY	20
 MTECH IT FY	MTITFY	20
 MTECH IT SY	MTITSY	20
+First Year Division 1	FYDiv1	100
+First Year Division 2	FYDiv2	100
+First Year Division 3	FYDiv3	100
+First Year Division 4	FYDiv4	100
+First Year Division 5	FYDiv5	100
+First Year Division 1 Batch 1	FYDiv1-B1	25
+First Year Division 1 Batch 2	FYDiv1-B2	25
+First Year Division 1 Batch 3	FYDiv1-B3	25
+First Year Division 1 Batch 4	FYDiv1-B4	25
+First Year Division 2 Batch 1	FYDiv2-B1	25
+First Year Division 2 Batch 2	FYDiv2-B2	25
+First Year Division 2 Batch 3	FYDiv2-B3	25
+First Year Division 2 Batch 4	FYDiv2-B4	25
+First Year Division 3 Batch 1	FYDiv3-B1	25
+First Year Division 3 Batch 2	FYDiv3-B2	25
+First Year Division 3 Batch 3	FYDiv3-B3	25
+First Year Division 3 Batch 4	FYDiv3-B4	25
+First Year Division 4 Batch 1	FYDiv4-B1	25
+First Year Division 4 Batch 2	FYDiv4-B2	25
+First Year Division 4 Batch 3	FYDiv4-B3	25
+First Year Division 4 Batch 4	FYDiv4-B4	25
+First Year Division 5 Batch 1	FYDiv5-B1	25
+First Year Division 5 Batch 2	FYDiv5-B2	25
+First Year Division 5 Batch 3	FYDiv5-B3	25
+First Year Division 5 Batch 4	FYDiv5-B4	25
