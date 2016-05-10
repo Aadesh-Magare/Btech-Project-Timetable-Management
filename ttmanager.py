@@ -272,7 +272,7 @@ class MyForm(wx.Frame):
         # wx.EVT_KEY_DOWN(self, self.KeyPressed)  
 
 
-        self.listboxTeacher = wx.ListBox(self.left1, -1,size=(90,400))
+        self.listboxTeacher = wx.ListBox(self.left1, -1,size=(90,400), style=wx.LB_SORT)
         self.Bind(wx.EVT_LISTBOX_DCLICK, self.OnListClick)
         libox = wx.BoxSizer(wx.VERTICAL)
         libox.Add(self.listboxTeacher, 1, flag=wx.EXPAND)
@@ -295,7 +295,7 @@ class MyForm(wx.Frame):
         self.page1.SetSizer(self.psizer1)
 
 
-        self.listboxVenue = wx.ListBox(self.left2, -1,size=(90,400))
+        self.listboxVenue = wx.ListBox(self.left2, -1,size=(90,400), style=wx.LB_SORT)
         libox = wx.BoxSizer(wx.VERTICAL)
         libox.Add(self.listboxVenue, 1, flag=wx.EXPAND)
 
@@ -316,7 +316,7 @@ class MyForm(wx.Frame):
         self.psizer2.Add(self.panel2, 6, wx.EXPAND)
         self.page2.SetSizer(self.psizer2)
 
-        self.listboxClass = wx.ListBox(self.left3, -1,size=(90,400))
+        self.listboxClass = wx.ListBox(self.left3, -1,size=(90,400), style=wx.LB_SORT)
         libox = wx.BoxSizer(wx.VERTICAL)
         libox.Add(self.listboxClass, 1, wx.EXPAND)
 
