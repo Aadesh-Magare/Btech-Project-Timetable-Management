@@ -54,12 +54,15 @@
 //while doing new ask prev save
 //venue should not have default class / remove from export pdf
 //export ods problem
+//generating empty timetable, show while its being done / progress bar
+//class subject mapping, class selected by default
 
 page down page up
-generating empty timetable, show while its being done / progress bar
 auto completion for input name in popbox (suggestion)
 teacher rename krta aal phije.
 subject class mapping after subject has been manually added.
 total credit for subjects which has tutorial class shoud be
 theory + tut e.g. math has theory + tut = 4
 dependencies check / dont directly install while installing deb
+duplicates list scrollable
+merge unmerge in right click

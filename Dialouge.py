@@ -686,6 +686,12 @@ class Dialoge(wx.Dialog):
         elif self.name in globaldata.all_classes:
             self.field3.SetValue(self.name)
             self.field3.res = self.name
+            key = self.name.split('-')[0]
+            val = globaldata.class_subject_map[key]
+            self.field4.Clear()
+            for sub in val:
+                self.field4.Append(sub)
+
 
         self.mainSizer.Add(self.label1, 1, flag=wx.ALIGN_CENTER_VERTICAL)
         self.mainSizer.Add(self.field1, 1, flag=wx.ALIGN_CENTER_VERTICAL)

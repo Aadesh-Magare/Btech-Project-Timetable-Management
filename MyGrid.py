@@ -730,8 +730,9 @@ class MyGrid(gridlib.Grid):
         menu = event.GetEventObject()
         menuItem = menu.FindItemById(itemId)
         deleteId = int(menuItem.GetLabel().split()[2]) - 1
+        print 'name and to delete', entry, deleteId
+
         if self.GetCellSize(a, b) == (1,1):
-            # print 'name and to delete', self.name, entry[deleteId]
             self.RemoveEntryFromTables(entry, deleteId)
         else:
             p, q = a, b
@@ -740,6 +741,7 @@ class MyGrid(gridlib.Grid):
                 for m in range(y):
                     self.rowSelect = p+l
                     self.colSelect = q+m
+                    entry = self.data[self.rowSelect][self.colSelect]
                     # print 'name and to delete', self.name, entry[deleteId]
                     self.RemoveEntryFromTables(entry, deleteId)
 
