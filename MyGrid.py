@@ -459,23 +459,25 @@ class MyGrid(gridlib.Grid):
         
         # If Ctrl+M is pressed...
         if event.ControlDown() and event.GetKeyCode() == 77:
+            self.MergeCells(None)
             # clipboard  = self.data[self.rowSelect][self.colSelect]
             # self.ParseIntoClipboard(clipboard)
-            i, j = globaldata.selection_left
-            k, l = globaldata.selection_right
-            self.SetCellSize(i, j, k-i+1, l-j+1);
-            print 'Merge Cells',
+            # i, j = globaldata.selection_left
+            # k, l = globaldata.selection_right
+            # self.SetCellSize(i, j, k-i+1, l-j+1);
+            # print 'Merge Cells',
 
         # If Ctrl+U is pressed...
         if event.ControlDown() and event.GetKeyCode() == 85:
+            self.UnMergeCells(None)
             # clipboard  = self.data[self.rowSelect][self.colSelect]
             # self.ParseIntoClipboard(clipboard)
-            i, j = globaldata.selection_left
-            k, l = globaldata.selection_right
-            self.SetCellSize(i, j, 1, 1);
-            print 'UnMerge Cells'
-            self.SendSizeEvent()
-            self.Layout()
+            # i, j = globaldata.selection_left
+            # k, l = globaldata.selection_right
+            # self.SetCellSize(i, j, 1, 1);
+            # print 'UnMerge Cells'
+            # self.SendSizeEvent()
+            # self.Layout()
         
         # If Ctrl+V is pressed...
         if event.ControlDown() and event.GetKeyCode() == 86:
@@ -785,6 +787,20 @@ class MyGrid(gridlib.Grid):
 
         pub.sendMessage('UPDATE_VIEW', data = None)
 
+    def MergeCells(self, evt):
+            i, j = globaldata.selection_left
+            k, l = globaldata.selection_right
+            self.SetCellSize(i, j, k-i+1, l-j+1);
+            print 'Merge Cells',
+
+    def UnMergeCells(self, evt):
+            i, j = globaldata.selection_left
+            k, l = globaldata.selection_right
+            self.SetCellSize(i, j, 1, 1);
+            print 'UnMerge Cells'
+            self.SendSizeEvent()
+            self.Layout()
+        
     def ShowPopupMenu(self, evt):
         i = evt.GetRow()
         j = evt.GetCol()
@@ -795,6 +811,13 @@ class MyGrid(gridlib.Grid):
         menu = wx.Menu()
         l = menu.Append(-1, "Insert Lunch")
         self.Bind(wx.EVT_MENU, lambda evt, a=i, b=j: self.OnLunchClick(a, b, evt) , l)
+
+        m = menu.Append(-1, "Merge Selected")
+        self.Bind(wx.EVT_MENU, self.MergeCells, m)
+
+        u = menu.Append(-1, "Unmerge Selected")
+        self.Bind(wx.EVT_MENU, self.UnMergeCells, u)
+
 
 ###### see how submenu works
    

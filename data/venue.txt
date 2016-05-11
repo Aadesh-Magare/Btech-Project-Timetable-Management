@@ -11,10 +11,10 @@ System Software Lab	SSL	24
 Advanced Software Lab	ASL	21
 Database Management Lab	DBMSL	21
 Information Security Lab	ISL	22
-Cognizant Lab-2	Cogni-2	27
-Cognizant Lab-3	Cogni-3	24
-Cognizant Lab-4	Cogni-4	24
-Cognizant Lab-34	Cogni-34	24
-Cognizant Lab-5	Cogni-5	27
-Cognizant Lab-6	Cogni-6	27
+Cognizant Lab-2	Cogni2	27
+Cognizant Lab-3	Cogni3	24
+Cognizant Lab-4	Cogni4	24
+Cognizant Lab-34	Cogni34	24
+Cognizant Lab-5	Cogni5	27
+Cognizant Lab-6	Cogni6	27
 Data Mining Lab	DML	20

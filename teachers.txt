@@ -1,0 +1,44 @@
+A A Sawant	AAS	12	4
+Archana Patil	ABP	16	6
+Abhijit A.M.	AM	16	6
+Aparna Biswas	APARNA	16	6
+Asmita Manna	ASM	16	6
+Gauri Shah	GS	3	4
+Soma Ghosh	GSN	16	6
+Institute Faculty	INST.FAC	30	10
+Jibi Abraham	JA	12	4
+Jagdish Kamble	JK	16	6
+Jignesh Mangukiya	JM	16	6
+J V Aghav	JVA	12	3
+Kshipra Moghe	KM	30	10
+K V Dalvi	KVD	30	10
+Nishchay Mhatre	NSM	16	6
+Other Dept	OD	30	10
+Priti Kale	PK	16	6
+Radhika Adki	RA	16	6
+Rahul Adhav	RBA	16	6
+Rajani Moona	RM	16	6
+Rohini Sarode	RS	16	6
+Sunil B Mane	SBM	16	6
+Shalaka Deshpande	SD	30	10
+Shikha Gupta	SG	16	6
+Snehal Kulkarni	SK	30	10
+S K Gaikwad	SKG	16	6
+Shindikar M R	SMR	30	10
+S N Ghotkar	SNG	12	3
+S P Dixit	SPD	12	3
+Shirish Gosavi	SPG	14	4
+Shital Rathod	SR	16	6
+S R Patil	SRP	16	6
+Swapnil Shirsat	SS	30	10
+Satish Kumbhar	SSK	16	6
+Shahi Ghumbre	SUG	12	3
+Tanuja Pattanshetti	TRP	16	6
+Uma Gajendragadkar	UUG	16	6
+Vandana Inamdar	VHJ	12	4
+Vaibhav Khatavkar	VKK	16	6
+Vinod Pachghare	VKP	12	4
+Vijay Khadse	VMK	16	6
+Vibhavari Kamble	VVK	16	6
+Vahida Attar	VZA	12	3
+Yashodhara Haribhakta	YBL	12	4

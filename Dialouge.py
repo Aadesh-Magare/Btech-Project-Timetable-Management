@@ -484,13 +484,16 @@ class ThreeItemList(wx.Dialog):
 
 class PromptingComboBox(wx.ComboBox) :
     def __init__(self, parent, value, choices, name, style=0, key='NotTwo', **par):
-        wx.ComboBox.__init__(self, parent, wx.ID_ANY, value, style= wx.CB_DROPDOWN, choices=choices, **par)
+        wx.ComboBox.__init__(self, parent, wx.ID_ANY, value, style= wx.CB_DROPDOWN|wx.CB_SORT, choices=choices, **par)
         self.parent = parent
         self.choices = choices
         self.name = name
         self.key = key
         self.Bind(wx.EVT_COMBOBOX, self.EvtCombobox) 
         self.Bind(wx.EVT_TEXT_ENTER, self.TypedText) 
+        # self.Bind(wx.EVT_TEXT, self.EvtText)
+        # self.Bind(wx.EVT_CHAR, self.EvtChar)
+        self.ignoreEvtText = False
                 
     def TypedText(self, event):
         res = self.GetValue()
@@ -498,8 +501,32 @@ class PromptingComboBox(wx.ComboBox) :
             self.EvtCombobox(event)
         else:
             self.SetValue("Choose")
+
+    def EvtChar(self, event):
+        if event.GetKeyCode() == 8:
+            self.ignoreEvtText = True
+        event.Skip()
+
+    def EvtText(self, event):
+        if self.ignoreEvtText:
+            self.ignoreEvtText = False
+            return
+        currentText = event.GetString()
+        found = False
+        for choice in self.choices :
+            if choice.startswith(currentText):
+                self.ignoreEvtText = True
+                self.SetValue(choice)
+                self.SetInsertionPoint(len(currentText))
+                self.SetMark(len(currentText), len(choice))
+                found = True
+                self.res = self.GetValue()
+                break
+        if not found:
+            event.Skip()
             
     def EvtCombobox(self, event):
+        self.ignoreEvtText = True
         # print globaldata.teacher_class_map
         # print 'selected', self.GetValue()
         self.res = self.GetValue()

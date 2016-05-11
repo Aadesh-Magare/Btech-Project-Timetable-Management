@@ -78,6 +78,7 @@ class MyForm(wx.Frame):
                 hfirst = wx.StaticText(self.panel2, label=globaldata.header1)
                 hsecond = wx.StaticText(self.panel2, label=globaldata.header2)
                 hthird = wx.StaticText(self.panel2, label=globaldata.header3)
+                print venue.name
                 index = globaldata.venue_shortnames.index(venue.name) - 1
                 hfourth = wx.StaticText(self.panel2, label='Timetable For Venue: ' + globaldata.venue_fullnames[index])
                 hthird.SetForegroundColour(wx.Colour(255,55,125))
@@ -1272,9 +1273,17 @@ class MyForm(wx.Frame):
         if openFileDialog.ShowModal() == wx.ID_CANCEL:
             return         
         filepath = openFileDialog.GetPath()
+
+        dlg = wx.ProgressDialog("Importing Data",
+                               "Please wait while data is imported",
+                               maximum = 10,
+                               parent=self,
+                               style = wx.PD_APP_MODAL|wx.PD_AUTO_HIDE)
+        dlg.Update(1)
         f = open(filepath, "r")
         lines = f.read().split('\n')    
         del lines[0]
+        dlg.Update(6)
         lines = filter(None, lines)
         msg = 'Imported Successfully\nDuplicates:'
         try:
@@ -1296,8 +1305,11 @@ class MyForm(wx.Frame):
                 globaldata.teacher_weeklymax.append(p2)
                 globaldata.teacher_dailymax.append(p3)
                 imp += 1
+            dlg.Update(8)
             msg += '\nTotal Imported = %s\nTotal Duplicates Ignored= %s' % (imp, err)
             self.TeacherData(evt)
+            dlg.Update(10)
+            dlg.Destroy()
             self.SuccessBox(msg)
 
         except:
@@ -1316,11 +1328,18 @@ class MyForm(wx.Frame):
         if openFileDialog.ShowModal() == wx.ID_CANCEL:
             return         
         filepath = openFileDialog.GetPath()
+        dlg = wx.ProgressDialog("Importing Data",
+                       "Please wait while data is imported",
+                       maximum = 10,
+                       parent=self,
+                       style = wx.PD_APP_MODAL|wx.PD_AUTO_HIDE)
+        dlg.Update(1)
         f = open(filepath, "r")
         lines = f.read().split('\n')
         del lines[0]
         lines = filter(None, lines)
         msg = 'Imported Successfully\nDuplicates:'
+        dlg.Update(6)
         try:
             imp = 0
             err = 0
@@ -1339,7 +1358,10 @@ class MyForm(wx.Frame):
                 globaldata.venue_capacity.append(p2)
                 imp += 1
             msg += '\nTotal Imported = %s\nTotal Duplicates Ignored= %s' % (imp, err)
+            dlg.Update(8)
             self.VenueData(evt)
+            dlg.Update(10)
+            dlg.Destroy()
             self.SuccessBox(msg)    
 
         except:
@@ -1464,11 +1486,19 @@ class MyForm(wx.Frame):
         if openFileDialog.ShowModal() == wx.ID_CANCEL:
             return         
         filepath = openFileDialog.GetPath()
+        dlg = wx.ProgressDialog("Importing Data",
+                       "Please wait while data is imported",
+                       maximum = 10,
+                       parent=self,
+                       style = wx.PD_APP_MODAL|wx.PD_AUTO_HIDE)
+        dlg.Update(1)
+
         f = open(filepath, "r")
         lines = f.read().split('\n')
         del lines[0]
         lines = filter(None, lines)
         msg = 'Imported Successfully\nDuplicates:'
+        dlg.Update(6)
         try:
             err = 0
             imp = 0
@@ -1488,7 +1518,10 @@ class MyForm(wx.Frame):
                 imp += 1
 
             msg += '\nTotal Imported = %s\nTotal Duplicates Ignored= %s' % (imp, err)
+            dlg.Update(8)
             self.ClassData(evt)
+            dlg.Update(10)
+            dlg.Destroy()
             self.SuccessBox(msg)    
 
         except:
