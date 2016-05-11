@@ -51,8 +51,8 @@
 //titles should be changeable during running / try grid for headers
 // cmd arg open kel ki notice nko
 //ctrl + s -> after opening cmd arg asks for save path
+//while doing new ask prev save
 
-while doing new ask prev save
 page down page up
 generating empty timetable, show while its being done / progress bar
 auto completion for input name in popbox (suggestion)
@@ -60,6 +60,6 @@ teacher rename krta aal phije.
 subject class mapping after subject has been manually added.
 total credit for subjects which has tutorial class shoud be
 theory + tut e.g. math has theory + tut = 4
-
-#dependencies check / dont directly install while installing deb
-
+venue should not have default class / remove from export pdf
+export ods problem
+dependencies check / dont directly install while installing deb

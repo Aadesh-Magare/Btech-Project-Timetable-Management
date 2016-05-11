@@ -34,7 +34,10 @@ class AutoWidthListCtrl(wx.ListCtrl, ListCtrlAutoWidthMixin, TextEditMixin, Colu
         wx.ListCtrl.__init__(self, parent, id=-1, style=wx.LC_REPORT | wx.ALWAYS_SHOW_SB ,size=(700, 400))
         ListCtrlAutoWidthMixin.__init__(self)
         TextEditMixin.__init__(self)
-        ColumnSorterMixin.__init__(self, 3)
+        if parent.key == 'Teacher':
+            ColumnSorterMixin.__init__(self, 4)
+        else:
+            ColumnSorterMixin.__init__(self, 3)
 
     def GetListCtrl(self):
         return self
@@ -278,11 +281,12 @@ class ListView(wx.Dialog):
         self.SetSizer(self.mainSizer)
         self.okbutton.SetFocus()
         self.list.itemDataMap = myData
-        self.Bind(wx.EVT_LIST_COL_CLICK, self.OnColClick, self.list)
+
+        # self.Bind(wx.EVT_LIST_COL_CLICK, self.OnColClick, self.list)
 
 
-    def OnColClick(self, evt):
-        print 'col clicked'
+    # def OnColClick(self, evt):
+    #     print 'col clicked'
     def onClosed(self, event):
         # print 'Close pressed'
         self.Destroy()

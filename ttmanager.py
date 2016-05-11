@@ -782,7 +782,7 @@ class MyForm(wx.Frame):
         if not self.BasicRequirements:
             self.ErrorBox('Please Enter Constraints First')
             return
-
+        print 'saveing'
         saveObject = SaveClass()
         saveObject.header1 = globaldata.header1
         saveObject.header2 = globaldata.header2
@@ -981,7 +981,15 @@ class MyForm(wx.Frame):
         globaldata.colLabels = []
         if len(self.__dict__) > 33:    #default attr are 32
             #here add confimation to save or not
-            os.execl(sys.executable, sys.executable, *sys.argv)
+            dlg = wx.MessageDialog(None, "Do you want to save existing timetable?", "Confirm", wx.CANCEL|wx.YES_NO|wx.ICON_QUESTION)
+            res = dlg.ShowModal()
+            if res == wx.ID_CANCEL:
+                dlg.Destroy()
+                return
+            if res == wx.ID_YES:
+                print 'yes'
+                self.OnSave(None)    
+            os.execl(sys.executable, sys.executable, sys.argv[0])
 
         dlg = HeaderInfo(self)
         dlg.ShowModal()
