@@ -78,7 +78,8 @@ class MyForm(wx.Frame):
                 hfirst = wx.StaticText(self.panel2, label=globaldata.header1)
                 hsecond = wx.StaticText(self.panel2, label=globaldata.header2)
                 hthird = wx.StaticText(self.panel2, label=globaldata.header3)
-                hfourth = wx.StaticText(self.panel2, label='Timetable For Venue: ' + venue.name)
+                index = globaldata.venue_shortnames.index(venue.name) - 1
+                hfourth = wx.StaticText(self.panel2, label='Timetable For Venue: ' + globaldata.venue_fullnames[index])
                 hthird.SetForegroundColour(wx.Colour(255,55,125))
                 hfirst.SetFont(self.fonth1)
                 hsecond.SetFont(self.fonth2)
@@ -114,7 +115,8 @@ class MyForm(wx.Frame):
                 hfirst = wx.StaticText(self.panel3, label=globaldata.header1)
                 hsecond = wx.StaticText(self.panel3, label=globaldata.header2)
                 hthird = wx.StaticText(self.panel3, label=globaldata.header3)
-                hfourth = wx.StaticText(self.panel3, label='Timetable For Class: ' + Class.name)
+                index = globaldata.class_shortnames.index(Class.name) - 1
+                hfourth = wx.StaticText(self.panel3, label='Timetable For Class: ' + globaldata.class_fullnames[index])
                 hthird.SetForegroundColour(wx.Colour(255,55,125))
                 hfirst.SetFont(self.fonth1)
                 hsecond.SetFont(self.fonth2)
@@ -365,7 +367,7 @@ class MyForm(wx.Frame):
         self._init_menubar()
         self._init_toolbar()
         self.BasicRequirements = False
-        # window.Bind(wx.EVT_ENTER_WINDOW, lambda event: self.SetFocus())
+        # self.Bind(wx.EVT_ENTER_WINDOW, lambda event: self.SetFocus())
         if flag :
             self.RenewUI(flag)
             self.savefilepath = sys.argv[1]
@@ -373,10 +375,39 @@ class MyForm(wx.Frame):
         else:
             self.RenewUI(flag)
 
+        wx.EVT_KEY_DOWN(self, self.KeyPressed) 
+
+    def KeyPressed(self, event):        
+        # If PageUp is pressed...
+
+        # If PageDown is pressed...
+        if event.GetKeyCode() == 366:
+            print 'PageU'
+            # self.parent.SetFocus()
+            # print self.parent.GetViewStart()
+            event.Skip()
+
+        if event.GetKeyCode() == 367:
+            print 'PageD'
+            # self.parent.SetFocus()
+            # print self.parent.GetViewStart()
+            event.Skip()
+            # return
+
+        if event.GetKeyCode():
+            # print event.GetKeyCode()
+            # event.ResumePropagation(1)
+            event.Skip()
+            return
+
     def OnQuit(self, evt):
+        dlg = wx.MessageDialog(None, "Do you really want to quit?", "Confirm", wx.YES_NO|wx.ICON_QUESTION)
+        res = dlg.ShowModal()
+        if res == wx.ID_NO:
+            dlg.Destroy()
+            return
         self.Close()
-    def OnRedo(self, evt):
-        self.Close()
+
     def ExportODS(self, evt):
         if not self.BasicRequirements:
             self.ErrorBox('Please Define Constraints First')
@@ -399,13 +430,25 @@ class MyForm(wx.Frame):
             return
         savefilepath = saveFileDialog.GetPath()
 
+        dlg = wx.ProgressDialog("Exporting Project",
+                               "Please wait while project is exported",
+                               maximum = 10,
+                               parent=self,
+                               style = wx.PD_APP_MODAL|wx.PD_AUTO_HIDE)
         # ods.inject_style(""" <style:style style:name="heading" style:family="table-cell" style:parent-style-name="Default"><style:text-properties style:vertical-align="top" style:use-window-font-color="true" style:repeat-content="false" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:font-name="Liberation Serif" fo:font-size="22pt" fo:language="en" fo:country="IN" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="bold" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-size-asian="22pt" style:language-asian="zh" style:country-asian="CN" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-size-complex="22pt" style:language-complex="hi" style:country-complex="IN" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/></style:style>""")
         # ods.inject_style(""" <style:style style:name="cell" style:family="table-cell" style:parent-style-name="Default"><style:table-cell-properties fo:border-bottom="0.06pt solid #000000" style:text-align-source="fix" style:repeat-content="false" fo:border-left="2.49pt solid #000000" fo:border-right="0.06pt solid #000000" fo:border-top="0.06pt solid #000000" style:vertical-align="top"/><style:paragraph-properties fo:text-align="center"/><style:text-properties style:use-window-font-color="true" style:text-outline="false" style:text-line-through-style="none" style:text-line-through-type="none" style:font-name="Liberation Serif" fo:font-size="22pt" fo:language="en" fo:country="IN" fo:font-style="normal" fo:text-shadow="none" style:text-underline-style="none" fo:font-weight="bold" style:text-underline-mode="continuous" style:text-overline-mode="continuous" style:text-line-through-mode="continuous" style:font-size-asian="10pt" style:language-asian="zh" style:country-asian="CN" style:font-style-asian="normal" style:font-weight-asian="normal" style:font-size-complex="10pt" style:language-complex="hi" style:country-complex="IN" style:font-style-complex="normal" style:font-weight-complex="normal" style:text-emphasize="none" style:font-relief="none" style:text-overline-style="none" style:text-overline-color="font-color"/></style:style> """)
 
         #static size change it later
-        sheetT = ezodf.Sheet('Teacher', size=(1000,1000))
-        sheetV = ezodf.Sheet('Venue', size=(1000,1000))
-        sheetC = ezodf.Sheet('Class', size=(1000,1000))
+        dlg.Update(2)
+        xx = len(globaldata.all_teachers) * 60
+        yy = 50
+        sheetT = ezodf.Sheet('Teacher', size=(xx,yy))
+        xx = len(globaldata.all_venues) * 60
+        yy = 50        
+        sheetV = ezodf.Sheet('Venue', size=(xx,yy))
+        xx = len(globaldata.all_classes) * 120
+        yy = 50        
+        sheetC = ezodf.Sheet('Class', size=(xx,yy))
 
         ods.sheets += sheetT
         ods.sheets += sheetV
@@ -421,9 +464,9 @@ class MyForm(wx.Frame):
             sheetV[i+6, 4].style_name = 'ce1'
             sheetV[i+8, 6].set_value(globaldata.header3) 
             sheetV[i+8, 6].style_name = 'ce17'
-            head = 'Timetable for Venue : %s \t\t' % t.name
-            if t.name in globaldata.venue_class_map.keys():
-                head += 'Class : %s ' % globaldata.venue_class_map[t.name]
+            head = 'Timetable for Venue : %s ' % t.name
+            # if t.name in globaldata.venue_class_map.keys():
+            #     head += 'Class : %s ' % globaldata.venue_class_map[t.name]
             sheetV[i+10, 6].set_value(head) 
             sheetV[i+10, 6].style_name = 'ce13'
             #upper row 
@@ -456,6 +499,7 @@ class MyForm(wx.Frame):
             sheetV[i+12+globaldata.days_per_week, 3+globaldata.lectures_per_day].style_name = "ce23"
             i += 25
         i = 0
+        dlg.Update(5)
         for t in globaldata.all_teachers:
             resMat = getattr(self, t.name).getODSData()
             sheetT[i+4, 5].set_value(globaldata.header1) 
@@ -497,6 +541,7 @@ class MyForm(wx.Frame):
             sheetT[i+12+globaldata.days_per_week, 3+globaldata.lectures_per_day].style_name = "ce23"
             i += 25
         i = 0
+        dlg.Update(7)
         for t in globaldata.all_classes:
             resMat = getattr(self, t.name).getODSData()
             sheetC[i+4, 5].set_value(globaldata.header1) 
@@ -540,7 +585,10 @@ class MyForm(wx.Frame):
             #fix last corner
             sheetC[i+12+globaldata.days_per_week, 3+globaldata.lectures_per_day].style_name = "ce23"
             i += 25
+        dlg.Update(9)
         ods.saveas(savefilepath)
+        dlg.Update(10)
+        dlg.Destroy()
         self.SuccessBox('Exported Successfully')
 
     def ExportHTML(self, evt):
@@ -594,12 +642,19 @@ class MyForm(wx.Frame):
             return
         savefilepath = saveFileDialog.GetPath()
 
+        dlg = wx.ProgressDialog("Exporting Project",
+                               "Please wait while project is exported",
+                               maximum = 10,
+                               parent=self,
+                               style = wx.PD_APP_MODAL|wx.PD_AUTO_HIDE)
+        dlg.Update(2)
         src = "<HTML><BODY>"
         # html = open('teacher.html', "w")
         for t in globaldata.all_teachers:
             src += getattr(self, t.name).getHTML()
         # html.write(src)
         # html.close()
+        dlg.Update(5)
         pdfkit.from_string(src, savefilepath + '/teacher.pdf')
         src = "<HTML><BODY>"    
         # html = open('venue.html', "w")
@@ -607,6 +662,7 @@ class MyForm(wx.Frame):
             src += getattr(self, t.name).getHTML()
         # html.write(src)
         # html.close()
+        dlg.Update(8)
         pdfkit.from_string(src, savefilepath + '/venue.pdf')
         src = "<HTML><BODY>"    
         # html = open('class.html', "w")
@@ -615,7 +671,7 @@ class MyForm(wx.Frame):
         # html.write(src)
         # html.close()
         pdfkit.from_string(src, savefilepath+ '/class.pdf')
-
+        dlg.Update(10)
         dlg = wx.MessageDialog(None, "Exported Successfully", "Notice", wx.OK|wx.ICON_INFORMATION)
         dlg.ShowModal()
         dlg.Destroy()
@@ -704,6 +760,12 @@ class MyForm(wx.Frame):
         self.PostOpenPath(self.savefilepath)
 
     def PostOpenPath(self, filepath):
+        dlg = wx.ProgressDialog("Loading Project",
+                               "Please wait while project is loaded",
+                               maximum = 10,
+                               parent=self,
+                               style = wx.PD_APP_MODAL|wx.PD_AUTO_HIDE)
+        dlg.Update(1)
         with open(filepath, 'rb') as handle:
             try:
                 saveObject = pickle.load(handle)
@@ -716,12 +778,14 @@ class MyForm(wx.Frame):
         globaldata.header1 = saveObject.header1
         globaldata.header2 = saveObject.header2
         globaldata.header3 = saveObject.header3
+        dlg.Update(2)
 
         globaldata.all_teachers = saveObject.all_teachers
         globaldata.all_venues = saveObject.all_venues
         globaldata.all_classes = saveObject.all_classes
 
         globaldata.subjects = saveObject.subjects
+        dlg.Update(3)
 
         globaldata.days_per_week = saveObject.days_per_week
         globaldata.lectures_per_day = saveObject.lectures_per_day
@@ -729,6 +793,7 @@ class MyForm(wx.Frame):
         globaldata.class_max = saveObject.class_max
         globaldata.start_time = saveObject.start_time
         globaldata.weekly_max = saveObject.weekly_max
+        dlg.Update(4)
 
         globaldata.venueCapacity = saveObject.venueCapacity
         globaldata.classCapacity = saveObject.classCapacity
@@ -740,6 +805,7 @@ class MyForm(wx.Frame):
         globaldata.teacher_shortnames = saveObject.teacher_shortnames
         globaldata.teacher_weeklymax = saveObject.teacher_weeklymax
         globaldata.teacher_dailymax = saveObject.teacher_dailymax
+        dlg.Update(6)
 
         globaldata.venue_fullnames = saveObject.venue_fullnames
         globaldata.venue_shortnames = saveObject.venue_shortnames
@@ -748,10 +814,12 @@ class MyForm(wx.Frame):
         globaldata.class_fullnames = saveObject.class_fullnames
         globaldata.class_shortnames = saveObject.class_shortnames
         globaldata.class_capacity = saveObject.class_capacity
+        dlg.Update(7)
 
         globaldata.subject_fullnames = saveObject.subject_fullnames
         globaldata.subject_shortnames = saveObject.subject_shortnames
         globaldata.subject_credits = saveObject.subject_credits
+        dlg.Update(8)
 
         globaldata.clipboard = saveObject.clipboard
         globaldata.teacher_class_map = saveObject.teacher_class_map
@@ -762,13 +830,16 @@ class MyForm(wx.Frame):
         globaldata.class_venue_map = saveObject.class_venue_map
         globaldata.class_subject_map = saveObject.class_subject_map
         globaldata.subject_class_map = saveObject.subject_class_map
+        dlg.Update(9)
         self.BasicRequirements = True
         # self.AppendGlobalInput(None)
         self.MakeLables(None)
         self.update(None)
-        dlg = wx.MessageDialog(None, "Loaded Successfully", "Notice", wx.OK|wx.ICON_INFORMATION)
-        dlg.ShowModal()
+        dl = wx.MessageDialog(None, "Loaded Successfully", "Notice", wx.OK|wx.ICON_INFORMATION)
+        dlg.Update(10)
         dlg.Destroy()
+        dl.ShowModal()
+        dl.Destroy()
 
     def OnSaveAs(self, evt):
         saveFileDialog = wx.FileDialog(self, "Save Project File As", "", ".tt",
@@ -934,7 +1005,7 @@ class MyForm(wx.Frame):
     #             self.listboxClass.Append(value)
 
     def MakeLables(self, evt):
-        print globaldata.start_time
+        # print globaldata.start_time
         if len(globaldata.start_time) == 2:
             h = int(globaldata.start_time[0])
             m = int(globaldata.start_time[1])

@@ -26,12 +26,7 @@ class MyForm(wx.Frame):
                                "An informative message",
                                maximum = max,
                                parent=self,
-                               style = wx.PD_CAN_ABORT
-                                | wx.PD_APP_MODAL
-                                | wx.PD_ELAPSED_TIME
-                                #| wx.PD_ESTIMATED_TIME
-                                | wx.PD_REMAINING_TIME
-                                )
+                               style = wx.PD_APP_MODAL)
  
         keepGoing = True
         count = 0

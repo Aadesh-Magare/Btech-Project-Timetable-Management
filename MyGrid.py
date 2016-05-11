@@ -121,11 +121,11 @@ class MyGrid(gridlib.Grid):
                             s += ' '
                             if b != None:
                                 s +=  '- ' + str(b)  + ' '
-                            try:
-                                if c != globaldata.venue_class_map[self.name]:
-                                    s +=  '['+ str(c) + ']'
-                            except:
-                                s +=  '['+ str(c) + ']'
+                            # try:
+                            #     if c != globaldata.venue_class_map[self.name]:
+                            s +=  '['+ str(c) + ']'
+                            # except:
+                            #     s +=  '['+ str(c) + ']'
 
                             res += s + '\n'
                         resMat[row][col] = res
@@ -186,17 +186,27 @@ class MyGrid(gridlib.Grid):
         html.append('<h2 ALIGN="center"> %s </h2>' % globaldata.header2)
         html.append('<h3 ALIGN="center"> %s </h3>' % globaldata.header3)
 
-        hfourth = 'Timetable For ' + self.type + ':' + self.name
+        # hfourth = 'Timetable For ' + self.type + ':' + self.name
+        hfourth = 'Timetable For '
+        if self.type == 'Teacher':
+            index = globaldata.teacher_shortnames.index(self.name) - 1
+            hfourth += 'Teacher : Prof. ' + globaldata.teacher_fullnames[index]
+
         if self.type == 'Class':
+            index = globaldata.class_shortnames.index(self.name) - 1
+            hfourth += 'Class : ' + globaldata.class_fullnames[index]
             try:
                 hfourth += '&nbsp&nbspVenue:' + globaldata.class_venue_map[self.name]
             except:
                 hfourth += ' '
         if self.type == 'Venue':
-            try:
-                hfourth += '&nbsp&nbspClass:' + globaldata.venue_class_map[self.name]
-            except:
-                hfourth += ' '
+            index = globaldata.venue_shortnames.index(self.name) - 1
+            hfourth += 'Venue : ' + globaldata.venue_fullnames[index]
+            # try:
+            #     hfourth += '&nbsp&nbspClass:' + globaldata.venue_class_map[self.name]
+            # except:
+                # hfourth += ' '
+
         html.append('<h3 ALIGN="center"> %s </h3>' % hfourth)
         html.append("<TABLE BORDER=1 CELLPADDING=0 CELLSPACING=0>")
        
@@ -254,11 +264,7 @@ class MyGrid(gridlib.Grid):
                             s += ' '
                             if b != None:
                                 s +=  '- ' + str(b)  + ' '
-                            try:
-                                if c != globaldata.venue_class_map[self.name]:
-                                    s +=  '['+ str(c) + ']'
-                            except:
-                                s +=  '['+ str(c) + ']'
+                            s +=  '['+ str(c) + ']'
 
                             res += s + '<br>'
                         html.append("<TD ALIGN='center' VALIGN='top'>%s</TD>" % res)

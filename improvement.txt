@@ -52,6 +52,8 @@
 // cmd arg open kel ki notice nko
 //ctrl + s -> after opening cmd arg asks for save path
 //while doing new ask prev save
+//venue should not have default class / remove from export pdf
+//export ods problem
 
 page down page up
 generating empty timetable, show while its being done / progress bar
@@ -60,6 +62,4 @@ teacher rename krta aal phije.
 subject class mapping after subject has been manually added.
 total credit for subjects which has tutorial class shoud be
 theory + tut e.g. math has theory + tut = 4
-venue should not have default class / remove from export pdf
-export ods problem
 dependencies check / dont directly install while installing deb

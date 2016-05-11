@@ -795,19 +795,26 @@ class HeaderInfo(wx.Dialog):
 
         self.okbutton = wx.Button(self, label="OK", id=wx.ID_OK)
         self.okbutton.SetFocus()
+
+        self.canbutton = wx.Button(self, label="Cancel", id=wx.ID_CANCEL)
+        
         self.mainSizer.Add(self.okbutton, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
+        self.mainSizer.AddSpacer(10)
+        self.mainSizer.Add(self.canbutton, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
         self.mainSizer.AddSpacer(10)
         
         self.Bind(wx.EVT_BUTTON, self.onOK, id=wx.ID_OK)
+        self.Bind(wx.EVT_BUTTON, self.onClosed, id=wx.ID_CANCEL)
+
         self.Bind(wx.EVT_TEXT_ENTER, self.onOK)
-        self.Bind(wx.EVT_CLOSE, self.Closed)
+        # self.Bind(wx.EVT_CLOSE, self.Closed)
         
         self.SetSizer(self.mainSizer)
         self.result = None
 
 
-    def Closed(self, event):
-        # print 'Close pressed'
+    def onClosed(self, event):
+        print 'Close pressed'
         self.result = None
         self.Destroy()
 
@@ -859,59 +866,6 @@ class BasicConstraint(wx.Dialog):
         self.mainSizer.Add(self.h1, 1, flag=wx.ALIGN_CENTER_HORIZONTAL)
 
 
-        # self.label2 = wx.StaticText(self, label="Teacher:")
-        # self.label2.SetFont(self.heading_font)
-        # self.hh = wx.BoxSizer(wx.HORIZONTAL)
-        # self.hh.Add(self.label2, 1)
-        # self.mainSizer.AddSpacer(10)        
-        # self.mainSizer.Add(self.hh, 1, flag=wx.ALIGN_CENTER_HORIZONTAL)
-
-
-
-        # self.h2 = wx.BoxSizer(wx.HORIZONTAL)
-        # self.ldailymax = wx.StaticText(self, label="Daily Maximum Workload")
-        # self.tdailymax = wx.TextCtrl(self, value="5",size=(140,-1))
-        # self.h2.Add(self.ldailymax, 1, flag=wx.ALIGN_CENTER|wx.EXPAND)
-        # self.h2.Add(self.tdailymax, 1, flag=wx.EXPAND)
-       
-        # self.h3 = wx.BoxSizer(wx.HORIZONTAL)
-        # self.ldailymin = wx.StaticText(self, label="Daily Minimum Workload")
-        # self.tdailymin = wx.TextCtrl(self, value="1",size=(140,-1))
-        # self.h3.Add(self.ldailymin, 1, flag=wx.ALIGN_CENTER|wx.EXPAND)
-        # self.h3.Add(self.tdailymin, 1, flag=wx.EXPAND)
-
-        # self.v1 = wx.BoxSizer(wx.VERTICAL)
-        # self.v1.Add(self.h2, 1, flag=wx.EXPAND)
-        # self.v1.AddSpacer(10)
-        # self.v1.Add(self.h3, 1, flag=wx.EXPAND)
-
-
-        # self.h5 = wx.BoxSizer(wx.HORIZONTAL)
-        # self.lweeklymax = wx.StaticText(self, label="Weekly Maximum Workload")
-        # self.tweeklymax = wx.TextCtrl(self, value="20",size=(140,-1))
-        # self.h5.Add(self.lweeklymax, 1, flag=wx.ALIGN_CENTER|wx.EXPAND)
-        # self.h5.AddSpacer(10)
-        # self.h5.Add(self.tweeklymax, 1, flag=wx.EXPAND)
-
-        # self.h4 = wx.BoxSizer(wx.HORIZONTAL)
-        # self.lweeklymin = wx.StaticText(self, label="Weekly Minimum Workload")
-        # self.tweeklymin = wx.TextCtrl(self, value="5",size=(140,-1))
-        # self.h4.Add(self.lweeklymin, 1, flag=wx.ALIGN_CENTER|wx.EXPAND)
-        # self.h5.AddSpacer(10)
-        # self.h4.Add(self.tweeklymin, 1, flag=wx.EXPAND)
-
-        # self.v2 = wx.BoxSizer(wx.VERTICAL)
-        # self.v2.Add(self.h5, 1, flag=wx.EXPAND)
-        # self.v2.AddSpacer(10)
-        # self.v2.Add(self.h4, 1, flag=wx.EXPAND)
-
-        # self.hh = wx.BoxSizer(wx.HORIZONTAL)
-        # self.hh.Add(self.v1, 1, flag=wx.EXPAND)
-        # self.hh.AddSpacer(10)
-        # self.hh.Add(self.v2, 1, flag=wx.EXPAND)
-
-        # self.mainSizer.Add(self.hh, 1, flag=wx.ALIGN_CENTER_HORIZONTAL)
-
         self.mainSizer.AddSpacer(50)
 
         self.label3 = wx.StaticText(self, label="Class:")
@@ -943,17 +897,25 @@ class BasicConstraint(wx.Dialog):
                 
         self.okbutton = wx.Button(self, label="OK", id=wx.ID_OK)
         self.okbutton.SetFocus()
+
+        self.canbutton = wx.Button(self, label="Cancel", id=wx.ID_CANCEL)
+
         self.mainSizer.Add(self.okbutton, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
+        self.mainSizer.AddSpacer(10)
+        self.mainSizer.Add(self.canbutton, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
         self.mainSizer.AddSpacer(20)
 
         self.Bind(wx.EVT_BUTTON, self.onOK, id=wx.ID_OK)
         self.Bind(wx.EVT_TEXT_ENTER, self.onOK)
+        self.Bind(wx.EVT_BUTTON, self.onClosed, id=wx.ID_CANCEL)
+
         self.SetSizer(self.mainSizer)
         self.result = None
-        self.Bind(wx.EVT_CLOSE, self.Closed)
 
-    def Closed(self, event):
-        # print 'Close pressed'
+        # self.Bind(wx.EVT_CLOSE, self.Closed)
+
+    def onClosed(self, event):
+        print 'Close pressed'
         self.result = None
         self.Destroy()
 
