@@ -139,7 +139,7 @@ class Teacher(BaseStructure):
 				if entry != None:
 					count += 1
 			index = globaldata.teacher_shortnames.index(self.name) - 1
-			if count >= globaldata.teacher_dailymax[index]:
+			if count > globaldata.teacher_dailymax[index]:
 				errors.append(i)
 			i += 1
 		if len(errors) > 0 :
@@ -379,6 +379,8 @@ class Classes(BaseStructure):
 		if sub in globaldata.subject_shortnames:
 			if sub in self.subjects:
 				if name in self.subjects[sub]:
+					print name, sub, self.subjects[sub][name],  globaldata.subject_credits[globaldata.subject_shortnames.index(sub) - 1]
+					print self.subjects
 					if self.subjects[sub][name] >= globaldata.subject_credits[globaldata.subject_shortnames.index(sub) - 1]:
 						raise LimitForSubject([sub + str(globaldata.subjects[sub])])
 					else:

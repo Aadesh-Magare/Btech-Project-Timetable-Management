@@ -456,6 +456,7 @@ class MyGrid(gridlib.Grid):
             clipboard  = self.data[self.rowSelect][self.colSelect]
             self.ParseIntoClipboard(clipboard)
             print 'Copied', globaldata.clipboard
+            event.Skip()
         
         # If Ctrl+M is pressed...
         if event.ControlDown() and event.GetKeyCode() == 77:

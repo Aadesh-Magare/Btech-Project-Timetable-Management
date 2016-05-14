@@ -1,6 +1,10 @@
-	Name	Abbrevation	Capacity	(Tab separated values)
+Name	Abbrevation	Capacity	(Tab separated values)
 AC 202	202	100
 AC 203	203	100
+AC 204	204	100
+AC 103	103	100
+AC 102	102	100
+AC 101	101	100
 Seminar Hall Entc Extn	SH	90
 Digital Systems Lab	DSL	25
 FOSS Lab-1	FOSS1	25
@@ -17,3 +21,4 @@ Cognizant Lab-4	Cogni4	24
 Cognizant Lab-34	Cogni34	24
 Cognizant Lab-5	Cogni5	27
 Cognizant Lab-6	Cogni6	27
+Data Mining Lab	DML	20

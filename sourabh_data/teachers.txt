@@ -1,4 +1,4 @@
-#	
+	
 Abhijit A.M.	AM	16	6
 Vandana Inamdar	VHJ	12	4
 Radhika Adki	RA	16	6
@@ -39,9 +39,9 @@ Other Dept	OD	30	10
 K V Dalvi	KVD	30	10
 Kshipra Moghe	KM	30	10
 Swapnil Shirsat	SS	30	10
-Other Dept	OD	30	10
 Institute Faculty	INST.FAC	30	10
 Shindikar M R	SMR	30	10
 Shalaka Deshpande	SD	30	10
-Kshripra Moghe	KM	30	10
 Snehal Kulkarni	SK	30	10
+S P Kavishwar	SPK	30	10
+Adjunct Faculty 1	ADJUN1	30	10

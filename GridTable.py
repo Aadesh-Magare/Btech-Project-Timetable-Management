@@ -52,22 +52,40 @@ class GenericTable(wx.grid.PyGridTableBase):
     def GetValue(self, row, col):
         if self.data[row][col] == None:
             return ''
+        # else:
+        #     res = ''
+        #     for i in range(len(self.data[row][col])):
+        #         for j in range(len(self.data[row][col][i])):
+        #             if self.data[row][col][i][j] != None:
+        #                 t = str(self.data[row][col][i][j]) + '\n'
+        #                 res += t
+        #         if i < len(self.data[row][col]) - 1:
+        #             res += '-------\n'
+        #         else:
+        #             res += '\n'
+
+        #     #to fix - there's some garbage at the end of line
+        #     # print res    
+        #     return res
+        #     # return self.data[row][col]
         else:
             res = ''
             for i in range(len(self.data[row][col])):
                 for j in range(len(self.data[row][col][i])):
                     if self.data[row][col][i][j] != None:
-                        t = str(self.data[row][col][i][j]) + '\n'
+                        t = str(self.data[row][col][i][j]) + '   '
                         res += t
-                if i < len(self.data[row][col]) - 1:
-                    res += '-------\n'
-                else:
-                    res += '\n'
+                res += '\n\n'
+                # if i < len(self.data[row][col]) - 1:
+                #     res += '-------\n'
+                # else:
+                #     res += '\n'
 
             #to fix - there's some garbage at the end of line
             # print res    
             return res
             # return self.data[row][col]
+
 
     def SetValue(self, row, col, value):
         # print 'Update to', value, row, col

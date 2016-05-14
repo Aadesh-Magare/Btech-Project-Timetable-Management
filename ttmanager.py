@@ -681,7 +681,8 @@ class MyForm(wx.Frame):
         s = []
         for c in globaldata.all_classes:
             res = c.valid_lunch_break()
-            if res == False:
+            print res
+            if res != True:
                 for m in res:
                     for key in m:
                         if c.name == key:
@@ -841,6 +842,7 @@ class MyForm(wx.Frame):
         dlg.Destroy()
         dl.ShowModal()
         dl.Destroy()
+        pub.sendMessage('RESIZE_CELLS', data = None)
 
     def OnSaveAs(self, evt):
         saveFileDialog = wx.FileDialog(self, "Save Project File As", "", ".tt",
@@ -1109,7 +1111,7 @@ class MyForm(wx.Frame):
             globaldata.teacher_weeklymax = dlg.result3
             globaldata.teacher_dailymax = dlg.result4
             for t in globaldata.teacher_shortnames:
-                # t = t.split('-')[0]
+                t = t.split('-')[0]
                 if t != "ADD NEW" and not hasattr(self, t):
                     project.push_object(t, 'Teacher')
                     pub.sendMessage('UPDATE_VIEW', data = None)
@@ -1131,7 +1133,7 @@ class MyForm(wx.Frame):
             globaldata.venue_shortnames =  temp      
             globaldata.venue_capacity = dlg.result3
             for t in globaldata.venue_shortnames:
-                # t = t.split('-')[0]
+                t = t.split('-')[0]
                 if t != "ADD NEW" and not hasattr(self, t):
                     project.push_object(t, 'Venue')
                     pub.sendMessage('UPDATE_VIEW', data = None)
@@ -1279,7 +1281,7 @@ class MyForm(wx.Frame):
                                maximum = 10,
                                parent=self,
                                style = wx.PD_APP_MODAL|wx.PD_AUTO_HIDE)
-        dlg.Update(1)
+        dlg.Update(1)   
         f = open(filepath, "r")
         lines = f.read().split('\n')    
         del lines[0]
@@ -1314,7 +1316,7 @@ class MyForm(wx.Frame):
 
         except:
             self.ErrorBox('Error in File Format at %s' % l)
-
+            dlg.Destroy()
         # if len(globaldata.all_teachers) == 0:    #default attr are 32
         #     self.ShowFirstGrid('Teacher')
 
@@ -1366,7 +1368,7 @@ class MyForm(wx.Frame):
 
         except:
             self.ErrorBox('Error in File Format %s' % l)
-
+            dlg.Destroy()
         # if len(globaldata.all_venues) == 0:    #default attr are 32
         #     self.ShowFirstGrid('Venue')
 
@@ -1394,7 +1396,7 @@ class MyForm(wx.Frame):
                 p = filter(None, p)
                 if p[0]  not in globaldata.teacher_shortnames or p[1] not in globaldata.subject_shortnames:
                     raise
-                if p[0] in globaldata.teacher_subject_map :             
+                if p[0] in globaldata.teacher_subject_map and globaldata.teacher_subject_map[p[0]] == p[1]:             
                     err += 1
                     msg += '\n' + p[0] + ', ' + p[1]
                     continue
@@ -1429,7 +1431,7 @@ class MyForm(wx.Frame):
                 p = filter(None, p)
                 if p[0]  not in globaldata.teacher_shortnames or p[1] not in globaldata.class_shortnames:
                     raise
-                if p[0] in globaldata.teacher_class_map:             
+                if p[0] in globaldata.teacher_class_map and globaldata.teacher_class_map[p[0]] == p[1]:             
                     err += 1
                     msg += '\n' + p[0] + ', ' + p[1]
                     continue
@@ -1464,7 +1466,7 @@ class MyForm(wx.Frame):
                 p = filter(None, p)
                 if p[0]  not in globaldata.venue_shortnames or p[1] not in globaldata.class_shortnames:
                     raise
-                if p[0] in globaldata.venue_class_map:             
+                if p[0] in globaldata.venue_class_map and globaldata.venue_class_map[p[0]] == p[1]:             
                     err += 1
                     msg += '\n' + p[0] + ', ' + p[1]
                     continue
@@ -1526,6 +1528,7 @@ class MyForm(wx.Frame):
 
         except:
             self.ErrorBox('Error in File Format %s' % l)
+            dlg.Destroy()   
         # if len(globaldata.all_classes) == 0:    #default attr are 32
         #     self.ShowFirstGrid('Class')
 

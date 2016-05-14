@@ -57,12 +57,16 @@
 //generating empty timetable, show while its being done / progress bar
 //class subject mapping, class selected by default
 //merge unmerge in right click
+//total credit for subjects which has tutorial class shoud be /theory + tut e.g. math has theory + tut = 4
+//Dont make batches until you have whole class ready
+i.e. TRY-b1 should be done after TRY has been added to list of t, v or c
 
-total credit for subjects which has tutorial class shoud be
-theory + tut e.g. math has theory + tut = 4
+
 dependencies check / dont directly install while installing deb
-duplicates list scrollable
-
-teacher rename krta aal phije.
+	teacher rename krta aal phije.
 #page down page up
 #auto completion for input name in popbox (suggestion)
+
+duplicates removal code from popup for mapping ->same venue mapped for multiple venues
+
+Gtk:ERROR:/build/buildd/gtk+2.0-2.24.27/gtk/gtkfilesystemmodel.c:746:gtk_file_system_model_sort: assertion failed: (r == n_visible_rows)

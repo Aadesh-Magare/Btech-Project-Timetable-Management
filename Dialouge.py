@@ -42,11 +42,17 @@ class AutoWidthListCtrl(wx.ListCtrl, ListCtrlAutoWidthMixin, TextEditMixin, Colu
     def GetListCtrl(self):
         return self
 
+class AutoWidthListCtrl2(wx.ListCtrl, ListCtrlAutoWidthMixin, TextEditMixin):
+    def __init__(self, parent, id=-1, style=wx.LC_REPORT | wx.ALWAYS_SHOW_SB, size=(700, 400)):
+        wx.ListCtrl.__init__(self, parent, id=-1, style=wx.LC_REPORT | wx.ALWAYS_SHOW_SB ,size=(700, 400))
+        ListCtrlAutoWidthMixin.__init__(self)
+        TextEditMixin.__init__(self)
+
 class HelpWindow(wx.Dialog):
     def __init__(self, parent, size=(900,900), id=-1, title="Keyboard Shortcuts"):
         wx.Dialog.__init__(self, parent, id, title, size)
         self.mainSizer = wx.BoxSizer(wx.VERTICAL)
-        self.list = AutoWidthListCtrl(self)
+        self.list = AutoWidthListCtrl2(self)
         self.list.Show(True)
         self.list.InsertColumn(0, 'Keyboard Shortcut', width=wx.LIST_AUTOSIZE_USEHEADER)
         self.list.InsertColumn(1, 'Description', width=wx.LIST_AUTOSIZE_USEHEADER)
@@ -80,7 +86,7 @@ class WarningView(wx.Dialog):
         wx.Dialog.__init__(self, parent, id, title, size, style=wx.DEFAULT_DIALOG_STYLE|wx.MAXIMIZE_BOX|wx.RESIZE_BORDER)
         self.parent = parent
         self.mainSizer = wx.BoxSizer(wx.VERTICAL)
-        self.list = AutoWidthListCtrl(self)
+        self.list = AutoWidthListCtrl2(self)
         # self.list = wx.ListCtrl(self,id, style=wx.LC_REPORT, size=(900, 400))
         self.list.Show(True)
         self.list.InsertColumn(0, 'No', width=wx.LIST_AUTOSIZE)
@@ -110,7 +116,7 @@ class WarningView(wx.Dialog):
         self.mainSizer.Add(self.list, 0, flag=wx.EXPAND|wx.ALIGN_CENTER)
         self.mainSizer.Add(self.hh, 0, flag=wx.ALIGN_CENTER_HORIZONTAL)
         self.SetSizer(self.mainSizer)
-        self.Bind(wx.EVT_CLOSE, self.onClosed)
+        # self.Bind(wx.EVT_CLOSE, self.onClosed)
         self.okbutton.SetFocus()
 
         # self.list.EnsureVisible(-1)
@@ -120,7 +126,7 @@ class WarningView(wx.Dialog):
         # self.list.SetSize(t)
 
     def onClosed(self, event):
-        # print 'Close pressed'
+        print 'Close pressed'
         self.Destroy()
 
     def onRefresh(self, event):
@@ -163,7 +169,7 @@ class WarningView(wx.Dialog):
             x = self.list.GetItem(i, 1).GetText()
             # print x
             res.append(x)
-        self.result = ''.join(res)
+        self.result = '\n'.join(res)
         self.Destroy()
 
 # class TestThread(Thread):
@@ -714,10 +720,11 @@ class Dialoge(wx.Dialog):
             self.field3.SetValue(self.name)
             self.field3.res = self.name
             key = self.name.split('-')[0]
-            val = globaldata.class_subject_map[key]
-            self.field4.Clear()
-            for sub in val:
-                self.field4.Append(sub)
+            if key in globaldata.class_subject_map:
+                val = globaldata.class_subject_map[key]
+                self.field4.Clear()
+                for sub in val:
+                    self.field4.Append(sub)
 
 
         self.mainSizer.Add(self.label1, 1, flag=wx.ALIGN_CENTER_VERTICAL)
