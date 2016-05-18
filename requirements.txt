@@ -1,0 +1,24 @@
+x User-friendly cell formatting (colors and styling)
+Export in ods, pdf, html formats
+Standard keyboard shortcuts should work (copy, paste, merge)
+Support merge, unmerge of cells.
+Ability to manage data of teachers, venues, classes, subjects at runtime.
+Support for batches in class (SYCE-b1, SYIT-b2)
+Individual teacher workload.
+Dynamic venue-class capacity checking.
+Dyanimc changing of titles.
+Show venue utilisation statistics.
+Check constraints option in menu.
+Teacher-subject, venue-class and teacher-class mapping.
+Teacher, venue, class, subject data should be imported from file.
+x Improve the grid layout.
+Show warning list for soft constraints violation.
+x Define styling for ods document.
+Support typing in cell directly.
+Open file through cmd argument.
+x Show suggestions in pop-up box while typing.
+Capacity, no of hours, workload should be changeable at runtime.
+Subject list should filter as per class / subject class mapping.
+Show keyboard shortcuts in menu.
+x Show help screen.
+x Port to web-platform. 
