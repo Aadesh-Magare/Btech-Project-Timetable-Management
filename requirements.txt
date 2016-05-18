@@ -20,5 +20,4 @@ x Show suggestions in pop-up box while typing.
 Capacity, no of hours, workload should be changeable at runtime.
 Subject list should filter as per class / subject class mapping.
 Show keyboard shortcuts in menu.
-x Show help screen.
 x Port to web-platform. 

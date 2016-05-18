@@ -8,9 +8,9 @@
 	//new wizard -> headers, basic constraints, popup for data
 	//data --> teachers, venue, classes, subjects
 	//suggestions dropdown box for teacher/venue/class names
-	//subject credits = max lectures 
+	//subject credits = max lectures
 	//arrange globals in global file
-	//what aboout batches - in the format as syc-b1, syc-b2
+	//what about batches - in the format as syc-b1, syc-b2
 	//heading of tt -- as tt of teacher / tt of venue / tt of class
 	//teacher load individually
 	//venue capacity checking (soft constraint) venue of 70 cap and class of 90 not fair
