@@ -1,0 +1,70 @@
+%_____________________________________________________________________________________________ 
+% LATEX Template: Department of Comp/IT BTech Project Reports
+% Sample Chapter
+% Sun Mar 27 10:25:35 IST 2011
+%
+% Note: Itemization, enumeration and other things not shown. A sample figure is included.
+%_____________________________________________________________________________________________ 
+
+\chapter{Literature review}
+\section{Existing Solutions}
+There are some existing softwares which solve the problem of timetable scheduling. Given below is the list of some of the well known softwares.
+\subsection{FET}
+This is an open-source software for automatic timetable generation. FET has some features like automatic generation of timetable based on provided constraints data, exporting the generated timetable in pdf, csv, html formats. It runs on most of the systems including GNU/Linux, Windows, MacOS. FET is too complex for new users. Large amount of data is required initially to generate timetable. There's no flexibility in timetable generation.
+
+\subsection{aSc Timetable}
+aSc Timetable is shareware software for automatic timetable generation with user-friendly GUI. It supports automatic generation of timetable with manual adjustments. The main issue with aSc Timetable is, its neither freeware nor open-source. It is not available on GNU/Linux.	
+
+\subsection{Mimosa}
+Mimosa scheduling software is user-friendly and can be used for any organization since it focuses on core challenges of scheduling. It runs on most of the systems including GNU/Linux, Windows, MacOS. Mimosa is neither freeware nor open-source.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+{\bfseries Features } & {\bfseries FET} & {\bfseries aSc Timetable} & {\bfseries Mimosa}  \\
+\hline
+Automatic/Manual & fully automatic & both & both \\
+ & semi-automatic &   &   \\
+ \hline
+ Platform & Windows & Windows & Windows  \\
+  & GNU/Linux, Mac & Mac & GNU/Linux, Mac  \\
+ \hline
+Import data from files & yes & yes & yes \\ 
+  \hline
+Export  & html, xml, csv & html, xml, csv & html, xml, csv  \\
+\hline
+Open Source & yes & no & no  \\
+\hline
+\end{tabular}
+\caption{Comparison of existing solutions}
+\label{tab:template}
+\end{table}
+
+\newpage
+\section{Proposed Solution}
+The main aim is to simplify the process of timetable management. The software won't automatically generate timetable but help the user manage timetable. The solution considers both soft and hard constraints. Soft constraint violation generates warning whereas hard constraints can't be violated. It supports dynamic checking of constraints.
+Timetable can be easily exported in popular formats like pdf, html and ods. 
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+ {\bfseries Features} & {\bfseries Proposed Solution} \\
+\hline
+Automatic/Manual & semi-automatic\\
+ \hline
+ Platform  & Windows, GNU/Linux\\
+ \hline
+Import data from files & yes\\ 
+  \hline
+Export  & html, {\bfseries ods}, pdf \\
+\hline
+Open Source & yes \\
+\hline
+\end{tabular}
+\caption{Proposed solution}
+\label{tab:template}
+\end{table}
+
+%_____________________________________________________________________________________________ 

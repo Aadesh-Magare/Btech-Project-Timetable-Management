@@ -1,0 +1,174 @@
+% This is test report 
+
+%\documentclass [a4paper,12pt,onecolumn] {report}
+
+%Inclusion of required packages
+
+%\usepackage[dvips]{graphics}
+%\usepackage{color}
+%\usepackage{epsfig,float}
+%\usepackage{subfig}
+%\usepackage{float}
+%\usepackage{indentfirst}
+
+ %\usepackage[left=2.5cm,top=2cm,right=2cm,bottom=2cm,bindingoffset=0.5cm]{geometry}
+% Page layout 
+%\setlength{\textwidth}{6.5in}
+%\setlength{\textheight}{10in}
+%\setlength{\topmargin}{0.0in}
+%\setlength{\oddsidemargin}{0.0in}			% Customisable
+%\setlength{\headheight}{0.0in}
+%\setlength{\headsep}{0.0in}
+%\setlength{\topskip}{0.0in}
+
+% Font definition
+
+%\fontencoding{T1}		% Font specification : Times New Roman, Bold, Normal, 18
+%\fontfamily{cmr}		% Roman
+%\fontseries{m}			% Medium
+%\fontshape{n}			% Upright
+%\fontsize{14pt}{5}		
+%\selectfont			% Select the specified font
+
+% Main report starts here
+
+%_____________________________________________________________________________________________ 
+% LATEX Template: Department of Comp/IT BTech Project Reports
+% Main Report
+% Sun Apr 1 20:40:00 IST 2011
+% 
+%_____________________________________________________________________________________________ 
+
+\documentclass[a4paper,12pt,onecolumn]{report}
+
+%_____________________________________________________________________________________________ 
+% Inclusion of Required Packages
+%_____________________________________________________________________________________________ 
+\usepackage[dvips]{graphics}
+\usepackage{color}
+\usepackage{epsfig,float}
+\usepackage[]{algorithm2e}
+%_____________________________________________________________________________________________ 
+% Page Layout
+%_____________________________________________________________________________________________
+
+ \usepackage[left=2.5cm,top=2cm,right=2cm,bottom=2cm,bindingoffset=0.5cm]{geometry}
+
+%\usepackage{geometry}
+%\geometry{a4paper,left=35mm,right=20mm,top=20mm,bottom=20mm}
+\setlength{\textwidth}{6.5in}
+\setlength{\textheight}{10in}
+\setlength{\topmargin}{0.0in}
+\setlength{\oddsidemargin}{0.0in}			% Customisable
+\setlength{\headheight}{0.0in}
+\setlength{\headsep}{0.0in}
+\setlength{\topskip}{0.0in}
+%_____________________________________________________________________________________________ 
+% Font Definition
+%_____________________________________________________________________________________________ 
+\fontencoding{T1}		% Font specification : Times New Roman, Bold, Normal, 18
+\fontfamily{cmr}		% Roman
+\fontseries{m}			% Medium
+\fontshape{n}			% Upright
+\fontsize{14pt}{5}		
+\linespread{1.5}		% Vertical spacing between lines
+\selectfont			% Select the specified font
+%_____________________________________________________________________________________________ 
+% Main report starts here
+%_____________________________________________________________________________________________ 
+
+
+\begin{document}
+% Title Page
+\input{titlepage.tex}
+
+% Certificate Page
+\input{certi.tex}
+
+% Absract
+\input{abstract.tex}
+
+%Table of content . Edit it 
+\thispagestyle{empty}
+\tableofcontents
+%
+%
+% EDIT THIS AFTER CONTENTS ARE FILLED 
+%
+%
+%\pagenumbering{roman}	% Lowercase roman numbering for prelim sections
+% \listoftables
+% \addcontentsline{toc}{chapter}{List of Tables}
+
+%\listoffigures
+%\addcontentsline{toc}{chapter}{List of Figures}
+
+%\chapter*{List of Symbols}
+%\addcontentsline{toc}{chapter}{List of Symbols}
+%
+
+%THIS IS ACCORDING TO TABLE OF CONTENT
+\listoffigures
+\addcontentsline{toc}{chapter}{List of Figures}
+
+\newpage
+\pagenumbering{arabic}
+
+\input{chapter_intro.tex}
+\input{chapter_review.tex}
+\input{chapter_design.tex}
+\input{chapter_impli.tex}
+\input{chapter_conclusion.tex}
+\input{chapter_future.tex}
+
+
+\chapter{Diagrams}
+
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[height=145mm, width=130mm]{classd.jpg}
+	\caption{Class Diagram}
+\end{figure}
+
+\newpage
+\begin{figure}[ht!]
+	\centering
+	\includegraphics[height=165mm, width=130mm]{usecase.jpg}
+	\caption{Use Case Diagram}
+\end{figure}
+
+
+\bibliography{plain}
+ \medskip
+    \begin{thebibliography}{9}
+        \bibitem{Python }
+        Python documentation,
+        \\\texttt{https://docs.python.org/}   
+
+        \bibitem{wxPython}
+        wxPython,
+        \\\texttt{http://www.wxpython.org/}
+       
+        \bibitem{wxwidgets}
+        wxwidgets documentation,
+        \\\texttt{https://www.wxwidgets.org/docs/tutorials/}
+       
+        \bibitem{ezodf}
+        ezodf: Python Package,
+        \\\texttt{https://pypi.python.org/pypi/ezodf}
+       
+        \bibitem{pickle}
+        pickle: Python module,
+        \\\texttt{https://docs.python.org/2/library/pickle.html}
+       
+        \bibitem{pdfkit}
+        pdfkit: Python module,
+        \\\texttt{https://pypi.python.org/pypi/pdfkit}
+        
+        \bibitem{GitHub}
+        GitHub link of project,
+        \\\texttt{https://github.com/Aadesh-Magare/Btech-Project-Timetable-Management}
+
+    \end{thebibliography}
+\end{document}\grid
+\grid
